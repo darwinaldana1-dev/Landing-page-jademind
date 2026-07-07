@@ -1150,6 +1150,10 @@ h2 {
   50% { opacity: 0; }
 }
 
+.typing-active {
+  color: oklch(0.64 0.22 145); /* Verde esmeralda brillante */
+}
+
 /* ===== Lightbox Modal (Zoom de Plataforma) ===== */
 .lightbox-modal {
   display: none;

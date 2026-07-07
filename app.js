@@ -19,34 +19,85 @@ const line2El = document.getElementById('line2');
 const cursor1 = document.getElementById('cursor1');
 const cursor2 = document.getElementById('cursor2');
 
-if (line1El && line2El) {
-  let i = 0;
-  const timer1 = setInterval(() => {
-    line1El.textContent = line1Full.substring(0, i + 1);
-    i++;
-    if (i >= line1Full.length) {
-      clearInterval(timer1);
-      setTimeout(() => {
-        if (cursor1) cursor1.style.display = 'none';
-        if (cursor2) cursor2.style.display = 'inline-block';
-        startLine2();
-      }, 300);
-    }
-  }, 65);
-}
+let index1 = 0;
+let index2 = 0;
+let isErasing = false;
 
-function startLine2() {
-  if (line2El) {
-    let j = 0;
-    const timer2 = setInterval(() => {
-      line2El.textContent = line2Full.substring(0, j + 1);
-      j++;
-      if (j >= line2Full.length) {
-        clearInterval(timer2);
+function typewriter() {
+  if (!line1El || !line2El) return;
+
+  if (!isErasing) {
+    // --- TYPING PHASE ---
+    if (index1 < line1Full.length) {
+      if (cursor1) cursor1.style.display = 'inline-block';
+      if (cursor2) cursor2.style.display = 'none';
+      
+      const typed = line1Full.substring(0, index1);
+      const activeChar = line1Full.charAt(index1);
+      line1El.innerHTML = `${typed}<span class="typing-active">${activeChar}</span>`;
+      
+      index1++;
+      setTimeout(typewriter, 70 + Math.random() * 35);
+    } else if (index2 < line2Full.length) {
+      line1El.innerHTML = line1Full; // Fixes line 1 to black
+      if (cursor1) cursor1.style.display = 'none';
+      if (cursor2) cursor2.style.display = 'inline-block';
+
+      const typed = line2Full.substring(0, index2);
+      const activeChar = line2Full.charAt(index2);
+      line2El.innerHTML = `${typed}<span class="typing-active">${activeChar}</span>`;
+      
+      index2++;
+      setTimeout(typewriter, 70 + Math.random() * 35);
+    } else {
+      line2El.innerHTML = line2Full; // Fixes line 2 to black
+      
+      // Wait at the end of typing before erasing (loop)
+      setTimeout(() => {
+        isErasing = true;
+        typewriter();
+      }, 3000);
+    }
+  } else {
+    // --- ERASING PHASE ---
+    if (index2 > 0) {
+      if (cursor1) cursor1.style.display = 'none';
+      if (cursor2) cursor2.style.display = 'inline-block';
+      
+      index2--;
+      const baseText = line2Full.substring(0, index2 - 1);
+      if (index2 > 0) {
+        const activeChar = line2Full.charAt(index2 - 1);
+        line2El.innerHTML = `${baseText}<span class="typing-active">${activeChar}</span>`;
+      } else {
+        line2El.innerHTML = '';
       }
-    }, 65);
+      
+      setTimeout(typewriter, 30);
+    } else if (index1 > 0) {
+      if (cursor1) cursor1.style.display = 'inline-block';
+      if (cursor2) cursor2.style.display = 'none';
+      
+      index1--;
+      const baseText = line1Full.substring(0, index1 - 1);
+      if (index1 > 0) {
+        const activeChar = line1Full.charAt(index1 - 1);
+        line1El.innerHTML = `${baseText}<span class="typing-active">${activeChar}</span>`;
+      } else {
+        line1El.innerHTML = '';
+      }
+      
+      setTimeout(typewriter, 30);
+    } else {
+      // Done erasing, reset indexes and start over after a brief pause
+      isErasing = false;
+      setTimeout(typewriter, 500);
+    }
   }
 }
+
+// Initialize loop
+typewriter();
 
 // --- Lightbox Modal (Zoom de imágenes publicitarias) ---
 const mockups = document.querySelectorAll('.mockup-wrapper');
