@@ -1115,6 +1115,9 @@ h2 {
 }
 
 @media (max-width: 768px) {
+  body {
+    background-attachment: scroll; /* Corrige el bug de visualización de fondos fijos en navegadores de celular */
+  }
   .nav-links { display: none; }
   .srv-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
