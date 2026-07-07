@@ -826,16 +826,16 @@ h2 {
   font-size: 0.88rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: var(--text-soft);
+  color: #374151; /* Color gris oscuro legible sobre fondo blanco */
 }
 
 .form-control {
   width: 100%;
   padding: 0.85rem 1rem;
   border-radius: var(--r-sm);
-  border: 1px solid var(--border-strong);
-  background: var(--bg-elev-2);
-  color: var(--text);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #f4f6f5; /* Gris claro */
+  color: #0d1511; /* Texto oscuro para máxima legibilidad al escribir */
   font-family: var(--ff-body);
   font-size: 0.95rem;
   transition: border-color 0.2s;
