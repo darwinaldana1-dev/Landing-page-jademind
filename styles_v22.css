@@ -40,13 +40,20 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background-image: 
     linear-gradient(rgba(9, 15, 12, 0.90), rgba(9, 15, 12, 0.95)), 
     url('Fondo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  pointer-events: none;
 }
 
 /* ===== Tipografías y Títulos ===== */
@@ -1116,9 +1123,7 @@ h2 {
 }
 
 @media (max-width: 768px) {
-  body {
-    background-attachment: scroll; /* Corrige el bug de visualización de fondos fijos en navegadores de celular */
-  }
+  /* El fondo se maneja mediante body::before para compatibilidad total con móviles */
   h1 {
     font-size: 2.2rem; /* Evita que los títulos grandes se desborden o corten palabras en celulares */
   }
