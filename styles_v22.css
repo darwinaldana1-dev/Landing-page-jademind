@@ -5,14 +5,14 @@
   --accent: oklch(0.72 0.19 145);        /* Jade Principal */
   --accent-2: oklch(0.62 0.19 145);      /* Jade Oscuro */
   --glow: oklch(0.72 0.19 145 / 0.15);    /* Resplandor suave */
-  --bg: #ffffff;                         /* Fondo Puro */
-  --bg-elev: #ffffff;                    /* Fondo de Tarjeta */
-  --bg-elev-2: #f8faf9;                  /* Fondo Elevado 2 */
-  --border: rgba(0, 0, 0, 0.06);         /* Borde Suave */
-  --border-strong: rgba(0, 0, 0, 0.12);  /* Borde Destacado */
-  --text: #0d1511;                       /* Texto Principal Oscuro */
-  --text-soft: #323d38;                  /* Texto Secundario */
-  --text-muted: #6f7c75;                 /* Texto Desvanecido */
+  --bg: #090f0c;                         /* Fondo Oscuro Jade */
+  --bg-elev: #121c17;                    /* Fondo de Tarjeta Oscuro (Jade elevado) */
+  --bg-elev-2: #182821;                  /* Fondo Elevado 2 */
+  --border: rgba(255, 255, 255, 0.08);   /* Borde Suave Claro */
+  --border-strong: rgba(255, 255, 255, 0.16); /* Borde Destacado Claro */
+  --text: #eaf2ee;                       /* Texto Principal Claro */
+  --text-soft: #a8b8b0;                  /* Texto Secundario Claro */
+  --text-muted: #6f8076;                 /* Texto Desvanecido Claro */
   
   --ff-display: 'Space Grotesk', system-ui, sans-serif;
   --ff-body: 'Inter Tight', system-ui, sans-serif;
@@ -41,8 +41,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.88)), 
-    url('banner.png');
+    linear-gradient(rgba(9, 15, 12, 0.90), rgba(9, 15, 12, 0.95)), 
+    url('Fondo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -150,11 +150,11 @@ h2 {
 }
 
 .nav.scrolled {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(18, 28, 23, 0.85);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 0.85rem 0;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .nav-container {
@@ -244,10 +244,10 @@ h2 {
   width: 100%;
   max-width: 360px;
   height: 480px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(18, 28, 23, 0.85);
   border: 1px solid var(--border-strong);
   border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(0, 40, 20, 0.08), 0 0 40px var(--glow);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 40px var(--glow);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -259,7 +259,7 @@ h2 {
 }
 
 .chat-sim-header {
-  background: #f4f6f5;
+  background: #121c17;
   padding: 0.85rem 1.25rem;
   display: flex;
   align-items: center;
@@ -313,7 +313,7 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
-  background: #fbfcfb;
+  background: #090f0c;
 }
 
 .chat-sim-msg {
@@ -326,8 +326,8 @@ h2 {
 }
 
 .chat-sim-msg.agent {
-  background: #ffffff;
-  color: var(--text-soft);
+  background: #121c17;
+  color: var(--text);
   border: 1px solid var(--border);
   align-self: flex-start;
   border-top-left-radius: 4px;
@@ -342,7 +342,7 @@ h2 {
 
 .chat-sim-footer {
   padding: 1rem;
-  background: #f4f6f5;
+  background: #121c17;
   border-top: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -356,7 +356,7 @@ h2 {
 }
 
 .chat-sim-opt {
-  background: #ffffff;
+  background: #121c17;
   border: 1px solid var(--border-strong);
   padding: 0.6rem 0.85rem;
   border-radius: var(--r-sm);
@@ -364,7 +364,7 @@ h2 {
   font-weight: 500;
   text-align: left;
   cursor: pointer;
-  color: var(--text-soft);
+  color: var(--text);
   transition: all 0.2s;
 }
 .chat-sim-opt:hover {
@@ -554,20 +554,20 @@ h2 {
 }
 
 .srv-card {
-  background: #ffffff;
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 2.5rem;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .srv-card:hover {
   transform: translateY(-6px);
   border-color: var(--accent-2);
-  box-shadow: 0 20px 40px rgba(0, 50, 30, 0.06);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .srv-icon {
@@ -827,7 +827,8 @@ h2 {
   padding: 0.85rem 1rem;
   border-radius: var(--r-sm);
   border: 1px solid var(--border-strong);
-  background: #ffffff;
+  background: var(--bg-elev-2);
+  color: var(--text);
   font-family: var(--ff-body);
   font-size: 0.95rem;
   transition: border-color 0.2s;
@@ -914,7 +915,7 @@ h2 {
 
 /* ===== Pillars Bar (Sección Hero Bottom) ===== */
 .pillars-bar {
-  background: #ffffff;
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 1.75rem 2rem;
@@ -922,7 +923,7 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-top: 4.5rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
   width: 100%;
 }
 
@@ -994,7 +995,7 @@ h2 {
   font-family: var(--ff-display);
   font-weight: 700;
   font-size: 1.25rem;
-  color: #4b5563; /* Gris oscuro para hacer buen contraste al lado de los colores */
+  color: var(--text-soft); /* Adaptado para contraste en modo oscuro */
   letter-spacing: -0.03em;
   display: flex;
   align-items: center;
