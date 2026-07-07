@@ -1,0 +1,10 @@
+# Archivos temporales o locales del sistema
+.DS_Store
+Thumbs.db
+
+# Configuración o cachés del agente/IDE si existieran en la carpeta
+.agents/
+.gemini/
+.system_generated/
+scratch/
+*.log
