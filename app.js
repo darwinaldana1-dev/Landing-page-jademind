@@ -23,6 +23,13 @@ let index1 = 0;
 let index2 = 0;
 let isErasing = false;
 
+function createCharSpan(char) {
+  const span = document.createElement('span');
+  span.className = 'char new';
+  span.textContent = char;
+  return span;
+}
+
 function typewriter() {
   if (!line1El || !line2El) return;
 
@@ -32,27 +39,22 @@ function typewriter() {
       if (cursor1) cursor1.style.display = 'inline-block';
       if (cursor2) cursor2.style.display = 'none';
       
-      const typed = line1Full.substring(0, index1);
-      const activeChar = line1Full.charAt(index1);
-      line1El.innerHTML = `${typed}<span class="typing-active">${activeChar}</span>`;
+      const span = createCharSpan(line1Full.charAt(index1));
+      line1El.appendChild(span);
       
       index1++;
       setTimeout(typewriter, 70 + Math.random() * 35);
     } else if (index2 < line2Full.length) {
-      line1El.innerHTML = line1Full; // Fixes line 1 to black
       if (cursor1) cursor1.style.display = 'none';
       if (cursor2) cursor2.style.display = 'inline-block';
 
-      const typed = line2Full.substring(0, index2);
-      const activeChar = line2Full.charAt(index2);
-      line2El.innerHTML = `${typed}<span class="typing-active">${activeChar}</span>`;
+      const span = createCharSpan(line2Full.charAt(index2));
+      line2El.appendChild(span);
       
       index2++;
       setTimeout(typewriter, 70 + Math.random() * 35);
     } else {
-      line2El.innerHTML = line2Full; // Fixes line 2 to black
-      
-      // Wait at the end of typing before erasing (loop)
+      // Done typing, wait before starting to erase
       setTimeout(() => {
         isErasing = true;
         typewriter();
@@ -64,39 +66,29 @@ function typewriter() {
       if (cursor1) cursor1.style.display = 'none';
       if (cursor2) cursor2.style.display = 'inline-block';
       
-      index2--;
-      const baseText = line2Full.substring(0, index2 - 1);
-      if (index2 > 0) {
-        const activeChar = line2Full.charAt(index2 - 1);
-        line2El.innerHTML = `${baseText}<span class="typing-active">${activeChar}</span>`;
-      } else {
-        line2El.innerHTML = '';
+      if (line2El.lastChild) {
+        line2El.removeChild(line2El.lastChild);
       }
-      
+      index2--;
       setTimeout(typewriter, 30);
     } else if (index1 > 0) {
       if (cursor1) cursor1.style.display = 'inline-block';
       if (cursor2) cursor2.style.display = 'none';
       
-      index1--;
-      const baseText = line1Full.substring(0, index1 - 1);
-      if (index1 > 0) {
-        const activeChar = line1Full.charAt(index1 - 1);
-        line1El.innerHTML = `${baseText}<span class="typing-active">${activeChar}</span>`;
-      } else {
-        line1El.innerHTML = '';
+      if (line1El.lastChild) {
+        line1El.removeChild(line1El.lastChild);
       }
-      
+      index1--;
       setTimeout(typewriter, 30);
     } else {
-      // Done erasing, reset indexes and start over after a brief pause
+      // Done erasing, wait and restart typing
       isErasing = false;
       setTimeout(typewriter, 500);
     }
   }
 }
 
-// Initialize loop
+// Start the typewriter loop
 typewriter();
 
 // --- Lightbox Modal (Zoom de imágenes publicitarias) ---
