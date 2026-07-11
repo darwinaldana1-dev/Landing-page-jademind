@@ -11,9 +11,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
   <!-- Estilos del Proyecto (Bypass caché local) -->
-  <link rel="stylesheet" href="styles_v22.css?v=28">
+  <link rel="stylesheet" href="styles_v22.css?v=31">
 </head>
 <body>
+
+  <!-- Efectos de Luz de Fondo (Glow Orbs) -->
+  <div class="bg-glow-container">
+    <div class="bg-glow-orb orb-1"></div>
+    <div class="bg-glow-orb orb-2"></div>
+  </div>
 
   <!-- Header / Nav -->
   <nav class="nav" id="navbar">
@@ -24,6 +30,7 @@
       <div class="nav-links">
         <a href="#producto">El Agente</a>
         <a href="#servicios">Servicios</a>
+        <a href="#landing-pages">Landing Pages</a>
         <a href="#contacto">Contacto</a>
         <a href="https://wa.me/573215077328" class="btn btn-primary" target="_blank" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
           Consultar Tarifas 📲
@@ -162,27 +169,48 @@
       </div>
       <div class="srv-grid">
         <div class="srv-card">
+          <div class="srv-card-img-wrapper" style="border-radius: var(--r-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); height: 160px; position: relative;">
+            <img src="./Fotos%20tarjetas/Agente%20IA.png" alt="Agente de Chat IA" class="srv-card-img" style="display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" />
+          </div>
           <div class="srv-icon">🤖</div>
           <h3>Agente de Chat IA</h3>
           <p>Atiende clientes 24/7, responde FAQs, califica leads y agenda citas en Cal.com.</p>
           <span class="srv-arrow">→</span>
         </div>
         <div class="srv-card">
+          <div class="srv-card-img-wrapper" style="border-radius: var(--r-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); height: 160px; position: relative;">
+            <img src="./Fotos%20tarjetas/Automatizacion%20de%20procesos.png" alt="Automatización de Procesos" class="srv-card-img" style="display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" />
+          </div>
           <div class="srv-icon">⚙️</div>
           <h3>Automatización de Procesos</h3>
           <p>Sincroniza tus canales de venta con pasarelas de pago y CRMs a través de Make y Zapier.</p>
           <span class="srv-arrow">→</span>
         </div>
         <div class="srv-card">
+          <div class="srv-card-img-wrapper" style="border-radius: var(--r-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); height: 160px; position: relative;">
+            <img src="./Fotos%20tarjetas/Contenido%20multimedia.png" alt="Contenido Multimedia" class="srv-card-img" style="display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" />
+          </div>
           <div class="srv-icon">🎨</div>
           <h3>Contenido Multimedia</h3>
           <p>Creativos publicitarios, videos para redes sociales y contenido digital diseñado para convertir.</p>
           <span class="srv-arrow">→</span>
         </div>
         <div class="srv-card">
+          <div class="srv-card-img-wrapper" style="border-radius: var(--r-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); height: 160px; position: relative;">
+            <img src="./Fotos%20tarjetas/Calificacion%20de%20prospectos.png" alt="Calificación de Prospectos" class="srv-card-img" style="display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" />
+          </div>
           <div class="srv-icon">🤖</div>
           <h3>Calificación de Prospectos</h3>
           <p>Filtramos tus leads entrantes y los organizamos en tu CRM por nivel de interés automáticamente.</p>
+          <span class="srv-arrow">→</span>
+        </div>
+        <div class="srv-card">
+          <div class="srv-card-img-wrapper" style="border-radius: var(--r-md); overflow: hidden; margin-bottom: 1.5rem; border: 1px solid var(--border); height: 160px; position: relative;">
+            <img src="./Fotos%20tarjetas/Creacion%20de%20landing%20pages.png" alt="Creación de Landing Pages" class="srv-card-img" style="display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" />
+          </div>
+          <div class="srv-icon">🌐</div>
+          <h3>Creación de Landing Pages</h3>
+          <p>Diseño y desarrollo de páginas web ultra rápidas y optimizadas para conversión.</p>
           <span class="srv-arrow">→</span>
         </div>
       </div>
@@ -194,6 +222,55 @@
     <div class="container">
       <div class="mockup-wrapper" id="showcase-2-mockup" style="cursor: zoom-in; transition: transform 0.2s" title="Haga clic para ampliar la imagen">
         <img src="./Publicidad 2.png?v=12" alt="Automatización JadeMind" class="mockup-img" style="display: block; width: 100%; height: auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección Landing Pages -->
+  <section id="landing-pages" class="section product-showcase" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-content">
+          <div class="eyebrow">Diseño & Conversión</div>
+          <h2 style="margin-bottom: 1rem;">Landing Pages que Venden Solas</h2>
+          <p class="section-sub" style="margin-bottom: 2rem; text-align: left;">
+            Diseñamos y desarrollamos páginas de aterrizaje profesionales, ultra veloces y optimizadas para convertir visitas en clientes potenciales.
+          </p>
+          <div class="benefits-list">
+            <div class="benefit-item">
+              <div class="benefit-icon">⚡</div>
+              <div class="benefit-text">
+                <h4>Velocidad Extrema (Core Web Vitals)</h4>
+                <p>Optimizadas al máximo para cargar en milisegundos. Menos tiempo de carga significa menos rebote y más ventas.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🎨</div>
+              <div class="benefit-text">
+                <h4>Diseño Exclusivo y Adaptativo</h4>
+                <p>Sin plantillas aburridas. Creamos una interfaz premium a la medida de tu marca, 100% responsiva para celulares.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📈</div>
+              <div class="benefit-text">
+                <h4>Copywriting Enfocado en Conversión</h4>
+                <p>Escribimos textos persuasivos estructurados para convencer y guiar al usuario hacia la acción de compra.</p>
+              </div>
+            </div>
+          </div>
+          <a href="#contacto" class="btn btn-primary" style="margin-top: 1rem;">Quiero mi Landing Page →</a>
+        </div>
+        <div class="showcase-visual">
+          <div class="mockup-wrapper" id="showcase-landing-mockup" style="cursor: zoom-in; transition: transform 0.2s" title="Haga clic para ampliar la imagen">
+            <div class="mockup-header">
+              <div class="mockup-dot red"></div>
+              <div class="mockup-dot yellow"></div>
+              <div class="mockup-dot green"></div>
+            </div>
+            <img src="./Landing page.png" alt="Diseño de Landing Pages JadeMind" class="mockup-img" style="display: block; width: 100%; height: auto;" />
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -211,6 +288,8 @@
       </a>
     </div>
   </section>
+
+
 
   <!-- Contacto -->
   <section id="contacto" class="section">

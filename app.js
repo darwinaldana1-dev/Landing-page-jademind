@@ -92,7 +92,7 @@ function typewriter() {
 typewriter();
 
 // --- Lightbox Modal (Zoom de imágenes publicitarias) ---
-const mockups = document.querySelectorAll('.mockup-wrapper');
+const mockups = document.querySelectorAll('.mockup-wrapper, .srv-card-img-wrapper');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox ? lightbox.querySelector('.lightbox-img') : null;
 
@@ -142,6 +142,7 @@ const OPTIONS = [
   { key: 'dudas', label: '🤖 ¿Cómo respondes dudas?', response: 'Me entreno con la información de tu negocio (catálogos, servicios, políticas) para responder cualquier pregunta al instante con precisión humana.' },
   { key: 'ventas', label: '📈 ¿Cómo cierras ventas?', response: 'Califico los leads haciendo preguntas clave, muestro las mejores opciones de tu catálogo y puedo enviar enlaces de pago de Stripe o pasarelas locales.' },
   { key: 'citas', label: '📅 ¿Cómo agendas citas?', response: 'Tengo integración directa con Cal.com. Muestro los horarios disponibles de tu equipo y reservo el espacio en segundos.' },
+  { key: 'landing', label: '🌐 ¿Crean landing pages?', response: '¡Sí! Diseñamos y desarrollamos landing pages ultra rápidas y de alta conversión. Lo mejor es que las entregamos integradas con tu propio Agente de IA para automatizar tus ventas 24/7 desde el primer día.' },
   { key: 'precio', label: '💼 ¿Cuáles son las tarifas?', response: 'Nuestras tarifas se adaptan a las necesidades de tu empresa. Puedes consultarnos directamente por WhatsApp al 3215077328 o por correo a jademind@gmail.com para darte una cotización personalizada.' }
 ];
 
@@ -211,3 +212,7 @@ function appendTypingIndicator() {
 
 // Initialize chat simulator options
 renderOptions();
+
+
+
+

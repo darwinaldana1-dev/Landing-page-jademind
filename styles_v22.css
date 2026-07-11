@@ -24,19 +24,20 @@
   --r-xl: 28px;
 }
 
-html, body {
+html {
+  background: transparent;
+}
+
+body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: transparent;
   color: var(--text);
   font-family: var(--ff-body);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-}
-
-body {
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
@@ -46,9 +47,10 @@ body::before {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
+  background-color: var(--bg);
   background-image: 
-    linear-gradient(rgba(9, 15, 12, 0.90), rgba(9, 15, 12, 0.95)), 
+    linear-gradient(rgba(9, 15, 12, 0.70), rgba(9, 15, 12, 0.85)), 
     url('Fondo.png');
   background-size: cover;
   background-position: center;
@@ -577,6 +579,14 @@ h2 {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
+.srv-card:hover .srv-card-img {
+  transform: scale(1.04);
+}
+
+.srv-card-img-wrapper {
+  cursor: zoom-in;
+}
+
 .srv-icon {
   width: 48px;
   height: 48px;
@@ -634,7 +644,7 @@ h2 {
   align-items: center;
   gap: 1.25rem;
   padding: 1.5rem;
-  background: #ffffff;
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   cursor: pointer;
@@ -703,11 +713,11 @@ h2 {
 }
 
 .calc-sidebar {
-  background: #ffffff;
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   padding: 2.25rem;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 6rem;
 }
@@ -1209,4 +1219,69 @@ h2 {
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
   object-fit: contain;
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== Efecto de Resplandor Animado de Fondo (Glow Orbs) ===== */
+.bg-glow-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.20; /* Muy tenue y sutil */
+  pointer-events: none;
+}
+
+.orb-1 {
+  width: 500px;
+  height: 500px;
+  background: oklch(0.72 0.19 145); /* Jade Principal */
+  top: -10%;
+  left: -10%;
+  animation: floatGlow1 22s infinite alternate ease-in-out;
+}
+
+.orb-2 {
+  width: 600px;
+  height: 600px;
+  background: oklch(0.62 0.19 145); /* Jade Oscuro */
+  bottom: -15%;
+  right: -10%;
+  animation: floatGlow2 28s infinite alternate ease-in-out;
+}
+
+@keyframes floatGlow1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(120px, 80px) scale(1.2);
+    opacity: 0.24;
+  }
+  100% {
+    transform: translate(-60px, 140px) scale(0.85);
+    opacity: 0.12;
+  }
+}
+
+@keyframes floatGlow2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate(-140px, -80px) scale(0.85);
+    opacity: 0.12;
+  }
+  100% {
+    transform: translate(90px, 60px) scale(1.25);
+    opacity: 0.26;
+  }
 }
