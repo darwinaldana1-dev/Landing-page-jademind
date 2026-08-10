@@ -326,7 +326,7 @@ h2 {
 }
 
 .chat-sim-msg {
-  max-width: 80%;
+  max-width: 92%;
   padding: 0.75rem 1rem;
   border-radius: var(--r-md);
   font-size: 0.9rem;
