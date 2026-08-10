@@ -183,7 +183,7 @@ const OPTIONS = [
   { key: 'ventas', label: '📈 ¿Cómo cierras ventas?', response: 'Califico los leads haciendo preguntas clave, muestro las mejores opciones de tu catálogo y puedo enviar enlaces de pago de Stripe o pasarelas locales.' },
   { key: 'citas', label: '📅 ¿Cómo agendas citas?', response: 'Tengo integración directa con Cal.com. Muestro los horarios disponibles de tu equipo y reservo el espacio en segundos.' },
   { key: 'landing', label: '🌐 ¿Crean landing pages?', response: '¡Sí! Diseñamos y desarrollamos landing pages ultra rápidas y de alta conversión. Lo mejor es que las entregamos integradas con tu propio Agente de IA para automatizar tus ventas 24/7 desde el primer día.' },
-  { key: 'precio', label: '💼 ¿Cuáles son las tarifas?', response: 'Nuestras tarifas se adaptan a las necesidades de tu empresa. Puedes consultarnos directamente por WhatsApp al 3215077328 o por correo a info@jademind.com.co para darte una cotización personalizada.' }
+  { key: 'precio', label: '💼 ¿Cuáles son las tarifas?', response: 'Nuestras tarifas se adaptan a las necesidades de tu empresa. Puedes consultarnos directamente por WhatsApp al 3009403058 o por correo a info@jademind.com.co para darte una cotización personalizada.' }
 ];
 
 const chatBody = document.getElementById('chat-body');
