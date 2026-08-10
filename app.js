@@ -213,6 +213,12 @@ function appendTypingIndicator() {
 // Initialize chat simulator options
 renderOptions();
 
-
-
-
+// Resume video playback when returning to the tab (fixes mobile pausing issue)
+document.addEventListener("visibilitychange", function() {
+  if (document.visibilityState === 'visible') {
+    const videos = document.querySelectorAll('video[autoplay]');
+    videos.forEach(v => {
+      v.play().catch(e => console.log("Autoplay prevented by browser:", e));
+    });
+  }
+});
