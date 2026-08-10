@@ -120,20 +120,60 @@ const contactFormContainer = document.getElementById('contact-form-container');
 if (contactForm && contactFormContainer) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    const nombre = document.getElementById('nombre')?.value || 'N/A';
+    const empresa = document.getElementById('empresa')?.value || 'N/A';
+    const email = document.getElementById('email')?.value || 'N/A';
+    const telefono = document.getElementById('telefono')?.value || 'N/A';
+    const mensaje = document.getElementById('mensaje')?.value || 'N/A';
+
+    // Original button text
+    const btn = contactForm.querySelector('button[type="submit"]');
+    const originalBtnText = btn ? btn.innerText : 'Enviar Mensaje';
     
-    // Simulate successful form submission
-    contactFormContainer.innerHTML = `
-      <div style="text-align: center; padding: 3rem 0;">
-        <span style="font-size: 3rem;">🎉</span>
-        <h3 style="margin: 1rem 0;">¡Mensaje Enviado!</h3>
-        <p style="color: var(--text-soft);">
-          Tu solicitud ha sido recibida. Uno de nuestros agentes se pondrá en contacto contigo en breve.
-        </p>
-        <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="window.location.reload();">
-          Enviar otro mensaje
-        </button>
-      </div>
-    `;
+    if(btn) {
+      btn.innerText = 'Enviando...';
+      btn.disabled = true;
+    }
+
+    // Usar API de FormSubmit para enviar correo real sin backend
+    fetch("https://formsubmit.co/ajax/Inf@jademind.com.co", {
+      method: "POST",
+      headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+          Nombre: nombre,
+          Empresa: empresa,
+          Email: email,
+          Telefono: telefono,
+          Mensaje: mensaje,
+          _subject: `¡Nuevo lead de JadeMind!: ${nombre}`
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Simulate successful form submission on screen
+      contactFormContainer.innerHTML = `
+        <div style="text-align: center; padding: 3rem 0;">
+          <span style="font-size: 3rem;">🎉</span>
+          <h3 style="margin: 1rem 0;">¡Mensaje Enviado!</h3>
+          <p style="color: var(--text-soft);">
+            Tu solicitud ha sido recibida. Uno de nuestros agentes se pondrá en contacto contigo en breve.
+          </p>
+          <button class="btn btn-secondary" style="margin-top: 1.5rem;" onclick="window.location.reload();">
+            Enviar otro mensaje
+          </button>
+        </div>
+      `;
+    })
+    .catch(error => {
+      console.log(error);
+      if(btn) {
+        btn.innerText = 'Error. Intenta de nuevo';
+        btn.disabled = false;
+      }
+    });
   });
 }
 
@@ -143,7 +183,7 @@ const OPTIONS = [
   { key: 'ventas', label: '📈 ¿Cómo cierras ventas?', response: 'Califico los leads haciendo preguntas clave, muestro las mejores opciones de tu catálogo y puedo enviar enlaces de pago de Stripe o pasarelas locales.' },
   { key: 'citas', label: '📅 ¿Cómo agendas citas?', response: 'Tengo integración directa con Cal.com. Muestro los horarios disponibles de tu equipo y reservo el espacio en segundos.' },
   { key: 'landing', label: '🌐 ¿Crean landing pages?', response: '¡Sí! Diseñamos y desarrollamos landing pages ultra rápidas y de alta conversión. Lo mejor es que las entregamos integradas con tu propio Agente de IA para automatizar tus ventas 24/7 desde el primer día.' },
-  { key: 'precio', label: '💼 ¿Cuáles son las tarifas?', response: 'Nuestras tarifas se adaptan a las necesidades de tu empresa. Puedes consultarnos directamente por WhatsApp al 3215077328 o por correo a jademind@gmail.com para darte una cotización personalizada.' }
+  { key: 'precio', label: '💼 ¿Cuáles son las tarifas?', response: 'Nuestras tarifas se adaptan a las necesidades de tu empresa. Puedes consultarnos directamente por WhatsApp al 3215077328 o por correo a Inf@jademind.com.co para darte una cotización personalizada.' }
 ];
 
 const chatBody = document.getElementById('chat-body');
