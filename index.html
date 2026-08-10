@@ -504,6 +504,19 @@
       opacity: 0;
       transition: opacity 0.8s ease;
     }
+    
+    /* Mostrar estático en móviles ya que no hay cursor */
+    @media (max-width: 768px) {
+      #premium-bg-grid {
+        opacity: 0.3 !important;
+        -webkit-mask-image: radial-gradient(circle 500px at 50% 20%, black 0%, transparent 100%) !important;
+        mask-image: radial-gradient(circle 500px at 50% 20%, black 0%, transparent 100%) !important;
+      }
+      #premium-cursor-glow {
+        opacity: 0.5 !important;
+        background: radial-gradient(circle 400px at 50% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 100%) !important;
+      }
+    }
   </style>
   <div id="star-field"></div>
   <div id="premium-bg-grid"></div>
