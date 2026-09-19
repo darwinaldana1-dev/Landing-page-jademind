@@ -8,3 +8,19 @@ Thumbs.db
 .system_generated/
 scratch/
 *.log
+
+# Copias y capturas locales de validación
+backups/
+qa-*.png
+
+# Restos de parches y copias de trabajo que no se publican
+*.rej
+*.patch
+*.orig
+diff.txt
+gitignore.txt
+originals/
+download_svgs.py
+
+# Demo independiente del fondo neuronal (la página usa neural-field.js de la raíz)
+neural-hero/

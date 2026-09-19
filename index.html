@@ -3,590 +3,884 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JadeMind — Agentes de Inteligencia Artificial y Automatización</title>
+  <title>JadeMind | Automatización comercial para WhatsApp y web</title>
+  <meta name="description" content="JadeMind conecta tu landing, WhatsApp y calendario para responder, calificar prospectos, agendar citas y transferir conversaciones a tu equipo.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#07110d">
+  <link rel="canonical" href="https://jademind.com.co/">
 
-  <!-- Google Fonts -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_CO">
+  <meta property="og:site_name" content="JadeMind">
+  <meta property="og:title" content="JadeMind | De la conversación a la cita">
+  <meta property="og:description" content="Automatización comercial para responder, calificar y agendar desde WhatsApp y web.">
+  <meta property="og:url" content="https://jademind.com.co/">
+  <meta property="og:image" content="https://jademind.com.co/banner.jpg">
+  <meta property="og:image:alt" content="JadeMind, automatización comercial con inteligencia artificial">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="JadeMind | De la conversación a la cita">
+  <meta name="twitter:description" content="Automatización comercial para WhatsApp y web.">
+  <meta name="twitter:image" content="https://jademind.com.co/banner.jpg">
+
+  <link rel="icon" type="image/png" sizes="192x192" href="visual/jademind-icono-192.png">
+  <link rel="apple-touch-icon" href="visual/jademind-icono-192.png">
+  <link rel="manifest" href="site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles_v22.css?v=51">
 
-  <!-- Estilos del Proyecto (Bypass caché local) -->
-  <link rel="stylesheet" href="styles_v22.css?v=31">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "JadeMind",
+    "url": "https://jademind.com.co/",
+    "logo": "https://jademind.com.co/visual/jademind-icono-512.png",
+    "image": "https://jademind.com.co/banner.jpg",
+    "description": "Automatización comercial para WhatsApp y web: atención inicial, calificación de prospectos, agenda y transferencia a equipos humanos.",
+    "email": "info@jademind.com.co",
+    "telephone": "+573009403058",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Medellín",
+      "addressCountry": "CO"
+    },
+    "areaServed": ["Colombia", "Latinoamérica"],
+    "sameAs": [
+      "https://www.instagram.com/jademind_oficial/",
+      "https://www.facebook.com/jademind"
+    ]
+  }
+  </script>
 </head>
-<body>
-
-  <!-- Efectos de Luz de Fondo (Glow Orbs) -->
-  <div class="bg-glow-container">
-    <div class="bg-glow-orb orb-1"></div>
-    <div class="bg-glow-orb orb-2"></div>
+<body id="inicio">
+  <div class="ambient-background" aria-hidden="true">
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
   </div>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <!-- Header / Nav -->
-  <nav class="nav" id="navbar">
-    <div class="container nav-container">
-      <a href="#" class="logo">
-        <img src="visual/jademind-horizontal-transparente.png" alt="Logo de JadeMind" style="height: 38px; border-radius: var(--r-sm);" />
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="JadeMind, volver al inicio">
+        <img src="visual/jademind-horizontal-web.png" width="146" height="48" alt="JadeMind">
       </a>
-      <div class="nav-links">
-        <a href="#producto">El Agente</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#landing-pages">Landing Pages</a>
-        <a href="#contacto">Contacto</a>
-        <a href="https://wa.me/573009403058" class="btn btn-primary" target="_blank" style="padding: 0.5rem 1.25rem; font-size: 0.85rem;">
-          Consultar Tarifas 📲
-        </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Abrir menú</span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#circuito">El sistema</a>
+        <a href="#demo">Demo</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#diseno-web">Diseño web</a>
+        <a href="#faq">Preguntas</a>
+        <a class="btn btn-small btn-primary" href="#contacto" data-track="nav_diagnostico">Solicitar diagnóstico</a>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- Hero -->
-  <header class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="eyebrow">Agentes de IA y automatizaciones</div>
-          <h1 class="hero-title" id="typewriter-title">
-            <span id="line1"></span><span id="cursor1" class="typewriter-cursor">|</span><br/>
-            <span id="line2"></span><span id="cursor2" class="typewriter-cursor" style="display:none;">|</span>
-          </h1>
-          <p class="hero-sub" style="font-size: 1.35rem; color: var(--text-soft); margin-top: 1rem;">
-            Agentes de IA y automatizaciones que trabajan por ti, 24/7.
-          </p>
-          <div class="hero-ctas" style="margin-top: 2rem;">
-            <a href="#servicios" class="btn btn-primary">Descubre cómo →</a>
-          </div>
-        </div>
+  <main id="contenido">
+    <section class="hero section" aria-labelledby="hero-title">
+      <canvas class="hero-canvas" aria-hidden="true" data-neural-field='{"core":[85,228,155],"deep":[16,185,129],"density":0.00007,"maxNodes":120,"linkDistance":150}'></canvas>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow hero-status"><span class="status-dot" aria-hidden="true"></span>Automatización comercial para WhatsApp y web</p>
+          <h1 id="hero-title">Responde, califica y agenda <span>sin perder el control humano.</span></h1>
+          <p class="hero-lead">JadeMind conecta tu landing, WhatsApp y calendario para responder al instante, calificar prospectos, agendar citas y transferir la conversación a una persona cuando hace falta.</p>
 
-        <!-- Chat Simulator -->
-        <div class="chat-sim">
-          <div class="chat-sim-header">
-            <div class="chat-sim-avatar">🤖</div>
-            <div class="chat-sim-info">
-              <span class="chat-sim-name">Jade IA (Demo)</span>
-              <span class="chat-sim-status">
-                <span class="online-indicator"></span> en línea 24/7
-              </span>
-            </div>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#demo" data-track="hero_demo">Explorar demos por sector</a>
+            <a class="btn btn-secondary" href="https://wa.me/573009403058?text=Hola%20JadeMind%2C%20quiero%20revisar%20mi%20flujo%20comercial." target="_blank" rel="noopener noreferrer" data-track="hero_whatsapp">Hablar por WhatsApp</a>
           </div>
-          <div class="chat-sim-body" id="chat-body">
-            <div class="chat-sim-msg agent">
-              ¡Hola! 🤖 Soy el Agente Comercial de JadeMind. Atiendo chats 24/7, cierro ventas y agenda citas. ¿Cómo te gustaría que te ayude hoy?
-            </div>
-          </div>
-          <div class="chat-sim-footer">
-            <div class="chat-sim-options-grid" id="chat-options">
-              <!-- Options are dynamically generated by JS -->
-            </div>
-          </div>
-        </div>
-        </div>
 
-      <!-- Video Showcase -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 4rem; align-items: center; margin: 5rem 0 3rem 0;">
-        <!-- Columna de Texto (Izquierda) -->
-        <div style="text-align: left;">
-          <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1.2;">Vende en Piloto Automático con IA</h2>
-          <p style="color: var(--text-soft); font-size: 1.15rem; line-height: 1.7; margin-bottom: 2rem;">
-            No dejes que tus clientes se enfríen esperando una respuesta. Nuestro agente de inteligencia artificial interactúa con tus prospectos al instante, por WhatsApp o tu web. Responde preguntas, califica su nivel de interés y agenda citas de forma totalmente automática.
-          </p>
-          <ul style="list-style: none; padding: 0; margin-bottom: 2.5rem;">
-            <li style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; color: var(--text); font-size: 1.05rem;">
-              <span style="color: var(--accent); font-weight: bold; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.6rem; border-radius: 50%;">✓</span> Atención 24/7 sin interrupciones ni demoras.
-            </li>
-            <li style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.2rem; color: var(--text); font-size: 1.05rem;">
-              <span style="color: var(--accent); font-weight: bold; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.6rem; border-radius: 50%;">✓</span> Conversaciones naturales y persuasivas.
-            </li>
-            <li style="display: flex; align-items: center; gap: 1rem; color: var(--text); font-size: 1.05rem;">
-              <span style="color: var(--accent); font-weight: bold; background: rgba(16, 185, 129, 0.1); padding: 0.2rem 0.6rem; border-radius: 50%;">✓</span> Aumento directo en tu tasa de conversión.
-            </li>
+          <ul class="trust-points" aria-label="Características principales">
+            <li>Demo funcional</li>
+            <li>Integraciones modulares</li>
+            <li>Control humano</li>
           </ul>
         </div>
 
-        <!-- Columna de Video (Derecha) -->
-        <div style="display: flex; justify-content: center; align-items: center;">
-          <div class="mockup-wrapper" id="showcase-2-mockup" style="margin: 0; max-width: 650px; width: 100%;">
-            <video src="./¡Vende en piloto automático con JadeMind!.mp4?v=3" class="mockup-img" style="display: block; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); pointer-events: none;" autoplay loop muted playsinline disablepictureinpicture disableRemotePlayback controlslist="nodownload"></video>
-          </div>
-        </div>
-      </div>
-      <!-- Pillars Bar -->
-      <div class="pillars-bar">
-        <div class="pillar-item">
-          <div class="pillar-icon">💬</div>
-          <div class="pillar-content">
-            <span class="pillar-title">Agentes de IA</span>
-            <span class="pillar-desc">Conversacionales, entrenados para entender y resolver.</span>
-          </div>
-        </div>
-        <div class="pillar-item">
-          <div class="pillar-icon">⚡</div>
-          <div class="pillar-content">
-            <span class="pillar-title">Automatizaciones</span>
-            <span class="pillar-desc">Procesos inteligentes que ahorran tiempo y recursos.</span>
-          </div>
-        </div>
-        <div class="pillar-item">
-          <div class="pillar-icon">📊</div>
-          <div class="pillar-content">
-            <span class="pillar-title">Datos que deciden</span>
-            <span class="pillar-desc">Transformamos datos en información accionable.</span>
-          </div>
-        </div>
-        <div class="pillar-item">
-          <div class="pillar-icon">🛡️</div>
-          <div class="pillar-content">
-            <span class="pillar-title">Seguro y confiable</span>
-            <span class="pillar-desc">Tus datos protegidos con tecnología de vanguardia.</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Barra de Integraciones -->
-      <div class="logos-bar">
-        <div class="logos-title">Integrado con las mejores tecnologías</div>
-        <div class="logos-grid">
-          <div class="logo-item" title="API Oficial de WhatsApp Cloud">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-            </svg>
-            <span>WhatsApp API</span>
-          </div>
-          <div class="logo-item" title="Inteligencia de OpenAI">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#10A37F">
-              <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/>
-            </svg>
-            <span>OpenAI (ChatGPT)</span>
-          </div>
-          <div class="logo-item" title="Claude AI de Anthropic">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#D97757">
-              <path d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/>
-            </svg>
-            <span>Claude (Anthropic)</span>
-          </div>
-          <div class="logo-item" title="Agendamiento con Cal.com">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M2.408 14.488C1.035 14.488 0 13.4 0 12.058c0-1.346.982-2.443 2.408-2.443.758 0 1.282.233 1.691.765l-.66.55a1.343 1.343 0 0 0-1.03-.442c-.93 0-1.44.711-1.44 1.57 0 .86.559 1.557 1.44 1.557.413 0 .765-.147 1.043-.443l.651.573c-.391.51-.929.743-1.695.743zM6.948 10.913h.89v3.49h-.89v-.51c-.185.362-.493.604-1.083.604-.943 0-1.695-.82-1.695-1.826 0-1.007.752-1.825 1.695-1.825.585 0 .898.241 1.083.604zm.026 1.758c0-.546-.374-.998-.964-.998-.568 0-.938.457-.938.998 0 .528.37.998.938.998.586 0 .964-.456.964-.998zM8.467 9.503h.89v4.895h-.89zM9.752 13.937a.53.53 0 0 1 .542-.528c.313 0 .533.242.533.528a.527.527 0 0 1-.533.537.534.534 0 0 1-.542-.537zM14.23 13.839c-.33.403-.832.658-1.426.658a1.806 1.806 0 0 1-1.84-1.826c0-1.007.778-1.825 1.84-1.825.572 0 1.07.241 1.4.622l-.687.577c-.172-.215-.396-.376-.713-.376-.568 0-.938.456-.938.998 0 .541.37.997.938.997.343 0 .58-.179.757-.42zM14.305 12.671c0-1.007.78-1.825 1.84-1.825 1.061 0 1.84.818 1.84 1.825 0 1.007-.779 1.826-1.84 1.826-1.06-.005-1.84-.82-1.84-1.826zm2.778 0c0-.546-.37-.998-.938-.998-.568-.004-.937.452-.937.998 0 .542.37.998.937.998.568 0 .938-.456.938-.998zM24 12.269v2.13h-.89v-1.911c0-.604-.281-.864-.704-.864-.396 0-.678.197-.678.864v1.91h-.89v-1.91c0-.604-.285-.864-.704-.864-.396 0-.744.197-.744.864v1.91h-.89v-3.49h.89v.484c.185-.376.52-.564 1.035-.564.489 0 .898.241 1.123.649.224-.417.554-.65 1.153-.65.731.005 1.299.56 1.299 1.442z"/>
-            </svg>
-            <span>Cal.com</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Meta Verification Badge -->
-      <style>
-        .meta-verification-badge {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 2rem;
-          padding: 1.5rem 2.5rem;
-          background: rgba(6, 104, 225, 0.08);
-          border: 1px solid rgba(6, 104, 225, 0.25);
-          border-radius: var(--r-md);
-          margin-top: 3rem;
-          max-width: 800px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .meta-text-block {
-          text-align: left;
-          border-left: 1px solid rgba(255, 255, 255, 0.15);
-          padding-left: 2rem;
-        }
-        @media (max-width: 600px) {
-          .meta-verification-badge {
-            flex-direction: column;
-            gap: 1.5rem;
-            padding: 1.5rem;
-          }
-          .meta-text-block {
-            text-align: center;
-            border-left: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            padding-left: 0;
-            padding-top: 1.5rem;
-          }
-        }
-      </style>
-      <div class="meta-verification-badge">
-        
-        <!-- Logo Meta oficial -->
-        <div style="display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#0668E1" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8.217 5.243C9.145 3.988 10.171 3 11.483 3 13.96 3 16 6.153 16.001 9.907c0 2.29-.986 3.725-2.757 3.725-1.543 0-2.395-.866-3.924-3.424l-.667-1.123-.118-.197a55 55 0 0 0-.53-.877l-1.178 2.08c-1.673 2.925-2.615 3.541-3.923 3.541C1.086 13.632 0 12.217 0 9.973 0 6.388 1.995 3 4.598 3q.477-.001.924.122c.31.086.611.22.913.407.577.359 1.154.915 1.782 1.714m1.516 2.224q-.378-.615-.727-1.133L9 6.326c.845-1.305 1.543-1.954 2.372-1.954 1.723 0 3.102 2.537 3.102 5.653 0 1.188-.39 1.877-1.195 1.877-.773 0-1.142-.51-2.61-2.87zM4.846 4.756c.725.1 1.385.634 2.34 2.001A212 212 0 0 0 5.551 9.3c-1.357 2.126-1.826 2.603-2.581 2.603-.777 0-1.24-.682-1.24-1.9 0-2.602 1.298-5.264 2.846-5.264q.137 0 .27.018"/>
-          </svg>
-          <span style="font-size: 2.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-weight: 500; color: #ffffff; letter-spacing: -0.04em;">Meta</span>
-        </div>
-
-        <div class="meta-text-block">
-          <h4 style="color: #0668E1; margin: 0 0 0.25rem 0; font-size: 1.15rem; font-family: var(--ff-display);">Proveedor de tecnología verificado</h4>
-          <p style="margin: 0; font-size: 0.95rem; color: var(--text-soft); line-height: 1.4;">Nuestra plataforma cumple con todos los estándares tecnológicos y de seguridad requeridos por Meta.</p>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
-
-
-  <!-- Servicios -->
-  <section id="servicios" class="section" style="background-color: #ffffff; color: #1a1a1a; padding: 5rem 0; margin: 1rem 0 4rem 0; border-radius: var(--r-xl); position: relative; z-index: 1;">
-    <div class="container">
-      <div class="section-head" style="text-align: center; margin-bottom: 3.5rem;">
-        <div class="eyebrow" style="color: var(--accent-2);">Nuestras Soluciones</div>
-        <h2 style="color: #090f0c;">¿Qué hacemos en JadeMind?</h2>
-        <p class="section-sub" style="color: #4a4a4a; max-width: 700px; margin: 1rem auto 0;">
-          Además de nuestro agente insignia, conectamos y potenciamos las operaciones y creativos de tu empresa con tecnologías de IA de vanguardia.
-        </p>
-      </div>
-      
-      <div class="services-text-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-        
-        <div class="service-text-card" style="background: #f4f6f5; padding: 2.5rem 2rem; border-radius: var(--r-md); border: 1px solid #e9ecef; transition: all 0.3s ease;">
-          <div class="srv-icon" style="font-size: 2.5rem; margin-bottom: 1.25rem;">🤖</div>
-          <h3 style="color: #090f0c; margin-bottom: 0.75rem; font-size: 1.25rem;">Agente de Chat IA</h3>
-          <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Atiende clientes 24/7, responde FAQs, califica leads y agenda citas en Cal.com.</p>
-        </div>
-
-        <div class="service-text-card" style="background: #f4f6f5; padding: 2.5rem 2rem; border-radius: var(--r-md); border: 1px solid #e9ecef; transition: all 0.3s ease;">
-          <div class="srv-icon" style="font-size: 2.5rem; margin-bottom: 1.25rem;">🎨</div>
-          <h3 style="color: #090f0c; margin-bottom: 0.75rem; font-size: 1.25rem;">Contenido Multimedia</h3>
-          <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Creativos publicitarios, videos para redes sociales y contenido digital diseñado para convertir.</p>
-        </div>
-
-        <div class="service-text-card" style="background: #f4f6f5; padding: 2.5rem 2rem; border-radius: var(--r-md); border: 1px solid #e9ecef; transition: all 0.3s ease;">
-          <div class="srv-icon" style="font-size: 2.5rem; margin-bottom: 1.25rem;">🤖</div>
-          <h3 style="color: #090f0c; margin-bottom: 0.75rem; font-size: 1.25rem;">Calificación de Prospectos</h3>
-          <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Filtramos tus leads entrantes y los organizamos en tu CRM por nivel de interés automáticamente.</p>
-        </div>
-
-        <div class="service-text-card" style="background: #f4f6f5; padding: 2.5rem 2rem; border-radius: var(--r-md); border: 1px solid #e9ecef; transition: all 0.3s ease;">
-          <div class="srv-icon" style="font-size: 2.5rem; margin-bottom: 1.25rem;">🌐</div>
-          <h3 style="color: #090f0c; margin-bottom: 0.75rem; font-size: 1.25rem;">Creación de Landing Pages</h3>
-          <p style="color: #555; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">Diseño y desarrollo de páginas web ultra rápidas y optimizadas para conversión.</p>
-        </div>
-
-      </div>
-    </div>
-    
-    <style>
-      .service-text-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-        border-color: #d1d5db;
-        background: #ffffff;
-      }
-    </style>
-  </section>
-
-
-  <!-- Sección Landing Pages -->
-  <section id="landing-pages" class="section product-showcase" style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="showcase-grid">
-        <div class="showcase-content">
-          <div class="eyebrow">Diseño & Conversión</div>
-          <h2 style="margin-bottom: 1rem;">Landing Pages que Venden Solas</h2>
-          <p class="section-sub" style="margin-bottom: 2rem; text-align: left;">
-            Diseñamos y desarrollamos páginas de aterrizaje profesionales, ultra veloces y optimizadas para convertir visitas en clientes potenciales.
-          </p>
-          <div class="benefits-list">
-            <div class="benefit-item">
-              <div class="benefit-icon">⚡</div>
-              <div class="benefit-text">
-                <h4>Velocidad Extrema (Core Web Vitals)</h4>
-                <p>Optimizadas al máximo para cargar en milisegundos. Menos tiempo de carga significa menos rebote y más ventas.</p>
+        <aside class="agent-preview" aria-label="Vista previa del recorrido de un prospecto">
+          <div class="window-bar">
+            <div class="agent-identity">
+              <span class="agent-mark" aria-hidden="true">J</span>
+              <div>
+                <strong>Jade IA</strong>
+                <span><i aria-hidden="true"></i> Demo guiada</span>
               </div>
             </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">🎨</div>
-              <div class="benefit-text">
-                <h4>Diseño Exclusivo y Adaptativo</h4>
-                <p>Sin plantillas aburridas. Creamos una interfaz premium a la medida de tu marca, 100% responsiva para celulares.</p>
-              </div>
-            </div>
-            <div class="benefit-item">
-              <div class="benefit-icon">📈</div>
-              <div class="benefit-text">
-                <h4>Copywriting Enfocado en Conversión</h4>
-                <p>Escribimos textos persuasivos estructurados para convencer y guiar al usuario hacia la acción de compra.</p>
-              </div>
-            </div>
+            <span class="demo-badge">Ejemplo</span>
           </div>
-          <a href="#contacto" class="btn btn-primary" style="margin-top: 1rem;">Quiero mi Landing Page →</a>
-        </div>
-        <div class="showcase-visual">
-          <div class="mockup-wrapper" id="showcase-landing-mockup" style="cursor: zoom-in; transition: transform 0.2s" title="Haga clic para ampliar la imagen">
-            <div class="mockup-header">
-              <div class="mockup-dot red"></div>
-              <div class="mockup-dot yellow"></div>
-              <div class="mockup-dot green"></div>
-            </div>
-            <img src="./Landing page.jpg" alt="Diseño de Landing Pages JadeMind" class="mockup-img" style="display: block; width: 100%; height: auto;" />
+
+          <div class="preview-thread">
+            <p class="message message-agent">Hola, Laura. ¿Buscas información, una cotización o prefieres agendar una llamada?</p>
+            <p class="message message-user">Quiero saber si pueden automatizar los mensajes que llegan de mis campañas.</p>
+            <p class="message message-agent">Sí. Para orientarte mejor: ¿cuántas conversaciones recibe tu equipo por semana?</p>
           </div>
+
+          <div class="lead-card">
+            <div>
+              <span class="card-label">Ficha actualizada</span>
+              <strong>Interés: automatización comercial</strong>
+            </div>
+            <dl>
+              <div><dt>Origen</dt><dd>Campaña web</dd></div>
+              <div><dt>Estado</dt><dd>En calificación</dd></div>
+            </dl>
+          </div>
+
+          <a class="preview-link" href="#circuito">Ver cómo avanza el circuito <span aria-hidden="true">→</span></a>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section problem-section" aria-labelledby="problem-title">
+      <!-- Isotipo ambiental: decorativo, detrás del contenido y sin eventos de puntero -->
+      <div class="brand-ambient" aria-hidden="true">
+        <div class="brand-ambient-parallax" data-brand-parallax>
+          <img class="brand-ambient-logo" src="assets/logo-icon.png" width="720" height="710" alt="" loading="lazy" decoding="async">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Llamado a la Acción Intermedio -->
-  <section class="section" style="background: var(--bg-elev); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); text-align: center;">
-    <div class="container" style="max-width: 800px;">
-      <div class="eyebrow">Planes y Precios</div>
-      <h2 style="margin-bottom: 1rem;">Obtén una Cotización Personalizada</h2>
-      <p class="section-sub" style="margin-bottom: 2.5rem;">
-        Nuestras tarifas se ajustan a la medida de tu negocio. Escríbenos por WhatsApp o déjanos un mensaje para diseñar una propuesta específica para tu empresa.
-      </p>
-      <a href="https://wa.me/573009403058" class="btn btn-primary" target="_blank" style="font-size: 1.1rem; padding: 1rem 2.25rem;">
-        Hablemos por WhatsApp 📲
-      </a>
-    </div>
-  </section>
-
-
-
-  <!-- Contacto -->
-  <section id="contacto" class="section">
-    <div class="container">
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div style="margin-bottom: 2rem;">
-            <img src="visual/jademind-vertical-transparente.png" alt="JadeMind Logo" style="max-width: 140px; height: auto; display: block;" />
-          </div>
-          <div class="contact-info-head">
-            <h3>Hablemos de tu negocio</h3>
-            <p style="color: var(--text-soft);">
-              Cuéntanos qué canales utilizas y cómo te gustaría implementar la Inteligencia Artificial.
-            </p>
-          </div>
-          <div class="contact-info-list">
-            <div class="contact-item">
-              <div class="contact-icon">📍</div>
-              <span>Medellín, Colombia</span>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">✉️</div>
-              <span>info@jademind.com.co</span>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon">📲</div>
-              <span>+57 321 507 7328</span>
-            </div>
-          </div>
-          <p style="font-size: 0.85rem; color: var(--text-muted);">
-            JadeMind © 2026. Todos los derechos reservados.
-          </p>
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">El problema no es conseguir el mensaje</p>
+          <h2 id="problem-title">Es todo lo que ocurre después.</h2>
+          <p>Cuando responder, preguntar, registrar y agendar viven en herramientas separadas, el equipo pierde contexto y el prospecto pierde impulso.</p>
         </div>
 
-        <div class="contact-form" id="contact-form-container">
-          <form id="contact-form">
-            <div class="form-group">
-              <label for="nombre">Tu Nombre</label>
-              <input type="text" id="nombre" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="empresa">Empresa</label>
-              <input type="text" id="empresa" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="email">Correo Electrónico</label>
-              <input type="email" id="email" class="form-control" required />
-            </div>
-            <div class="form-group">
-              <label for="telefono">WhatsApp / Teléfono</label>
-              <input type="tel" id="telefono" class="form-control" />
-            </div>
-            <div class="form-group">
-              <label for="mensaje">¿Cómo te ayudamos?</label>
-              <textarea id="mensaje" rows="3" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">
-              Enviar Mensaje
+        <div class="problem-grid">
+          <article class="problem-card reveal-on-scroll">
+            <span>01</span>
+            <h3>Respuesta tardía</h3>
+            <p>Las conversaciones entran mientras el equipo está ocupado y la primera respuesta depende de disponibilidad manual.</p>
+          </article>
+          <article class="problem-card reveal-on-scroll" style="transition-delay: 0.15s">
+            <span>02</span>
+            <h3>Calificación dispersa</h3>
+            <p>La información importante queda repartida entre chats, notas y hojas de cálculo difíciles de seguir.</p>
+          </article>
+          <article class="problem-card reveal-on-scroll" style="transition-delay: 0.3s">
+            <span>03</span>
+            <h3>Agenda con fricción</h3>
+            <p>El intercambio de horarios añade pasos justo cuando la oportunidad ya está preparada para avanzar.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section circuit-section" id="circuito" aria-labelledby="circuit-title">
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">Circuito Jade</p>
+          <h2 id="circuit-title">Mira a Jade IA trabajar en tiempo real.</h2>
+          <p>Un recorrido conectado, no un chatbot aislado. Sigue a un prospecto desde el primer mensaje hasta tu CRM, o elige una etapa para explorarla.</p>
+        </div>
+
+        <div class="circuit-shell" data-circuit>
+          <div class="circuit-steps" role="group" aria-label="Etapas del Circuito Jade">
+            <button class="circuit-step is-active" type="button" data-step="captar" aria-pressed="true" aria-controls="circuit-copy">
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg></span>
+              <span class="step-head"><strong>Captar</strong><small>Landing, pauta o WhatsApp</small></span>
+              <span class="step-num" aria-hidden="true">01</span>
+              <span class="step-progress" aria-hidden="true"><i></i></span>
             </button>
+            <button class="circuit-step" type="button" data-step="conversar" aria-pressed="false" aria-controls="circuit-copy">
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></span>
+              <span class="step-head"><strong>Conversar</strong><small>Respuesta con contexto</small></span>
+              <span class="step-num" aria-hidden="true">02</span>
+              <span class="step-progress" aria-hidden="true"><i></i></span>
+            </button>
+            <button class="circuit-step" type="button" data-step="calificar" aria-pressed="false" aria-controls="circuit-copy">
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></span>
+              <span class="step-head"><strong>Calificar</strong><small>Datos y reglas del negocio</small></span>
+              <span class="step-num" aria-hidden="true">03</span>
+              <span class="step-progress" aria-hidden="true"><i></i></span>
+            </button>
+            <button class="circuit-step" type="button" data-step="convertir" aria-pressed="false" aria-controls="circuit-copy">
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
+              <span class="step-head"><strong>Avanzar</strong><small>Agenda o transferencia</small></span>
+              <span class="step-num" aria-hidden="true">04</span>
+              <span class="step-progress" aria-hidden="true"><i></i></span>
+            </button>
+            <button class="circuit-step" type="button" data-step="registrar" aria-pressed="false" aria-controls="circuit-copy">
+              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></span>
+              <span class="step-head"><strong>Registrar</strong><small>CRM y seguimiento</small></span>
+              <span class="step-num" aria-hidden="true">05</span>
+              <span class="step-progress" aria-hidden="true"><i></i></span>
+            </button>
+          </div>
+
+          <div class="circuit-copy" id="circuit-copy">
+            <p class="stage-kicker" id="circuit-kicker">Etapa 01 · Captar</p>
+            <h3 id="circuit-detail-title">Cada canal entra al mismo recorrido.</h3>
+            <p id="circuit-detail-text">La conversación puede comenzar desde una landing, un anuncio o un acceso directo a WhatsApp sin perder el origen del prospecto.</p>
+            <ul id="circuit-detail-list">
+              <li>Identificación del canal de entrada</li>
+              <li>Mensaje inicial adaptado al contexto</li>
+              <li>Continuidad entre web y WhatsApp</li>
+            </ul>
+          </div>
+
+          <div class="circuit-stage" id="circuit-detail" data-active="captar">
+            <div class="console">
+              <div class="console-bar">
+                <span class="console-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="console-title" aria-hidden="true">jade-agent<span class="hide-sm"> · flujo comercial</span></span>
+                <span class="console-counter" id="circuit-counter" aria-hidden="true">01 / 05</span>
+                <span class="console-live" aria-hidden="true"><i></i>EN VIVO</span>
+                <button class="console-toggle" type="button" aria-pressed="false" aria-label="Pausar recorrido automático">
+                  <svg class="icon-pause" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>
+                  <svg class="icon-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5z"/></svg>
+                </button>
+              </div>
+
+              <div class="console-body" aria-hidden="true">
+                <!-- 01 · Captar -->
+                <div class="scene scene-captar is-active" data-scene="captar">
+                  <ul class="src-list">
+                    <li class="src a-left" style="--d:.1s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8v18L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span><span><b>Anuncio Meta</b><small>Campaña de julio</small></span></li>
+                    <li class="src a-left" style="--d:.25s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><span><b>Landing web</b><small>/diagnostico</small></span></li>
+                    <li class="src a-left" style="--d:.4s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span><b>WhatsApp</b><small>Enlace directo</small></span></li>
+                  </ul>
+                  <svg class="src-wires" viewBox="0 0 80 240" preserveAspectRatio="none">
+                    <path class="wire" d="M0 36 C 45 36, 35 120, 80 120"/>
+                    <path class="wire" d="M0 120 L 80 120"/>
+                    <path class="wire" d="M0 204 C 45 204, 35 120, 80 120"/>
+                    <path class="packet" pathLength="100" style="--d:.6s" d="M0 36 C 45 36, 35 120, 80 120"/>
+                    <path class="packet" pathLength="100" style="--d:1.2s" d="M0 120 L 80 120"/>
+                    <path class="packet" pathLength="100" style="--d:1.8s" d="M0 204 C 45 204, 35 120, 80 120"/>
+                  </svg>
+                  <div class="hub a-pop" style="--d:.5s"><span class="hub-ring"></span><span class="hub-ring"></span><span class="hub-core">J</span></div>
+                  <div class="row-card a-rise" style="--d:1.6s">
+                    <span class="avatar">LG</span>
+                    <div><b>Nuevo prospecto · Laura G.</b><small>Meta Ads → WhatsApp · 09:41</small></div>
+                    <span class="tag">Origen guardado</span>
+                  </div>
+                </div>
+
+                <!-- 02 · Conversar -->
+                <div class="scene scene-conversar" data-scene="conversar">
+                  <div class="chat-meta a-rise">
+                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Respuesta en 3 s</span>
+                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Tono de marca</span>
+                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Activo 24/7</span>
+                  </div>
+                  <p class="bubble in a-rise" style="--d:.3s">Hola, vi su anuncio. ¿Pueden responder los mensajes que llegan de mis campañas?</p>
+                  <div class="typing" style="--d:1s"><i></i><i></i><i></i></div>
+                  <p class="bubble out a-rise" style="--d:2.4s">¡Hola, Laura! Sí, respondo al instante con la información aprobada de tu negocio. ¿Cuántos mensajes reciben por semana?</p>
+                  <span class="chip is-source a-rise" style="--d:2.9s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Fuente: catálogo de servicios</span>
+                  <p class="bubble in a-rise" style="--d:3.6s">Unos 300, casi todos desde Instagram.</p>
+                  <p class="bubble out a-rise" style="--d:4.8s">Perfecto. Con ese volumen puedo calificar a cada persona y agendar las llamadas por ti.</p>
+                </div>
+
+                <!-- 03 · Calificar -->
+                <div class="scene scene-calificar" data-scene="calificar">
+                  <div class="score a-pop" style="--d:.1s">
+                    <div class="score-ring">
+                      <svg viewBox="0 0 120 120">
+                        <defs><linearGradient id="score-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9af0c2"/><stop offset="1" stop-color="#1fae6b"/></linearGradient></defs>
+                        <circle class="score-track" cx="60" cy="60" r="50"/>
+                        <circle class="score-fill" cx="60" cy="60" r="50" pathLength="100"/>
+                      </svg>
+                      <div class="score-val"><b data-count="87">87</b><small>de 100</small></div>
+                    </div>
+                    <span class="score-tag">Prioridad alta</span>
+                  </div>
+                  <dl class="fields">
+                    <div class="field" style="--d:.3s"><dt>Intención</dt><dd>Automatizar campañas</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="field" style="--d:.8s"><dt>Volumen</dt><dd>~300 chats por semana</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="field" style="--d:1.3s"><dt>Canal principal</dt><dd>Instagram + WhatsApp</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                    <div class="field" style="--d:1.8s"><dt>Urgencia</dt><dd>Decide este mes</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
+                  </dl>
+                </div>
+
+                <!-- 04 · Avanzar -->
+                <div class="scene scene-convertir" data-scene="convertir">
+                  <div class="cal a-rise">
+                    <div class="cal-head"><b>Agenda del equipo</b><small>Disponibilidad real</small></div>
+                    <div class="cal-grid">
+                      <span class="cal-day">Lun</span><span class="cal-day">Mar</span><span class="cal-day">Mié</span><span class="cal-day">Jue</span><span class="cal-day">Vie</span>
+                      <span class="slot busy" style="--d:.15s">—</span><span class="slot" style="--d:.2s">09:00</span><span class="slot busy" style="--d:.25s">—</span><span class="slot busy" style="--d:.3s">—</span><span class="slot" style="--d:.35s">09:00</span>
+                      <span class="slot" style="--d:.2s">10:30</span><span class="slot busy" style="--d:.25s">—</span><span class="slot" style="--d:.3s">10:30</span><span class="slot pick" style="--d:.35s">10:30</span><span class="slot busy" style="--d:.4s">—</span>
+                      <span class="slot busy" style="--d:.25s">—</span><span class="slot" style="--d:.3s">15:00</span><span class="slot busy" style="--d:.35s">—</span><span class="slot" style="--d:.4s">15:00</span><span class="slot" style="--d:.45s">15:00</span>
+                    </div>
+                  </div>
+                  <div class="row-card a-rise" style="--d:2s">
+                    <span class="avatar is-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <div><b>Llamada confirmada · jueves 10:30</b><small>Invitación enviada al calendario de Laura</small></div>
+                  </div>
+                  <div class="row-card a-rise" style="--d:2.8s">
+                    <span class="avatar">AR</span>
+                    <div><b>Asignado a Andrés · Ventas</b><small>Recibe el resumen y todo el historial</small></div>
+                  </div>
+                </div>
+
+                <!-- 05 · Registrar -->
+                <div class="scene scene-registrar" data-scene="registrar">
+                  <div class="crm a-rise">
+                    <div class="crm-head">
+                      <b>CRM · Oportunidades</b>
+                      <span class="sync">
+                        <span class="sync-pending"><i class="sync-spin"></i>Sincronizando</span>
+                        <span class="sync-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sincronizado</span>
+                      </span>
+                    </div>
+                    <div class="crm-row head"><span>Prospecto</span><span>Estado</span><span>Puntaje</span><span class="col-next">Próximo paso</span></div>
+                    <div class="crm-row new"><span class="who">Laura G.</span><span><span class="pill ok">Calificado</span></span><span>87</span><span class="col-next">Llamada jue 10:30</span></div>
+                    <div class="crm-row"><span class="who">Carlos M.</span><span><span class="pill">Conversando</span></span><span>64</span><span class="col-next">Enviar propuesta</span></div>
+                    <div class="crm-row"><span class="who">Ana P.</span><span><span class="pill ok">Agendado</span></span><span>91</span><span class="col-next">Demo vie 09:00</span></div>
+                  </div>
+                  <div class="summary">
+                    <b>Resumen generado por Jade IA</b>
+                    <p>Laura quiere automatizar unos 300 mensajes semanales de campañas en Instagram. Decide este mes. Llamada agendada con Andrés.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="console-log" aria-hidden="true">
+                <span class="log-prompt">›</span>
+                <code id="circuit-log">lead.created  origen=meta_ads  canal=whatsapp</code>
+                <span class="caret"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section advanced-features" aria-labelledby="advanced-title">
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">Capacidades exclusivas</p>
+          <h2 id="advanced-title">Herramientas que marcan la diferencia.</h2>
+          <p>Integraciones oficiales y tecnología de vanguardia para una experiencia sin fricciones tanto para tu cliente como para tu equipo.</p>
+        </div>
+
+        <div class="advanced-grid">
+          <article class="adv-card reveal-on-scroll">
+            <div class="adv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+            </div>
+            <h3>Atención mediante notas de voz</h3>
+            <p>Nuestro agente no solo lee y escribe; comprende audios y <strong>responde mediante notas de voz generadas por IA</strong>. Brinda una experiencia mucho más cálida, humana y accesible para los clientes que prefieren evitar los textos largos.</p>
+          </article>
+
+          <article class="adv-card reveal-on-scroll" style="transition-delay: 0.15s">
+            <div class="adv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
+            <h3>Método Coexistence de WhatsApp</h3>
+            <p>Función oficial de Meta que permite <strong>usar el mismo número de teléfono</strong> en la App de WhatsApp Business y en nuestra API de forma simultánea. La IA gestiona el volumen general y tu equipo interviene manualmente desde su celular cuando sea necesario, sin interrupciones.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section demo-section" id="demo" aria-labelledby="demo-title">
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">Casos de uso reales</p>
+          <h2 id="demo-title">Pruébalo en distintos sectores.</h2>
+          <p>La inteligencia artificial se adapta a las reglas y objetivos de cada industria.</p>
+        </div>
+
+        <div class="sector-tabs" role="tablist" aria-label="Seleccionar sector">
+          <button id="tab-inmobiliaria" role="tab" aria-selected="true" aria-controls="sector-panel" tabindex="0" data-sector="inmobiliaria">Inmobiliaria</button>
+          <button id="tab-estetica" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="estetica">Estética</button>
+          <button id="tab-educacion" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="educacion">Educación</button>
+          <button id="tab-productos" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="productos">Venta de productos</button>
+        </div>
+
+        <div class="sector-demo" id="sector-panel" role="tabpanel" aria-labelledby="tab-inmobiliaria">
+          <div class="demo-chat">
+            <div class="demo-chat-head">
+              <div><span class="online-dot" aria-hidden="true"></span><strong id="sector-agent-name">Asistente inmobiliario</strong></div>
+              <small>Conversación de ejemplo</small>
+            </div>
+            <div class="demo-chat-body" id="sector-messages">
+              <p class="message message-agent"><span class="sr-only">Asistente: </span>Hola, ¿buscas comprar, arrendar o vender una propiedad?</p>
+              <p class="message message-user"><span class="sr-only">Cliente: </span>Quiero comprar un apartamento en Medellín.</p>
+              <p class="message message-agent"><span class="sr-only">Asistente: </span>Perfecto. ¿Qué presupuesto, zonas y número de habitaciones tienes en mente?</p>
+              <p class="message message-user"><span class="sr-only">Cliente: </span>Hasta $480 millones, dos habitaciones, idealmente en Laureles o Belén.</p>
+              <p class="message message-agent"><span class="sr-only">Asistente: </span>¿Lo buscas para vivir o invertir y en qué plazo quieres comprar?</p>
+              <p class="message message-user"><span class="sr-only">Cliente: </span>Para vivir. Quiero decidir durante los próximos tres meses.</p>
+              <p class="message message-agent"><span class="sr-only">Asistente: </span>Ya tengo tu perfil. Puedo mostrarte opciones compatibles y ayudarte a coordinar una visita.</p>
+            </div>
+            <p class="sr-only" id="sector-demo-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          </div>
+
+          <aside class="demo-result" aria-labelledby="demo-result-title">
+            <span class="demo-badge">Salida del circuito</span>
+            <h3 id="demo-result-title">Lo que recibe el equipo</h3>
+            <dl id="sector-result">
+              <div><dt>Intención</dt><dd>Compra</dd></div>
+              <div><dt>Perfil</dt><dd>2 habitaciones · hasta $480 millones</dd></div>
+              <div><dt>Ubicación</dt><dd>Laureles o Belén</dd></div>
+              <div><dt>Siguiente paso</dt><dd>Enviar opciones y agendar visita</dd></div>
+            </dl>
+            <p id="sector-handoff">Si faltan datos o aparece una solicitud sensible, Jade IA deriva la conversación a una persona.</p>
+            <a class="btn btn-primary" href="#contacto" data-track="demo_diagnostico">Quiero diseñar mi recorrido</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section solutions-section" id="soluciones" aria-labelledby="solutions-title">
+      <div class="container">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow">Soluciones modulares</p>
+          <h2 id="solutions-title">Empieza por el cuello de botella correcto.</h2>
+          <p>No todos los negocios necesitan el mismo nivel de automatización. El alcance se define después de entender el proceso actual.</p>
+        </div>
+
+        <div class="solution-grid">
+          <article class="solution-card reveal-on-scroll">
+            <span class="solution-number">01</span>
+            <h3>Agente de atención y calificación</h3>
+            <p>Para equipos que ya reciben conversaciones y necesitan responder, recopilar datos clave y transferir con contexto.</p>
+            <ul>
+              <li>Base de conocimiento del negocio</li>
+              <li>Preguntas de calificación</li>
+              <li>Transferencia a una persona</li>
+            </ul>
+          </article>
+          <article class="solution-card solution-card-featured reveal-on-scroll" style="transition-delay: 0.15s">
+            <span class="solution-label">Circuito completo</span>
+            <span class="solution-number">02</span>
+            <h3>Captación, conversación y agenda</h3>
+            <p>Para conectar landing, campañas, WhatsApp, calendario y registro de oportunidades en un solo recorrido.</p>
+            <ul>
+              <li>Landing orientada a conversación</li>
+              <li>Agente y agenda conectados</li>
+              <li>Registro en CRM o herramienta elegida</li>
+            </ul>
+          </article>
+          <article class="solution-card reveal-on-scroll" style="transition-delay: 0.3s">
+            <span class="solution-number">03</span>
+            <h3>Automatización a la medida</h3>
+            <p>Para procesos que requieren reglas, integraciones o seguimiento más allá de una conversación inicial.</p>
+            <ul>
+              <li>Mapeo del proceso</li>
+              <li>Webhooks e integraciones</li>
+              <li>Monitoreo y mejora continua</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="compatibility" aria-labelledby="compatibility-title">
+      <div class="container compatibility-inner">
+        <p id="compatibility-title">Tecnologías compatibles según cada implementación</p>
+        <ul class="tech-logos">
+          <li>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>WhatsApp</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg>
+            <span>OpenAI</span>
+          </li>
+          <li>
+            <svg class="logo-wordmark" viewBox="0 9 24 6" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2.408 14.488C1.035 14.488 0 13.4 0 12.058c0-1.346.982-2.443 2.408-2.443.758 0 1.282.233 1.691.765l-.66.55a1.343 1.343 0 0 0-1.03-.442c-.93 0-1.44.711-1.44 1.57 0 .86.559 1.557 1.44 1.557.413 0 .765-.147 1.043-.443l.651.573c-.391.51-.929.743-1.695.743zM6.948 10.913h.89v3.49h-.89v-.51c-.185.362-.493.604-1.083.604-.943 0-1.695-.82-1.695-1.826 0-1.007.752-1.825 1.695-1.825.585 0 .898.241 1.083.604zm.026 1.758c0-.546-.374-.998-.964-.998-.568 0-.938.457-.938.998 0 .528.37.998.938.998.586 0 .964-.456.964-.998zM8.467 9.503h.89v4.895h-.89zM9.752 13.937a.53.53 0 0 1 .542-.528c.313 0 .533.242.533.528a.527.527 0 0 1-.533.537.534.534 0 0 1-.542-.537zM14.23 13.839c-.33.403-.832.658-1.426.658a1.806 1.806 0 0 1-1.84-1.826c0-1.007.778-1.825 1.84-1.825.572 0 1.07.241 1.4.622l-.687.577c-.172-.215-.396-.376-.713-.376-.568 0-.938.456-.938.998 0 .541.37.997.938.997.343 0 .58-.179.757-.42zM14.305 12.671c0-1.007.78-1.825 1.84-1.825 1.061 0 1.84.818 1.84 1.825 0 1.007-.779 1.826-1.84 1.826-1.06-.005-1.84-.82-1.84-1.826zm2.778 0c0-.546-.37-.998-.938-.998-.568-.004-.937.452-.937.998 0 .542.37.998.937.998.568 0 .938-.456.938-.998zM24 12.269v2.13h-.89v-1.911c0-.604-.281-.864-.704-.864-.396 0-.678.197-.678.864v1.91h-.89v-1.91c0-.604-.285-.864-.704-.864-.396 0-.744.197-.744.864v1.91h-.89v-3.49h.89v.484c.185-.376.52-.564 1.035-.564.489 0 .898.241 1.123.649.224-.417.554-.65 1.153-.65.731.005 1.299.56 1.299 1.442z"/></svg>
+            <span class="sr-only">Cal.com</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.6035 0v24h4.9317V0zm9.8613 0v24h4.9317V0z"/></svg>
+            <span>ElevenLabs</span>
+          </li>
+        </ul>
+        <small>La compatibilidad técnica no implica patrocinio ni afiliación con estas marcas.</small>
+      </div>
+    </section>
+
+    <section class="section web-section" id="diseno-web" aria-labelledby="web-title">
+      <div class="container">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">Diseño y desarrollo web</p>
+          <h2 id="web-title">Páginas que se ven increíbles y venden desde el primer clic.</h2>
+          <p>Diseñamos y desarrollamos landing pages y sitios web a medida: rápidos, animados, optimizados para Google y listos para conectar con WhatsApp y tu agente de IA.</p>
+          <span class="web-proof"><span class="status-dot" aria-hidden="true"></span>La página que estás viendo la hicimos nosotros</span>
+        </div>
+
+        <div class="web-layout">
+          <div class="web-build" data-web-build>
+            <div class="browser">
+              <div class="browser-bar">
+                <span class="console-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <div class="browser-url" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                  <span>tumarca.com</span>
+                </div>
+                <div class="device-toggle" role="group" aria-label="Vista previa por dispositivo">
+                  <button type="button" data-device-btn="desktop" aria-pressed="true" aria-label="Vista de escritorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></button>
+                  <button type="button" data-device-btn="tablet" aria-pressed="false" aria-label="Vista de tableta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></button>
+                  <button type="button" data-device-btn="mobile" aria-pressed="false" aria-label="Vista de celular"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></button>
+                </div>
+              </div>
+
+              <p class="sr-only">Animación de ejemplo: una landing page se construye por fases, desde la estructura hasta su publicación, y se adapta a escritorio, tableta y celular.</p>
+
+              <div class="browser-stage" aria-hidden="true">
+                <div class="sm-screen" data-device="desktop">
+                  <div class="sm-page">
+                    <div class="sm-nav">
+                      <span class="sm-logo"><i></i><span class="sk">TuMarca</span></span>
+                      <span class="sm-links"><span class="sk">Inicio</span><span class="sk">Servicios</span><span class="sk">Casos</span></span>
+                      <span class="sm-navbtn sk">Contacto</span>
+                    </div>
+                    <div class="sm-hero">
+                      <div class="sm-copy">
+                        <span class="sm-eyebrow sk">Nuevo · 2026</span>
+                        <strong class="sm-title"><span class="sk">Tu marca, lista para crecer en línea.</span></strong>
+                        <span class="sm-text"><span class="sk">Una página rápida y a medida que convierte visitas en clientes.</span></span>
+                        <span class="sm-actions"><span class="sm-cta sk">Agendar ahora</span><span class="sm-ghost sk">Ver más</span></span>
+                      </div>
+                      <div class="sm-art">
+                        <i class="sm-orb sm-orb-1"></i>
+                        <i class="sm-orb sm-orb-2"></i>
+                        <span class="sm-art-card">
+                          <span class="sm-art-head"><i></i><i></i></span>
+                          <span class="sm-bars"><i style="--h:42%"></i><i style="--h:64%"></i><i style="--h:50%"></i><i style="--h:82%"></i><i style="--h:95%"></i></span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="sm-cards">
+                      <span class="sm-card" style="--sd:.1s"><i class="sm-ico"></i><b class="sk">Diseño único</b><em class="sk">Hecho para tu marca</em></span>
+                      <span class="sm-card" style="--sd:.2s"><i class="sm-ico"></i><b class="sk">Carga veloz</b><em class="sk">Optimizada al detalle</em></span>
+                      <span class="sm-card" style="--sd:.3s"><i class="sm-ico"></i><b class="sk">Conectada</b><em class="sk">WhatsApp, CRM e IA</em></span>
+                    </div>
+                  </div>
+
+                  <span class="sm-cursor"><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.7-4.4 3 6.9 3-1.3-3-6.8h6.5z" fill="#fff" stroke="#0a1c13" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+                  <span class="sm-ripple"></span>
+
+                  <div class="sm-launch">
+                    <div class="sm-toast">
+                      <span class="sm-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                      <span><b>Publicado en tumarca.com</b><small>Métricas objetivo de cada entrega</small></span>
+                    </div>
+                    <div class="sm-scores">
+                      <span class="sm-score" style="--off:2"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="98">98</b></span><small>Rendimiento</small></span>
+                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>Accesibilidad</small></span>
+                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>SEO</small></span>
+                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>Buenas prácticas</small></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ol class="build-steps" aria-label="Fases de construcción">
+              <li><span class="num">01</span><b>Estructura</b><small>Wireframe y jerarquía</small><span class="bar" aria-hidden="true"><i></i></span></li>
+              <li><span class="num">02</span><b>Diseño</b><small>Marca, color y tipografía</small><span class="bar" aria-hidden="true"><i></i></span></li>
+              <li><span class="num">03</span><b>Interacción</b><small>Animación y respuesta</small><span class="bar" aria-hidden="true"><i></i></span></li>
+              <li><span class="num">04</span><b>Lanzamiento</b><small>Publicación y métricas</small><span class="bar" aria-hidden="true"><i></i></span></li>
+            </ol>
+          </div>
+
+          <div class="web-plans">
+            <article class="plan reveal-on-scroll" data-spotlight>
+              <div class="plan-head">
+                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+                <div><h3>Landing page</h3><small>Una página, un objetivo</small></div>
+              </div>
+              <p>Enfocada en una sola acción: agendar, comprar o escribir por WhatsApp. Ideal para campañas y lanzamientos.</p>
+              <ul>
+                <li>Copy orientado a conversión</li>
+                <li>Diseño y animaciones a medida</li>
+                <li>Formularios, WhatsApp y analítica</li>
+              </ul>
+            </article>
+
+            <article class="plan reveal-on-scroll" data-spotlight style="transition-delay: 0.1s">
+              <div class="plan-head">
+                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
+                <div><h3>Sitio web corporativo</h3><small>Tu empresa, con autoridad</small></div>
+              </div>
+              <p>Varias páginas para presentar tu empresa, servicios y casos de éxito con una imagen sólida y profesional.</p>
+              <ul>
+                <li>Arquitectura de contenidos</li>
+                <li>SEO técnico y velocidad</li>
+                <li>Publicación en tu dominio</li>
+              </ul>
+            </article>
+
+            <article class="plan plan-featured reveal-on-scroll" data-spotlight style="transition-delay: 0.2s">
+              <span class="plan-badge">Más completo</span>
+              <div class="plan-head">
+                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+                <div><h3>Web + Jade IA</h3><small>Tu sitio trabajando 24/7</small></div>
+              </div>
+              <p>Tu página conectada al agente: cada visita puede convertirse en una conversación calificada y una cita en tu agenda.</p>
+              <ul>
+                <li>Agente en web y WhatsApp</li>
+                <li>Agenda y CRM conectados</li>
+                <li>Medición de todo el recorrido</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <div class="web-marquee" aria-label="Qué incluye cada proyecto web">
+          <div class="web-marquee-track">
+            <ul>
+              <li>Diseño a medida</li>
+              <li>100% responsive</li>
+              <li>SEO técnico</li>
+              <li>Carga ultrarrápida</li>
+              <li>Animaciones propias</li>
+              <li>Integración con WhatsApp</li>
+              <li>Analítica y píxeles</li>
+              <li>Formularios conectados</li>
+              <li>Accesibilidad</li>
+              <li>Dominio y publicación</li>
+            </ul>
+            <ul aria-hidden="true">
+              <li>Diseño a medida</li>
+              <li>100% responsive</li>
+              <li>SEO técnico</li>
+              <li>Carga ultrarrápida</li>
+              <li>Animaciones propias</li>
+              <li>Integración con WhatsApp</li>
+              <li>Analítica y píxeles</li>
+              <li>Formularios conectados</li>
+              <li>Accesibilidad</li>
+              <li>Dominio y publicación</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="web-cta reveal-on-scroll">
+          <p><strong>¿Tu negocio merece una página así?</strong>Cuéntanos tu idea y te proponemos estructura, alcance y tiempos.</p>
+          <div class="web-cta-actions">
+            <a class="btn btn-primary" href="#contacto" data-track="web_cotizar" data-prefill-message="Hola, quiero cotizar una landing page o sitio web para mi negocio.">Cotizar mi página web</a>
+            <a class="btn btn-secondary" href="https://wa.me/573009403058?text=Hola%20JadeMind%2C%20quiero%20cotizar%20una%20landing%20page%20o%20sitio%20web." target="_blank" rel="noopener noreferrer" data-track="web_whatsapp">Hablar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section method-section" id="metodo" aria-labelledby="method-title">
+      <div class="container method-layout">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow">Implementación con criterio</p>
+          <h2 id="method-title">Primero entendemos. Después automatizamos.</h2>
+          <p>La IA no corrige un proceso confuso por sí sola. Por eso cada proyecto empieza definiendo decisiones, límites y responsables.</p>
+          <a class="text-link" href="#contacto">Solicitar un diagnóstico <span aria-hidden="true">→</span></a>
+        </div>
+
+        <ol class="method-list">
+          <li class="reveal-on-scroll"><span>01</span><div><h3>Diagnóstico</h3><p>Revisamos canales, volumen, preguntas frecuentes, herramientas y puntos donde se pierde contexto.</p></div></li>
+          <li class="reveal-on-scroll" style="transition-delay: 0.1s"><span>02</span><div><h3>Diseño del recorrido</h3><p>Definimos qué pregunta la IA, qué registra, cuándo agenda y cuándo debe detenerse.</p></div></li>
+          <li class="reveal-on-scroll" style="transition-delay: 0.2s"><span>03</span><div><h3>Entrenamiento y validación</h3><p>Configuramos la información aprobada y probamos escenarios normales, ambiguos y sensibles.</p></div></li>
+          <li class="reveal-on-scroll" style="transition-delay: 0.3s"><span>04</span><div><h3>Lanzamiento y mejora</h3><p>Activamos el flujo, revisamos conversaciones y ajustamos con evidencia operativa.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section transparency-section" aria-labelledby="transparency-title">
+      <div class="container transparency-panel">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow">Transparencia primero</p>
+          <h2 id="transparency-title">Una IA profesional también sabe cuándo detenerse.</h2>
+          <p>Diseñamos límites, escalamiento y trazabilidad para que la automatización acompañe a tu equipo en lugar de ocultar incertidumbre.</p>
+        </div>
+        <div class="transparency-grid">
+          <article class="reveal-on-scroll"><span aria-hidden="true">A</span><h3>Respuestas con base aprobada</h3><p>El agente trabaja con información, reglas y contenidos definidos para el proyecto.</p></article>
+          <article class="reveal-on-scroll" style="transition-delay: 0.15s"><span aria-hidden="true">H</span><h3>Transferencia humana</h3><p>Las excepciones y conversaciones que requieren criterio pueden pasar a una persona con su contexto.</p></article>
+          <article class="reveal-on-scroll" style="transition-delay: 0.3s"><span aria-hidden="true">D</span><h3>Datos con propósito</h3><p>Se recopila la información necesaria para el recorrido acordado y se documentan los proveedores involucrados.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section media-section" aria-labelledby="media-title">
+      <div class="container media-layout">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow">Demostración visual</p>
+          <h2 id="media-title">Observa el flujo antes de conversar con nosotros.</h2>
+          <p id="video-description">El video presenta cómo una conversación puede responder preguntas iniciales, recopilar contexto y conducir al siguiente paso comercial.</p>
+          <details class="video-transcript">
+            <summary>Leer descripción de la demostración</summary>
+            <p>La secuencia muestra un ejemplo conceptual de atención comercial automatizada: entrada del prospecto, respuesta inicial, recopilación de datos y preparación de una acción como agenda o transferencia.</p>
+          </details>
+        </div>
+        <div class="video-frame reveal-on-scroll">
+          <video autoplay loop muted playsinline disablePictureInPicture disableRemotePlayback controlsList="nodownload noplaybackrate nofullscreen" preload="metadata" poster="banner.jpg" width="960" height="540" aria-describedby="video-description">
+            <source src="¡Vende en piloto automático con JadeMind!.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video. Puedes leer la descripción disponible junto a él.
+          </video>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section faq-section" id="faq" aria-labelledby="faq-title">
+      <div class="container faq-layout">
+        <div class="section-heading reveal-on-scroll">
+          <p class="eyebrow">Preguntas frecuentes</p>
+          <h2 id="faq-title">Lo que conviene aclarar antes de automatizar.</h2>
+          <p>El diagnóstico confirma el alcance técnico y comercial de cada implementación.</p>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>¿La IA reemplaza a mi equipo comercial?</summary>
+            <p>No es el objetivo. JadeMind puede encargarse de tareas iniciales y repetitivas, preparar contexto y transferir la oportunidad para que el equipo intervenga donde aporta más criterio.</p>
+          </details>
+          <details>
+            <summary>¿Qué pasa si el agente no sabe responder?</summary>
+            <p>El flujo debe definir límites y rutas de escalamiento. Ante información insuficiente, puede pedir contexto adicional o transferir la conversación a una persona.</p>
+          </details>
+          <details>
+            <summary>¿Se puede integrar con mis herramientas actuales?</summary>
+            <p>Depende de las APIs y permisos disponibles. Durante el diagnóstico revisamos WhatsApp, calendario, CRM, formularios y otras herramientas antes de confirmar el alcance.</p>
+          </details>
+          <details>
+            <summary>¿Cuánto tarda una implementación?</summary>
+            <p>Varía según la cantidad de contenidos, reglas, canales e integraciones. La propuesta incluye etapas, entregables y tiempos estimados antes de iniciar.</p>
+          </details>
+          <details>
+            <summary>¿Cómo se define el precio?</summary>
+            <p>Se calcula según el recorrido, número de canales, integraciones, volumen y acompañamiento requerido. Primero identificamos el módulo que resuelve el cuello de botella principal.</p>
+          </details>
+          <details>
+            <summary>¿Cómo se manejan los datos?</summary>
+            <p>Se documentan finalidades, accesos y proveedores para cada proyecto. Puedes consultar la política de tratamiento y plantear requisitos específicos durante el diagnóstico.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacto" aria-labelledby="contact-title">
+      <div class="container contact-shell">
+        <div class="contact-copy">
+          <p class="eyebrow">Diagnóstico comercial</p>
+          <h2 id="contact-title">Detectemos dónde se enfrían tus conversaciones.</h2>
+          <p>Cuéntanos qué ocurre hoy desde que entra un mensaje hasta que una persona compra, agenda o recibe una propuesta.</p>
+          <ul>
+            <li>Revisión del proceso actual</li>
+            <li>Primer flujo recomendado</li>
+            <li>Alcance e integraciones necesarias</li>
+          </ul>
+
+          <address>
+            <span>Medellín, Colombia</span>
+            <a href="mailto:info@jademind.com.co">info@jademind.com.co</a>
+            <a href="https://wa.me/573009403058" target="_blank" rel="noopener noreferrer">+57 300 940 3058</a>
+          </address>
+        </div>
+
+        <div class="contact-form-shell">
+          <form id="contact-form" action="https://formsubmit.co/info@jademind.com.co" method="POST" aria-describedby="form-privacy-note">
+            <input type="hidden" name="_subject" value="Nuevo diagnóstico solicitado en JadeMind">
+            <div class="honey-field" aria-hidden="true">
+              <label for="website">No completar este campo</label>
+              <input id="website" name="_honey" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input id="nombre" name="nombre" type="text" autocomplete="name" maxlength="120" required>
+              </div>
+              <div class="form-group">
+                <label for="empresa">Empresa</label>
+                <input id="empresa" name="empresa" type="text" autocomplete="organization" maxlength="160">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+              </div>
+              <div class="form-group">
+                <label for="telefono">WhatsApp <span>(opcional)</span></label>
+                <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" maxlength="32">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="sector">Sector</label>
+              <select id="sector" name="sector">
+                <option value="">Selecciona una opción</option>
+                <option>Inmobiliario</option>
+                <option>Salud y estética</option>
+                <option>Educación</option>
+                <option>Comercio y venta de productos</option>
+                <option>Otro</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="mensaje">¿Qué parte del proceso quieres mejorar?</label>
+              <textarea id="mensaje" name="mensaje" rows="4" maxlength="2000" required></textarea>
+            </div>
+
+            <label class="consent-field" for="privacidad">
+              <input id="privacidad" name="acepta_privacidad" type="checkbox" value="sí" required>
+              <span>Autorizo el tratamiento de mis datos para responder esta solicitud, de acuerdo con la <a href="politicas-de-privacidad.html">política de privacidad</a>.</span>
+            </label>
+
+            <button class="btn btn-primary btn-submit" type="submit" data-track="form_submit">Solicitar diagnóstico</button>
+            <p class="form-note" id="form-privacy-note">Tus datos se utilizarán para atender esta solicitud. No enviamos listas de correo sin autorización adicional.</p>
+            <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
           </form>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-  <!-- Botón Flotante de WhatsApp -->
-  <a href="https://wa.me/573009403058?text=Hola%20JadeMind!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios%20de%20agentes%20de%20IA%20y%20automatizaci%C3%B3n." class="whatsapp-float-wrapper" target="_blank" rel="noopener noreferrer">
-    <span class="whatsapp-tooltip">¡Habla con nosotros!</span>
-    <div class="whatsapp-float" title="Escríbenos por WhatsApp">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-      </svg>
-    </div>
-  </a>
-
-  <!-- Footer & Redes Sociales -->
-  <footer class="footer-social" style="padding: 4rem 0 2rem 0; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 2rem; position: relative; z-index: 5;">
-    <div class="container">
-      <h3 style="font-size: 2rem; margin-bottom: 1.5rem; font-family: var(--ff-display);">Conecta con JadeMind</h3>
-      <p style="color: var(--text-soft); font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">Únete a nuestra comunidad para descubrir tips de ventas, casos de éxito y las últimas tendencias en inteligencia artificial.</p>
+    <section class="social-section" id="comunidad" aria-labelledby="social-title">
+    <div class="container social-header">
+      <h2 id="social-title">Únete a nuestra comunidad</h2>
+      <p>Descubre estrategias exclusivas, actualizaciones sobre IA y casos de éxito reales en nuestras redes sociales.</p>
       
-      <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <!-- Instagram Button -->
-        <a href="https://www.instagram.com/jademind_oficial?igsh=MTFwN3M1NTQ4MzM3MA==" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.75rem; background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(220, 39, 67, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(220, 39, 67, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(220, 39, 67, 0.4)';">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-          </svg>
-          Síguenos en Instagram
+      <div class="social-cards">
+        <a href="https://www.instagram.com/jademind_oficial/" target="_blank" rel="noopener noreferrer" class="social-card instagram" data-track="social_instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <span>Síguenos en Instagram</span>
         </a>
+        <a href="https://www.facebook.com/jademind" target="_blank" rel="noopener noreferrer" class="social-card facebook" data-track="social_facebook">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Síguenos en Facebook</span>
+        </a>
+      </div>
+    </div>
+    </section>
+  </main>
 
-        <!-- Facebook Button -->
-        <a href="https://www.facebook.com/jademind" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.75rem; background: #1877F2; color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: 600; text-decoration: none; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(24, 119, 242, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(24, 119, 242, 0.4)';">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-          </svg>
-          Síguenos en Facebook
-        </a>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <img src="visual/jademind-horizontal-web.png" width="146" height="48" loading="lazy" decoding="async" alt="JadeMind">
+        <p>Automatización comercial para conversaciones que necesitan avanzar con contexto.</p>
       </div>
-      <div style="margin-top: 4rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-        <p style="color: var(--text-soft); font-size: 1.05rem;">
-          <strong>✉️ Correo:</strong> <a href="mailto:info@jademind.com.co" style="color: var(--accent); text-decoration: none;">info@jademind.com.co</a> 
-          <span style="margin: 0 1rem; color: rgba(255,255,255,0.2);">|</span> 
-          <strong>📞 Teléfono:</strong> <a href="https://wa.me/573009403058" style="color: var(--accent); text-decoration: none;">+57 300 9403058</a>
-        </p>
-        <div style="display: flex; gap: 1.5rem; margin-top: 1rem;">
-          <a href="politicas-de-privacidad.html" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Políticas de Privacidad</a>
-          <span style="color: rgba(255,255,255,0.2);">•</span>
-          <a href="politicas-de-privacidad.html" style="color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">Términos y Condiciones</a>
-        </div>
-        <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.3);">© 2026 JadeMind. Todos los derechos reservados.</p>
-      </div>
+      <nav aria-label="Enlaces legales">
+        <a href="politicas-de-privacidad.html">Privacidad</a>
+        <a href="terminos-y-condiciones.html">Términos y condiciones</a>
+        <a href="https://www.instagram.com/jademind_oficial/" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.facebook.com/jademind" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <span>© 2026 JadeMind. Todos los derechos reservados.</span>
+      <a href="#inicio">Volver arriba <span aria-hidden="true">↑</span></a>
     </div>
   </footer>
 
-  <!-- Script Lógico -->
-  <script src="app.js?v=28"></script>
+  <a class="whatsapp-float" href="https://wa.me/573009403058?text=Hola%20JadeMind%2C%20quiero%20revisar%20mi%20flujo%20comercial." target="_blank" rel="noopener noreferrer" aria-label="Hablar con JadeMind por WhatsApp" data-track="floating_whatsapp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26C2.17 6.44 6.6 2.01 12.06 2.01c2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.89-9.89 9.89"/></svg>
+  </a>
 
-  <!-- Efectos de Fondo Premium (Grid + Spotlight + Estrellas) -->
-  <style>
-    /* Estrellas parpadeantes (Cósmico/Tecnológico) */
-    #star-field {
-      position: fixed;
-      inset: 0;
-      z-index: -3;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    
-    .tech-star {
-      position: absolute;
-      background: white;
-      border-radius: 50%;
-      opacity: 0;
-      animation: twinkle linear infinite;
-    }
-    
-    @keyframes twinkle {
-      0% { opacity: 0; transform: scale(0.5); }
-      50% { opacity: 0.8; transform: scale(1.2); box-shadow: 0 0 6px currentColor; }
-      100% { opacity: 0; transform: scale(0.5); }
-    }
-
-    /* Cuadrícula sutil de fondo */
-    #premium-bg-grid {
-      position: fixed;
-      inset: 0;
-      z-index: -1; 
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-      /* Máscara radial que revela la cuadrícula solo cerca del cursor */
-      -webkit-mask-image: radial-gradient(circle 350px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
-      mask-image: radial-gradient(circle 350px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), black 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-    
-    /* Resplandor sofisticado que acompaña la cuadrícula */
-    #premium-cursor-glow {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-      /* Color jade muy sutil */
-      background: radial-gradient(circle 500px at var(--mouse-x, 50vw) var(--mouse-y, 50vh), rgba(16, 185, 129, 0.06) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-    
-    /* Mostrar estático en móviles ya que no hay cursor */
-    @media (max-width: 768px) {
-      #premium-bg-grid {
-        opacity: 0.3 !important;
-        -webkit-mask-image: radial-gradient(circle 500px at 50% 20%, black 0%, transparent 100%) !important;
-        mask-image: radial-gradient(circle 500px at 50% 20%, black 0%, transparent 100%) !important;
-      }
-      #premium-cursor-glow {
-        opacity: 0.5 !important;
-        background: radial-gradient(circle 400px at 50% 20%, rgba(16, 185, 129, 0.08) 0%, transparent 100%) !important;
-      }
-    }
-  </style>
-  <div id="star-field"></div>
-  <div id="premium-bg-grid"></div>
-  <div id="premium-cursor-glow"></div>
-  <script>
-    // 1. Generar Estrellas Tecnológicas
-    const starField = document.getElementById('star-field');
-    const numStars = 80;
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.classList.add('tech-star');
-      
-      const size = Math.random() * 2 + 1; // 1px a 3px
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.left = `${Math.random() * 100}vw`;
-      star.style.top = `${Math.random() * 100}vh`;
-      
-      const duration = Math.random() * 4 + 2; // 2s a 6s
-      const delay = Math.random() * 5;
-      star.style.animationDuration = `${duration}s`;
-      star.style.animationDelay = `${delay}s`;
-      
-      // El 30% de las estrellas tendrán color de acento (Jade/Azul) para el toque "tech"
-      const randColor = Math.random();
-      if (randColor > 0.85) {
-        star.style.color = 'rgba(6, 104, 225, 0.8)'; // Azul Meta
-        star.style.background = 'rgba(6, 104, 225, 0.8)';
-      } else if (randColor > 0.70) {
-        star.style.color = '#10B981'; // Jade
-        star.style.background = '#10B981';
-      } else {
-        star.style.color = 'rgba(255, 255, 255, 0.8)';
-      }
-      
-      starField.appendChild(star);
-    }
-
-    // 2. Lógica del Spotlight y Grid
-    const gridEl = document.getElementById('premium-bg-grid');
-    const glowEl = document.getElementById('premium-cursor-glow');
-
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      
-      gridEl.style.setProperty('--mouse-x', `${x}px`);
-      gridEl.style.setProperty('--mouse-y', `${y}px`);
-      glowEl.style.setProperty('--mouse-x', `${x}px`);
-      glowEl.style.setProperty('--mouse-y', `${y}px`);
-      
-      gridEl.style.opacity = '1';
-      glowEl.style.opacity = '1';
-    });
-
-    document.addEventListener('mouseleave', () => {
-      gridEl.style.opacity = '0';
-      glowEl.style.opacity = '0';
-    });
-  </script>
+  <script src="neural-field.js?v=1" defer></script>
+  <script src="app.js?v=43"></script>
 </body>
 </html>

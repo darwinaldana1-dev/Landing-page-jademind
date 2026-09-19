@@ -1,0 +1,25 @@
+{
+  "name": "JadeMind",
+  "short_name": "JadeMind",
+  "description": "Automatización comercial para WhatsApp y web.",
+  "lang": "es-CO",
+  "start_url": "/",
+  "scope": "/",
+  "display": "minimal-ui",
+  "background_color": "#07110d",
+  "theme_color": "#07110d",
+  "icons": [
+    {
+      "src": "/visual/jademind-icono-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/visual/jademind-icono-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
