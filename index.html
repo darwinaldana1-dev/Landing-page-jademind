@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles_v22.css?v=51">
+  <link rel="stylesheet" href="styles_v22.css?v=52">
 
   <script type="application/ld+json">
   {
@@ -77,7 +77,6 @@
 
       <div class="nav-links" id="nav-links">
         <a href="#circuito">El sistema</a>
-        <a href="#demo">Demo</a>
         <a href="#soluciones">Soluciones</a>
         <a href="#diseno-web">Diseño web</a>
         <a href="#faq">Preguntas</a>
@@ -96,7 +95,7 @@
           <p class="hero-lead">JadeMind conecta tu landing, WhatsApp y calendario para responder al instante, calificar prospectos, agendar citas y transferir la conversación a una persona cuando hace falta.</p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#demo" data-track="hero_demo">Explorar demos por sector</a>
+            <a class="btn btn-primary" href="#circuito" data-track="hero_circuito">Ver a Jade IA en acción</a>
             <a class="btn btn-secondary" href="https://wa.me/573009403058?text=Hola%20JadeMind%2C%20quiero%20revisar%20mi%20flujo%20comercial." target="_blank" rel="noopener noreferrer" data-track="hero_whatsapp">Hablar por WhatsApp</a>
           </div>
 
@@ -379,55 +378,6 @@
             <h3>Método Coexistence de WhatsApp</h3>
             <p>Función oficial de Meta que permite <strong>usar el mismo número de teléfono</strong> en la App de WhatsApp Business y en nuestra API de forma simultánea. La IA gestiona el volumen general y tu equipo interviene manualmente desde su celular cuando sea necesario, sin interrupciones.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section demo-section" id="demo" aria-labelledby="demo-title">
-      <div class="container">
-        <div class="section-heading section-heading-centered reveal-on-scroll">
-          <p class="eyebrow">Casos de uso reales</p>
-          <h2 id="demo-title">Pruébalo en distintos sectores.</h2>
-          <p>La inteligencia artificial se adapta a las reglas y objetivos de cada industria.</p>
-        </div>
-
-        <div class="sector-tabs" role="tablist" aria-label="Seleccionar sector">
-          <button id="tab-inmobiliaria" role="tab" aria-selected="true" aria-controls="sector-panel" tabindex="0" data-sector="inmobiliaria">Inmobiliaria</button>
-          <button id="tab-estetica" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="estetica">Estética</button>
-          <button id="tab-educacion" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="educacion">Educación</button>
-          <button id="tab-productos" role="tab" aria-selected="false" aria-controls="sector-panel" tabindex="-1" data-sector="productos">Venta de productos</button>
-        </div>
-
-        <div class="sector-demo" id="sector-panel" role="tabpanel" aria-labelledby="tab-inmobiliaria">
-          <div class="demo-chat">
-            <div class="demo-chat-head">
-              <div><span class="online-dot" aria-hidden="true"></span><strong id="sector-agent-name">Asistente inmobiliario</strong></div>
-              <small>Conversación de ejemplo</small>
-            </div>
-            <div class="demo-chat-body" id="sector-messages">
-              <p class="message message-agent"><span class="sr-only">Asistente: </span>Hola, ¿buscas comprar, arrendar o vender una propiedad?</p>
-              <p class="message message-user"><span class="sr-only">Cliente: </span>Quiero comprar un apartamento en Medellín.</p>
-              <p class="message message-agent"><span class="sr-only">Asistente: </span>Perfecto. ¿Qué presupuesto, zonas y número de habitaciones tienes en mente?</p>
-              <p class="message message-user"><span class="sr-only">Cliente: </span>Hasta $480 millones, dos habitaciones, idealmente en Laureles o Belén.</p>
-              <p class="message message-agent"><span class="sr-only">Asistente: </span>¿Lo buscas para vivir o invertir y en qué plazo quieres comprar?</p>
-              <p class="message message-user"><span class="sr-only">Cliente: </span>Para vivir. Quiero decidir durante los próximos tres meses.</p>
-              <p class="message message-agent"><span class="sr-only">Asistente: </span>Ya tengo tu perfil. Puedo mostrarte opciones compatibles y ayudarte a coordinar una visita.</p>
-            </div>
-            <p class="sr-only" id="sector-demo-status" role="status" aria-live="polite" aria-atomic="true"></p>
-          </div>
-
-          <aside class="demo-result" aria-labelledby="demo-result-title">
-            <span class="demo-badge">Salida del circuito</span>
-            <h3 id="demo-result-title">Lo que recibe el equipo</h3>
-            <dl id="sector-result">
-              <div><dt>Intención</dt><dd>Compra</dd></div>
-              <div><dt>Perfil</dt><dd>2 habitaciones · hasta $480 millones</dd></div>
-              <div><dt>Ubicación</dt><dd>Laureles o Belén</dd></div>
-              <div><dt>Siguiente paso</dt><dd>Enviar opciones y agendar visita</dd></div>
-            </dl>
-            <p id="sector-handoff">Si faltan datos o aparece una solicitud sensible, Jade IA deriva la conversación a una persona.</p>
-            <a class="btn btn-primary" href="#contacto" data-track="demo_diagnostico">Quiero diseñar mi recorrido</a>
-          </aside>
         </div>
       </div>
     </section>
@@ -881,6 +831,6 @@
   </a>
 
   <script src="neural-field.js?v=1" defer></script>
-  <script src="app.js?v=43"></script>
+  <script src="app.js?v=44"></script>
 </body>
 </html>

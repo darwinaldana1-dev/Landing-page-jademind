@@ -316,151 +316,6 @@ if (circuitShell) {
 
 selectCircuitStep(circuitCurrent);
 
-// Demo por sector
-const SECTOR_CONTENT = {
-  inmobiliaria: {
-    agent: 'Asistente inmobiliario',
-    messages: [
-      ['agent', 'Hola, ¿buscas comprar, arrendar o vender una propiedad?'],
-      ['user', 'Quiero comprar un apartamento en Medellín.'],
-      ['agent', 'Perfecto. ¿Qué presupuesto, zonas y número de habitaciones tienes en mente?'],
-      ['user', 'Hasta $480 millones, dos habitaciones, idealmente en Laureles o Belén.'],
-      ['agent', '¿Lo buscas para vivir o invertir y en qué plazo quieres comprar?'],
-      ['user', 'Para vivir. Quiero decidir durante los próximos tres meses.'],
-      ['agent', 'Ya tengo tu perfil. Puedo mostrarte opciones compatibles y ayudarte a coordinar una visita.']
-    ],
-    result: [['Intención', 'Compra'], ['Perfil', '2 habitaciones · hasta $480 millones'], ['Ubicación', 'Laureles o Belén'], ['Siguiente paso', 'Enviar opciones y agendar visita']],
-    handoff: 'Si el presupuesto, la zona o el tipo de inmueble requieren asesoría, el agente transfiere la conversación con el contexto recopilado.'
-  },
-  estetica: {
-    agent: 'Asistente de clínica estética',
-    messages: [
-      ['agent', 'Hola, ¿quieres conocer tratamientos, revisar disponibilidad o agendar una valoración?'],
-      ['user', 'Quiero mejorar manchas y textura, pero no sé cuál tratamiento necesito.'],
-      ['agent', 'Puedo ayudarte con el proceso sin sustituir la evaluación clínica. ¿Es tu primera consulta y tienes alguna fecha especial?'],
-      ['user', 'Sí, es mi primera vez y tengo un evento dentro de dos meses.'],
-      ['agent', 'Gracias. ¿Qué sede y horarios suelen funcionarte mejor?'],
-      ['user', 'Medellín, preferiblemente los sábados en la mañana.'],
-      ['agent', 'Perfecto. Consultaré una valoración facial en ese horario; el profesional definirá el tratamiento y las indicaciones durante la cita.']
-    ],
-    result: [['Interés', 'Valoración facial'], ['Contexto', 'Primera consulta · evento en 2 meses'], ['Preferencia', 'Sábado en la mañana'], ['Siguiente paso', 'Consultar agenda en Medellín']],
-    handoff: 'El agente no realiza diagnósticos médicos. Las recomendaciones clínicas se reservan para el profesional responsable.'
-  },
-  educacion: {
-    agent: 'Asistente de admisiones',
-    messages: [
-      ['agent', 'Hola, ¿buscas un programa, información de matrícula o hablar con admisiones?'],
-      ['user', 'Quiero estudiar analítica de datos en modalidad virtual.'],
-      ['agent', '¿Qué nivel de formación buscas y cuándo te gustaría comenzar?'],
-      ['user', 'Un diplomado. Quisiera iniciar el próximo mes.'],
-      ['agent', '¿Tienes experiencia previa y qué horarios puedes dedicar al estudio?'],
-      ['user', 'Soy principiante y puedo estudiar en las noches.'],
-      ['agent', 'Con ese perfil puedo mostrarte programas virtuales, horarios, costos y próximas cohortes. Admisiones confirmará requisitos y matrícula.']
-    ],
-    result: [['Programa', 'Diplomado en analítica de datos'], ['Perfil', 'Principiante · horario nocturno'], ['Inicio', 'Próximo mes'], ['Siguiente paso', 'Enviar programa y conectar con admisiones']],
-    handoff: 'Cuando el prospecto necesita homologaciones, financiación o condiciones especiales, la conversación pasa al equipo de admisiones.'
-  },
-  productos: {
-    agent: 'Asistente de ventas de productos',
-    messages: [
-      ['agent', 'Hola, ¿qué producto buscas o qué necesidad quieres resolver?'],
-      ['user', 'Necesito audífonos inalámbricos para trabajar y entrenar.'],
-      ['agent', '¿Qué características priorizas y cuál es tu presupuesto máximo?'],
-      ['user', 'Cancelación de ruido, resistencia al sudor y hasta $450.000.'],
-      ['agent', '¿Usas Android o iPhone y en qué ciudad recibirías el pedido?'],
-      ['user', 'Android. Necesito entrega en Medellín esta semana.'],
-      ['agent', 'En esta simulación encontré dos opciones: A por $389.000 con 30 horas de batería y B por $429.000 con mejor cancelación. Ambas encajan en tu presupuesto. ¿Cuál prefieres?'],
-      ['user', 'La opción B.'],
-      ['agent', 'Perfecto. Dejé seleccionada la opción B y puedo llevarte al pago o transferirte a ventas para confirmar disponibilidad y entrega.']
-    ],
-    result: [['Producto', 'Audífonos inalámbricos'], ['Selección', 'Opción B · $429.000'], ['Entrega', 'Medellín · esta semana'], ['Siguiente paso', 'Confirmar inventario y continuar al pago']],
-    handoff: 'Antes de cerrar la compra se verifican inventario, garantía y tiempo de entrega. Si surge una excepción, ventas recibe el producto seleccionado y todo el contexto.'
-  }
-};
-
-const sectorTabs = Array.from(document.querySelectorAll('[role="tab"][data-sector]'));
-const sectorPanel = document.getElementById('sector-panel');
-const sectorAgentName = document.getElementById('sector-agent-name');
-const sectorMessages = document.getElementById('sector-messages');
-const sectorResult = document.getElementById('sector-result');
-const sectorHandoff = document.getElementById('sector-handoff');
-const sectorDemoStatus = document.getElementById('sector-demo-status');
-
-function createMessage(type, text) {
-  const message = document.createElement('p');
-  const speaker = document.createElement('span');
-  speaker.className = 'sr-only';
-  speaker.textContent = type === 'user' ? 'Cliente: ' : 'Asistente: ';
-  message.className = `message message-${type}`;
-  message.append(speaker, document.createTextNode(text));
-  return message;
-}
-
-function createResultRow([label, value]) {
-  const wrapper = document.createElement('div');
-  const term = document.createElement('dt');
-  const description = document.createElement('dd');
-  term.textContent = label;
-  description.textContent = value;
-  wrapper.append(term, description);
-  return wrapper;
-}
-
-function selectSector(key, { focus = false, announce = false } = {}) {
-  const content = SECTOR_CONTENT[key];
-  const activeTab = sectorTabs.find((tab) => tab.dataset.sector === key);
-  if (!content || !activeTab || !sectorPanel || !sectorAgentName || !sectorMessages || !sectorResult || !sectorHandoff) return;
-
-  sectorTabs.forEach((tab) => {
-    const active = tab === activeTab;
-    tab.setAttribute('aria-selected', String(active));
-    tab.tabIndex = active ? 0 : -1;
-  });
-
-  sectorPanel.setAttribute('aria-labelledby', activeTab.id);
-  sectorAgentName.textContent = content.agent;
-  sectorMessages.replaceChildren(...content.messages.map(([type, text]) => createMessage(type, text)));
-  sectorResult.replaceChildren(...content.result.map(createResultRow));
-  sectorHandoff.textContent = content.handoff;
-
-  if (announce && sectorDemoStatus) {
-    sectorDemoStatus.textContent = `Demo de ${activeTab.textContent.trim()} cargada.`;
-  }
-
-  if (focus) activeTab.focus();
-
-  if (focus || announce) {
-    activeTab.scrollIntoView({
-      behavior: prefersReducedMotion.matches ? 'auto' : 'smooth',
-      block: 'nearest',
-      inline: 'nearest'
-    });
-  }
-}
-
-sectorTabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => {
-    selectSector(tab.dataset.sector, { announce: true });
-    emitConversion('sector_demo', { sector: tab.dataset.sector });
-  });
-
-  tab.addEventListener('keydown', (event) => {
-    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-
-    let nextIndex = index;
-    if (event.key === 'ArrowRight') nextIndex = (index + 1) % sectorTabs.length;
-    if (event.key === 'ArrowLeft') nextIndex = (index - 1 + sectorTabs.length) % sectorTabs.length;
-    if (event.key === 'Home') nextIndex = 0;
-    if (event.key === 'End') nextIndex = sectorTabs.length - 1;
-
-    selectSector(sectorTabs[nextIndex].dataset.sector, { focus: true, announce: true });
-  });
-});
-
-selectSector('inmobiliaria');
-
-
 // El video solo consume recursos de reproducción mientras está visible.
 const demoVideo = document.querySelector('.video-frame video');
 if (demoVideo && 'IntersectionObserver' in window) {
@@ -481,11 +336,10 @@ if (demoVideo && 'IntersectionObserver' in window) {
   videoObserver.observe(demoVideo);
 }
 
-// Evita que el acceso flotante cubra la demo conversacional o el formulario.
+// Evita que el acceso flotante cubra el formulario.
 const whatsappFloat = document.querySelector('.whatsapp-float');
 const contactSection = document.getElementById('contacto');
-const demoSection = document.getElementById('demo');
-const protectedFloatSections = [demoSection, contactSection].filter(Boolean);
+const protectedFloatSections = [contactSection].filter(Boolean);
 if (whatsappFloat && protectedFloatSections.length) {
   let visibilityFrame = null;
   const updateWhatsAppVisibility = () => {
