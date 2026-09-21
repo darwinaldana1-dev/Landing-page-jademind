@@ -7,10 +7,9 @@ Landing estática de JadeMind, construida con HTML, CSS y JavaScript sin depende
 ```powershell
 node --check app.js
 node scripts/validate-site.mjs
-node scripts/browser-qa.mjs
 ```
 
-`validate-site.mjs` comprueba anclas, recursos, IDs, labels y metadatos. `browser-qa.mjs` abre Chrome o Edge en modo headless, valida los layouts de 320, 390, 820 y 1440 px, revisa las páginas legales y prueba menú, demo sectorial, Circuito Jade, estimador y estados del formulario. Sus capturas se guardan en la carpeta temporal del sistema.
+`validate-site.mjs` comprueba anclas, recursos, IDs, labels y metadatos.
 
 ## Archivos de publicación
 
@@ -22,7 +21,8 @@ node scripts/browser-qa.mjs
 - `robots.txt`
 - `sitemap.xml`
 - `site.webmanifest`
-- Imágenes y video referenciados por las páginas
+- `neural-field.js` (fondo animado del hero)
+- `banner.jpg`, el video, `assets/logo-icon.png` y los logos de `visual/`
 
 ## Antes de publicar
 
@@ -31,5 +31,3 @@ node scripts/browser-qa.mjs
 3. Completar o validar con asesoría jurídica la identificación del responsable del tratamiento y los textos legales.
 4. Configurar en el hosting HTTPS y encabezados como CSP, HSTS, Referrer-Policy, Permissions-Policy y X-Content-Type-Options.
 5. Probar el formulario en el dominio publicado sin utilizar datos sensibles.
-
-La copia previa a la mejora está guardada localmente en `backups/` y esa carpeta está excluida de Git.
