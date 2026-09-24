@@ -59,7 +59,10 @@
   --accent: #10d18a;
   --accent-soft: #a6edcb;
   --accent-strong: #01986b;
-  --accent-hover: #03774f;
+  /* Botón principal = bg-primary del CRM en oscuro; hover = primary/90 sobre ink */
+  --accent-hover: #0fbe7e;
+  /* Jade de marca (#02B981): el verde que usa el tema claro del CRM */
+  --jade: #02b981;
   --danger: #ffb4b4;
   --success: #a5f5da;
   --shadow-sm: 0 12px 30px rgba(0, 0, 0, 0.18);
@@ -277,9 +280,9 @@ section[id] {
 }
 
 .btn-primary {
-  background: var(--accent-strong);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(1, 152, 107, 0.28);
+  background: var(--accent);
+  color: var(--bg);
+  box-shadow: 0 10px 25px rgba(16, 209, 138, 0.28);
 }
 
 .btn-primary:hover {
@@ -670,8 +673,8 @@ section[id] {
 .message-user {
   align-self: flex-end;
   border-top-right-radius: 5px;
-  background: var(--accent-strong);
-  color: #fff;
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .lead-card {
@@ -861,7 +864,7 @@ section[id] {
 }
 
 .problem-section .eyebrow {
-  color: #03774f;
+  color: var(--jade);
 }
 
 .problem-section .section-heading > p:last-child {
@@ -898,7 +901,7 @@ section[id] {
 .problem-card > span {
   display: inline-flex;
   margin-bottom: 4.25rem;
-  color: #03774f;
+  color: var(--jade);
   font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
@@ -1623,8 +1626,8 @@ section[id] {
 .bubble.out {
   align-self: flex-end;
   border-top-right-radius: 5px;
-  background: var(--accent-strong);
-  color: #fff;
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .typing {
@@ -2298,7 +2301,7 @@ section[id] {
 
 .method-section .eyebrow,
 .method-section .text-link {
-  color: #03774f;
+  color: var(--jade);
 }
 
 .method-section .section-heading > p:last-of-type {
@@ -2335,7 +2338,7 @@ section[id] {
 }
 
 .method-list > li > span {
-  color: #03774f;
+  color: var(--jade);
   font-family: var(--font-display);
   font-size: 0.74rem;
   font-weight: 700;
@@ -2481,7 +2484,7 @@ section[id] {
 .estimator-fields input[type="range"] {
   width: 100%;
   min-height: 34px;
-  accent-color: var(--accent-strong);
+  accent-color: var(--accent);
 }
 
 .estimator-fields output {
@@ -2701,10 +2704,10 @@ section[id] {
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #03774f;
-  outline: 3px solid rgba(1, 152, 107, 0.2);
+  border-color: var(--jade);
+  outline: 3px solid rgba(2, 185, 129, 0.2);
   outline-offset: 1px;
-  box-shadow: 0 0 0 1px #03774f;
+  box-shadow: 0 0 0 1px var(--jade);
 }
 
 .consent-field {
@@ -2722,11 +2725,11 @@ section[id] {
   width: 20px;
   height: 20px;
   margin: 0.08rem 0 0;
-  accent-color: var(--accent-strong);
+  accent-color: var(--jade);
 }
 
 .consent-field a {
-  color: #03774f;
+  color: var(--jade);
   font-weight: 700;
 }
 
@@ -2854,14 +2857,14 @@ section[id] {
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 50%;
-  background: #01986b;
-  color: #fff;
+  background: var(--accent);
+  color: var(--bg);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
   transition: background-color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 .whatsapp-float:hover {
-  background: #03774f;
+  background: var(--accent-hover);
   transform: translateY(-3px);
 }
 
@@ -2929,7 +2932,7 @@ section[id] {
 .legal-intro {
   padding: 1.5rem;
   margin: 2rem 0;
-  border-left: 3px solid var(--accent-strong);
+  border-left: 3px solid var(--accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   background: rgba(16, 209, 138, 0.07);
   color: var(--text-soft);
