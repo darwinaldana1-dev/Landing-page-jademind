@@ -18,8 +18,8 @@
   var BUCKETS = 8; // niveles de opacidad para agrupar las líneas en pocos trazos
 
   var DEFAULTS = {
-    core: [0, 255, 136],      // #00ff88
-    deep: [16, 185, 129],     // #10b981
+    core: [0, 255, 136],      // #10d18a
+    deep: [16, 185, 129],     // #02bb83
     density: 1 / 12000,       // nodos por px² (a calidad 1)
     minNodes: 32,
     maxNodes: 150,
@@ -94,7 +94,7 @@
     this.segCap = segCap;
 
     this.nodeSprite = makeSprite(128, [
-      [0, 'rgba(214,255,234,1)'],
+      [0, 'rgba(229, 240, 236,1)'],
       [0.16, rgba(o.core, 1)],
       [0.3, rgba(o.core, 0.34)],
       [0.6, rgba(o.deep, 0.07)],

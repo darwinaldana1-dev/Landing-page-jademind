@@ -6,8 +6,8 @@
   "start_url": "/",
   "scope": "/",
   "display": "minimal-ui",
-  "background_color": "#07110d",
-  "theme_color": "#07110d",
+  "background_color": "#0b1013",
+  "theme_color": "#0b1013",
   "icons": [
     {
       "src": "/visual/jademind-icono-192.png",

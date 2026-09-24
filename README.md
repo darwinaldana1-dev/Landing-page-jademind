@@ -22,6 +22,7 @@ node scripts/validate-site.mjs
 - `sitemap.xml`
 - `site.webmanifest`
 - `neural-field.js` (fondo animado del hero)
+- `assets/fonts/`: Poppins + Inter, las tipografías del CRM, servidas desde el sitio
 - `banner.jpg`, `video/vende-en-piloto-automatico.mp4`, `assets/logo-icon.png` y los logos de `visual/`
 
 ## Antes de publicar
