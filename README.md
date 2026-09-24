@@ -22,7 +22,7 @@ node scripts/validate-site.mjs
 - `sitemap.xml`
 - `site.webmanifest`
 - `neural-field.js` (fondo animado del hero)
-- `banner.jpg`, el video, `assets/logo-icon.png` y los logos de `visual/`
+- `banner.jpg`, `video/vende-en-piloto-automatico.mp4`, `assets/logo-icon.png` y los logos de `visual/`
 
 ## Antes de publicar
 
