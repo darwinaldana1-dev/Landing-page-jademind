@@ -738,3 +738,73 @@ document.querySelectorAll('[data-prefill-message]').forEach((link) => {
     if (message && !message.value.trim()) message.value = link.dataset.prefillMessage;
   });
 });
+
+// Recorrido del panel: capturas reales del CRM que avanzan solas.
+// Solo corre en pantalla, se pausa con el mouse o el foco encima y respeta
+// prefers-reduced-motion (ahí solo cambian con las pestañas).
+const panelTour = document.querySelector('[data-panel-tour]');
+if (panelTour) {
+  const PANEL_DURATION = 5000;
+  const tabs = [...panelTour.querySelectorAll('[data-panel-tab]')];
+  const shots = [...panelTour.querySelectorAll('[data-panel-shot]')];
+  const urlLabel = panelTour.querySelector('[data-panel-url]');
+  let current = 0;
+  let timer = null;
+  let onScreen = false;
+  let hovering = false;
+
+  panelTour.style.setProperty('--panel-duration', `${PANEL_DURATION}ms`);
+
+  const showPanel = (index) => {
+    current = (index + tabs.length) % tabs.length;
+    const key = tabs[current].dataset.panelTab;
+    tabs.forEach((tab, i) => {
+      const active = i === current;
+      tab.classList.toggle('is-active', active);
+      tab.setAttribute('aria-pressed', String(active));
+      // reinicia la barra de progreso de la pestaña activa
+      if (active) restartClass(tab, 'is-active');
+    });
+    shots.forEach((shot) => shot.classList.toggle('is-active', shot.dataset.panelShot === key));
+    if (urlLabel) urlLabel.textContent = tabs[current].dataset.url;
+  };
+
+  const stop = () => {
+    window.clearTimeout(timer);
+    timer = null;
+  };
+
+  const schedule = () => {
+    stop();
+    const autoplay = onScreen && !hovering && !prefersReducedMotion.matches;
+    panelTour.classList.toggle('is-autoplay', autoplay);
+    panelTour.classList.toggle('is-paused', !autoplay);
+    if (!autoplay) return;
+    timer = window.setTimeout(() => {
+      showPanel(current + 1);
+      schedule();
+    }, PANEL_DURATION);
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      showPanel(index);
+      schedule();
+      emitConversion('panel_tab', { label: tab.dataset.panelTab });
+    });
+  });
+
+  panelTour.addEventListener('mouseenter', () => { hovering = true; schedule(); });
+  panelTour.addEventListener('mouseleave', () => { hovering = false; showPanel(current); schedule(); });
+  panelTour.addEventListener('focusin', () => { hovering = true; schedule(); });
+  panelTour.addEventListener('focusout', () => { hovering = false; schedule(); });
+  prefersReducedMotion.addEventListener?.('change', schedule);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      if (onScreen) showPanel(current);
+      schedule();
+    }, { threshold: 0.35 }).observe(panelTour);
+  }
+}

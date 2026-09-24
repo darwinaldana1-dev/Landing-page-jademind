@@ -4872,3 +4872,394 @@ section[id] {
     width: 100%;
   }
 }
+
+/* ── Pruébalo tú mismo: invita a escribirle al agente real de JadeMind ── */
+.try-section {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background:
+    radial-gradient(38rem 26rem at 88% 50%, rgba(16, 209, 138, 0.1), transparent 70%),
+    var(--bg);
+}
+
+.try-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 5rem);
+}
+
+.try-copy h2 {
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+}
+
+.try-copy > p:not(.eyebrow) {
+  max-width: 34rem;
+  color: var(--text-soft);
+  font-size: 1.1rem;
+}
+
+.try-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.4rem;
+  margin-top: 1.8rem;
+}
+
+.try-actions .btn svg {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.55rem;
+}
+
+.try-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.try-qr {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  width: fit-content;
+  margin: 2.2rem 0 0;
+  padding: 0.9rem 1.2rem 0.9rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(17, 24, 29, 0.6);
+}
+
+.try-qr img {
+  width: 96px;
+  height: 96px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+
+.try-qr figcaption {
+  max-width: 13rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.try-qr strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.try-chat {
+  overflow: hidden;
+  border: 1px solid rgba(16, 209, 138, 0.22);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(160deg, rgba(25, 34, 41, 0.9), rgba(11, 16, 19, 0.96));
+  box-shadow: var(--shadow-lg), 0 0 80px rgba(16, 209, 138, 0.08);
+}
+
+.try-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.try-chat-head .agent-mark {
+  width: 38px;
+  height: 38px;
+}
+
+.try-chat-head strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.try-chat-head small {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.try-chat-body {
+  display: flex;
+  min-height: 330px;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.3rem 1.2rem 1.5rem;
+}
+
+.try-bubble {
+  max-width: 82%;
+  margin: 0;
+  padding: 0.7rem 0.95rem;
+  border-radius: 14px;
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.try-bubble.in {
+  align-self: flex-start;
+  border-top-left-radius: 5px;
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.try-bubble.out {
+  align-self: flex-end;
+  border-top-right-radius: 5px;
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.try-typing {
+  display: inline-flex;
+  gap: 0.3rem;
+  width: fit-content;
+}
+
+.try-typing i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-soft);
+  opacity: 0.5;
+  animation: typing-dot 0.9s ease-in-out infinite;
+}
+
+.try-typing i:nth-child(2) { animation-delay: 0.15s; }
+.try-typing i:nth-child(3) { animation-delay: 0.3s; }
+
+/* Las burbujas entran una por una cuando el chat aparece en pantalla */
+.try-chat .try-bubble {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.try-chat.is-visible .try-bubble {
+  animation: try-bubble-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.try-chat.is-visible .try-bubble:nth-child(1) { animation-delay: 0.3s; }
+.try-chat.is-visible .try-bubble:nth-child(2) { animation-delay: 1.2s; }
+.try-chat.is-visible .try-bubble:nth-child(3) { animation-delay: 2s; }
+.try-chat.is-visible .try-bubble:nth-child(4) { animation-delay: 3.2s; }
+.try-chat.is-visible .try-bubble:nth-child(5) { animation-delay: 4s; }
+
+@keyframes try-bubble-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Así se ve tu panel: capturas reales del CRM ── */
+.panel-section {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.panel-tour {
+  margin-inline: auto;
+}
+
+.panel-stage {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  background: var(--bg);
+}
+
+.panel-shot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.panel-shot.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.panel-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.panel-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  overflow: hidden;
+  border: 1px solid rgba(232, 242, 238, 0.08);
+  border-radius: var(--radius-md);
+  background: rgba(17, 24, 29, 0.5);
+  color: var(--text-soft);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-tab:hover {
+  border-color: rgba(232, 242, 238, 0.2);
+  color: var(--text);
+}
+
+.panel-tab.is-active {
+  border-color: rgba(16, 209, 138, 0.38);
+  background: linear-gradient(90deg, rgba(16, 209, 138, 0.13), rgba(17, 24, 29, 0.65));
+  color: var(--text);
+}
+
+.panel-tab-icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgba(16, 209, 138, 0.2);
+  border-radius: 10px;
+  color: var(--accent);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.panel-tab-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.panel-tab.is-active .panel-tab-icon {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.panel-tab-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.panel-tab-text strong {
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panel-tab-text small {
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.panel-tab-bar {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  opacity: 0;
+}
+
+.panel-tab-bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.panel-tab.is-active .panel-tab-bar {
+  opacity: 1;
+}
+
+.panel-tour.is-autoplay .panel-tab.is-active .panel-tab-bar i {
+  animation: step-progress var(--panel-duration, 5s) linear forwards;
+}
+
+.panel-tour.is-paused .panel-tab-bar i {
+  animation-play-state: paused !important;
+}
+
+.panel-note {
+  margin: 1.1rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .try-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  /* En el celular ya está en WhatsApp: el QR sobra */
+  .try-qr {
+    display: none;
+  }
+
+  .try-actions .btn {
+    width: 100%;
+  }
+
+  .try-chat-body {
+    min-height: 0;
+  }
+
+  .panel-tab {
+    padding: 0.65rem;
+  }
+
+  .panel-tab-text small {
+    display: none;
+  }
+
+  .panel-tab-text strong {
+    font-size: 0.82rem;
+  }
+
+  .panel-tab-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .try-chat .try-bubble,
+  .try-chat.is-visible .try-bubble {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .panel-shot {
+    transition: none;
+  }
+}
