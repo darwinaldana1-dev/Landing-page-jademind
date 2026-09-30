@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co; form-action https://formsubmit.co; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>JadeMind | Automatización comercial para WhatsApp y web</title>
-  <meta name="description" content="JadeMind conecta tu landing, WhatsApp y calendario para responder, calificar prospectos, agendar citas y transferir conversaciones a tu equipo.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>JadeMind | Agentes de IA para WhatsApp y CRM de ventas</title>
+  <meta name="description" content="JadeMind es el CRM con agentes de IA para WhatsApp: responde al instante, califica prospectos, agenda citas y pasa la conversación a tu equipo. Hecho en Colombia.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="theme-color" content="#0b1013">
   <link rel="canonical" href="https://jademind.com.co/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="JadeMind">
-  <meta property="og:title" content="JadeMind | De la conversación a la cita">
-  <meta property="og:description" content="Automatización comercial para responder, calificar y agendar desde WhatsApp y web.">
+  <meta property="og:title" content="JadeMind | Agentes de IA para WhatsApp y CRM de ventas">
+  <meta property="og:description" content="Responde, califica y agenda desde WhatsApp con agentes de IA, sin perder el control humano.">
   <meta property="og:url" content="https://jademind.com.co/">
   <meta property="og:image" content="https://jademind.com.co/banner.jpg">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
   <meta property="og:image:alt" content="JadeMind, automatización comercial con inteligencia artificial">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JadeMind | De la conversación a la cita">
-  <meta name="twitter:description" content="Automatización comercial para WhatsApp y web.">
+  <meta name="twitter:title" content="JadeMind | Agentes de IA para WhatsApp y CRM de ventas">
+  <meta name="twitter:description" content="Responde, califica y agenda desde WhatsApp con agentes de IA, sin perder el control humano.">
   <meta name="twitter:image" content="https://jademind.com.co/banner.jpg">
 
   <link rel="icon" type="image/png" sizes="192x192" href="visual/jademind-icono-192.png">
@@ -34,23 +36,63 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "JadeMind",
-    "url": "https://jademind.com.co/",
-    "logo": "https://jademind.com.co/visual/jademind-icono-512.png",
-    "image": "https://jademind.com.co/banner.jpg",
-    "description": "Automatización comercial para WhatsApp y web: atención inicial, calificación de prospectos, agenda y transferencia a equipos humanos.",
-    "email": "info@jademind.com.co",
-    "telephone": "+573009403058",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Medellín",
-      "addressCountry": "CO"
-    },
-    "areaServed": ["Colombia", "Latinoamérica"],
-    "sameAs": [
-      "https://www.instagram.com/jademind_oficial/",
-      "https://www.facebook.com/profile.php?id=61561292698761"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jademind.com.co/#organization",
+        "name": "JadeMind",
+        "alternateName": "Jade Mind",
+        "url": "https://jademind.com.co/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jademind.com.co/visual/jademind-icono-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://jademind.com.co/banner.jpg",
+        "description": "CRM con agentes de IA para WhatsApp: atención inicial, calificación de prospectos, agenda, pedidos y transferencia a equipos humanos.",
+        "email": "info@jademind.com.co",
+        "telephone": "+573009403058",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Medellín",
+          "addressRegion": "Antioquia",
+          "addressCountry": "CO"
+        },
+        "areaServed": ["Colombia", "Latinoamérica"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+573009403058",
+          "email": "info@jademind.com.co",
+          "availableLanguage": "es"
+        },
+        "sameAs": [
+          "https://www.instagram.com/jademind_oficial/",
+          "https://www.facebook.com/profile.php?id=61561292698761"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jademind.com.co/#website",
+        "name": "JadeMind",
+        "alternateName": ["Jade Mind", "jademind.com.co"],
+        "url": "https://jademind.com.co/",
+        "inLanguage": "es-CO",
+        "publisher": { "@id": "https://jademind.com.co/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jademind.com.co/#software",
+        "name": "JadeMind",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "CRM",
+        "operatingSystem": "Web",
+        "url": "https://jademind.com.co/",
+        "description": "CRM con agentes de IA que atienden por WhatsApp, califican prospectos, agendan citas y registran pedidos, con transferencia a una persona cuando hace falta.",
+        "inLanguage": "es",
+        "publisher": { "@id": "https://jademind.com.co/#organization" }
+      }
     ]
   }
   </script>
@@ -899,7 +941,7 @@
     <div class="container footer-grid">
       <div>
         <img src="visual/jademind-horizontal-web.png" width="146" height="48" loading="lazy" decoding="async" alt="JadeMind">
-        <p>Automatización comercial para conversaciones que necesitan avanzar con contexto.</p>
+        <p>CRM con agentes de IA para WhatsApp. Automatización comercial para conversaciones que necesitan avanzar con contexto.</p>
       </div>
       <nav aria-label="Enlaces legales">
         <a href="politicas-de-privacidad.html">Privacidad</a>
