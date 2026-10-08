@@ -29,7 +29,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles_v22.css?v=55">
+  <link rel="stylesheet" href="styles_v22.css?v=64">
 
   <script type="application/ld+json">
   {
@@ -79,6 +79,7 @@
       <div class="nav-links" id="nav-links">
         <a href="#circuito">El sistema</a>
         <a href="#soluciones">Soluciones</a>
+        <a href="#planes">Planes</a>
         <a href="#diseno-web">Diseño web</a>
         <a href="#faq">Preguntas</a>
         <a class="btn btn-small btn-secondary" href="https://jademind.com.co/login" data-track="nav_ingresar">Ingresar</a>
@@ -514,6 +515,119 @@
       </div>
     </section>
 
+    <section class="section pricing-section" id="planes" aria-labelledby="pricing-title">
+      <div class="container" data-pricing data-mode="activo">
+        <div class="section-heading section-heading-centered reveal-on-scroll">
+          <p class="eyebrow">Planes y precios</p>
+          <h2 id="pricing-title">Elige cómo quieres que trabaje tu agente.</h2>
+          <p>Implementa tu agente con el activo digital y mantenlo al día con la membresía mensual. Todos los precios incluyen IVA.</p>
+        </div>
+
+        <div class="pricing-switch reveal-on-scroll">
+          <div class="pricing-toggle" role="group" aria-label="Tipo de precio">
+            <span class="pricing-toggle-thumb" aria-hidden="true"></span>
+            <button type="button" data-pricing-mode="activo" aria-pressed="true">
+              <b>Activo digital</b><small>Implementación</small>
+            </button>
+            <button type="button" data-pricing-mode="membresia" aria-pressed="false">
+              <b>Membresía mensual</b><small>Cada mes</small>
+            </button>
+          </div>
+          <p class="pricing-includes">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
+            <span data-pricing-includes>Incluye agente, capacitación de interfaz, servidor y capacitación de Meta Ads.</span>
+          </p>
+        </div>
+
+        <p class="sr-only" role="status" aria-live="polite" data-pricing-status></p>
+
+        <div class="pricing-grid">
+          <article class="price-card reveal-on-scroll" data-plan="informativo" data-spotlight>
+            <div class="price-head">
+              <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><line x1="8" y1="11.5" x2="8.01" y2="11.5"/><line x1="12" y1="11.5" x2="12.01" y2="11.5"/><line x1="16" y1="11.5" x2="16.01" y2="11.5"/></svg></span>
+              <h3>Informativo</h3>
+            </div>
+            <div class="price-amount">
+              <span class="price-number">$<span data-price>499.900</span></span>
+              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+            </div>
+            <p class="price-alt" data-alt>Membresía: $129.900 COP / mes</p>
+            <ul class="price-features" data-features>
+              <li>Preguntas frecuentes e información clave</li>
+              <li>Comparte catálogo básico</li>
+              <li>Captura datos del cliente</li>
+              <li>Entrega a un asesor</li>
+            </ul>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_informativo" data-prefill-message="Hola, me interesa el plan Informativo (Activo digital).">Quiero este plan</a>
+          </article>
+
+          <article class="price-card reveal-on-scroll" data-plan="citas" data-spotlight style="transition-delay: 0.08s">
+            <div class="price-head">
+              <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg></span>
+              <h3>Citas y reservas</h3>
+            </div>
+            <div class="price-amount">
+              <span class="price-number">$<span data-price>599.900</span></span>
+              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+            </div>
+            <p class="price-alt" data-alt>Membresía: $139.900 COP / mes</p>
+            <ul class="price-features" data-features>
+              <li>Agenda citas y reservas</li>
+              <li>Envía confirmaciones automáticas</li>
+              <li>Gestiona cambios y recordatorios</li>
+              <li>Entrega a un asesor</li>
+            </ul>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_citas" data-prefill-message="Hola, me interesa el plan Citas y reservas (Activo digital).">Quiero este plan</a>
+          </article>
+
+          <article class="price-card reveal-on-scroll" data-plan="pedidos" data-spotlight style="transition-delay: 0.16s">
+            <div class="price-head">
+              <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+              <h3>Pedidos y ventas</h3>
+            </div>
+            <div class="price-amount">
+              <span class="price-number">$<span data-price>719.900</span></span>
+              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+            </div>
+            <p class="price-alt" data-alt>Membresía: $159.900 COP / mes</p>
+            <ul class="price-features" data-features>
+              <li>Comparte catálogo y productos</li>
+              <li>Valida datos del cliente</li>
+              <li>Genera pedidos</li>
+              <li>Consulta estado del pedido</li>
+            </ul>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_pedidos" data-prefill-message="Hola, me interesa el plan Pedidos y ventas (Activo digital).">Quiero este plan</a>
+          </article>
+
+          <article class="price-card is-featured reveal-on-scroll" data-plan="hibrido" data-spotlight style="transition-delay: 0.24s">
+            <span class="price-badge">Más completo</span>
+            <div class="price-head">
+              <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
+              <h3>Híbrido</h3>
+            </div>
+            <div class="price-amount">
+              <span class="price-number">$<span data-price>999.900</span></span>
+              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+            </div>
+            <p class="price-alt" data-alt>Membresía: $169.900 COP / mes</p>
+            <ul class="price-features" data-features>
+              <li>Integra información, citas y pedidos</li>
+              <li>Reúne varios flujos en un mismo agente</li>
+              <li>Captura y clasifica leads</li>
+              <li>Atención más completa para el negocio</li>
+            </ul>
+            <a class="btn btn-primary price-cta" href="#contacto" data-plan-cta data-track="plan_hibrido" data-prefill-message="Hola, me interesa el plan Híbrido (Activo digital).">Quiero este plan</a>
+          </article>
+        </div>
+
+        <div class="pricing-enterprise reveal-on-scroll">
+          <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="22" x2="9" y2="18"/><line x1="15" y1="22" x2="15" y2="18"/><line x1="8" y1="6" x2="8.01" y2="6"/><line x1="12" y1="6" x2="12.01" y2="6"/><line x1="16" y1="6" x2="16.01" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/></svg></span>
+          <p><strong>Para empresas: funciona a través de cotización previa.</strong>Soluciones personalizadas según las necesidades de tu empresa, con la misma tecnología y respaldo de JadeMind.</p>
+          <a class="btn btn-secondary" href="#contacto" data-plan-cta data-track="plan_empresas" data-prefill-message="Hola, quiero una cotización de JadeMind para mi empresa.">Solicitar cotización</a>
+        </div>
+      </div>
+    </section>
+
     <section class="compatibility" aria-labelledby="compatibility-title">
       <div class="container compatibility-inner">
         <p id="compatibility-title">Tecnologías compatibles según cada implementación</p>
@@ -548,123 +662,136 @@
           <span class="web-proof"><span class="status-dot" aria-hidden="true"></span>La página que estás viendo la hicimos nosotros</span>
         </div>
 
-        <div class="web-layout">
-          <div class="web-build" data-web-build>
+        <div class="studio reveal-on-scroll" data-studio>
+          <div class="studio-panel">
+            <div class="studio-head">
+              <span class="studio-live"><i aria-hidden="true"></i>Estudio en vivo</span>
+              <p class="studio-hint" data-studio-hint>Modo demostración. Elige una opción para diseñar la tuya.</p>
+              <span class="studio-timer" aria-hidden="true"><i></i></span>
+            </div>
+
+            <fieldset class="studio-group">
+              <legend><span>01</span>Tu negocio</legend>
+              <div class="studio-chips">
+                <button type="button" data-studio-set="sector" data-value="restaurante" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2v8a2.5 2.5 0 0 0 5 0V2"/><path d="M8.5 2v20"/><path d="M18 22V2c-2.5 1.2-4 4.2-4 8.5h4"/></svg>Restaurante</button>
+                <button type="button" data-studio-set="sector" data-value="clinica" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3l1.8 4.7 4.7 1.8-4.7 1.8L11 16l-1.8-4.7L4.5 9.5l4.7-1.8z"/><path d="M18.5 14.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z"/></svg>Clínica estética</button>
+                <button type="button" data-studio-set="sector" data-value="inmobiliaria" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9v12h14V9"/><path d="M10 21v-6h4v6"/></svg>Inmobiliaria</button>
+                <button type="button" data-studio-set="sector" data-value="tienda" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 7h13l1 14h-15z"/><path d="M9 9V6.5a3 3 0 0 1 6 0V9"/></svg>Tienda online</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="studio-group">
+              <legend><span>02</span>Color de marca</legend>
+              <div class="studio-swatches">
+                <button type="button" data-studio-set="theme" data-value="jade" aria-pressed="true" style="--sw:#10d18a"><i aria-hidden="true"></i>Jade</button>
+                <button type="button" data-studio-set="theme" data-value="oceano" aria-pressed="false" style="--sw:#3b9eff"><i aria-hidden="true"></i>Océano</button>
+                <button type="button" data-studio-set="theme" data-value="coral" aria-pressed="false" style="--sw:#ff7a59"><i aria-hidden="true"></i>Coral</button>
+                <button type="button" data-studio-set="theme" data-value="violeta" aria-pressed="false" style="--sw:#a78bfa"><i aria-hidden="true"></i>Violeta</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="studio-group">
+              <legend><span>03</span>Composición</legend>
+              <div class="studio-layouts">
+                <button type="button" data-studio-set="layout" data-value="split" aria-pressed="true"><svg viewBox="0 0 36 24" aria-hidden="true"><rect x="3" y="6" width="13" height="2.6" rx="1.3"/><rect x="3" y="11" width="10" height="2" rx="1"/><rect x="3" y="16" width="7" height="3" rx="1.5" class="hl"/><rect x="20" y="4" width="13" height="16" rx="2.5" class="art"/></svg>Dividida</button>
+                <button type="button" data-studio-set="layout" data-value="center" aria-pressed="false"><svg viewBox="0 0 36 24" aria-hidden="true"><rect x="8" y="5" width="20" height="2.6" rx="1.3"/><rect x="11" y="10" width="14" height="2" rx="1"/><rect x="14.5" y="15" width="7" height="3" rx="1.5" class="hl"/><circle cx="18" cy="12" r="11" class="art ghost"/></svg>Centrada</button>
+                <button type="button" data-studio-set="layout" data-value="editorial" aria-pressed="false"><svg viewBox="0 0 36 24" aria-hidden="true"><rect x="3" y="4" width="13" height="16" rx="2.5" class="art"/><rect x="20" y="6" width="13" height="2.6" rx="1.3"/><rect x="20" y="11" width="10" height="2" rx="1"/><rect x="20" y="16" width="7" height="3" rx="1.5" class="hl"/></svg>Editorial</button>
+              </div>
+            </fieldset>
+
+            <fieldset class="studio-group">
+              <legend><span>04</span>Dispositivo</legend>
+              <div class="studio-devices">
+                <button type="button" data-studio-set="device" data-value="desktop" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Escritorio</button>
+                <button type="button" data-studio-set="device" data-value="tablet" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Tableta</button>
+                <button type="button" data-studio-set="device" data-value="mobile" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Celular</button>
+              </div>
+            </fieldset>
+
+            <div class="studio-actions">
+              <button type="button" class="btn btn-primary" data-studio-publish>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.6-3 2-4c1.6-1.1 5 0 5 0"/><path d="M12 15v5s3-.6 4-2c1.1-1.6 0-5 0-5"/></svg>
+                Publicar demo
+              </button>
+              <a class="btn btn-secondary" href="#contacto" data-studio-quote data-track="web_studio_cotizar" data-prefill-message="Hola, quiero cotizar una página web para mi restaurante.">Cotizar una así</a>
+            </div>
+          </div>
+
+          <div class="studio-stage">
             <div class="browser">
               <div class="browser-bar">
                 <span class="console-dots" aria-hidden="true"><i></i><i></i><i></i></span>
                 <div class="browser-url" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                  <span>tumarca.com</span>
+                  <span data-mk="domain">laterraza.co</span>
                 </div>
-                <div class="device-toggle" role="group" aria-label="Vista previa por dispositivo">
-                  <button type="button" data-device-btn="desktop" aria-pressed="true" aria-label="Vista de escritorio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></button>
-                  <button type="button" data-device-btn="tablet" aria-pressed="false" aria-label="Vista de tableta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></button>
-                  <button type="button" data-device-btn="mobile" aria-pressed="false" aria-label="Vista de celular"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></button>
-                </div>
+                <span class="browser-live" aria-hidden="true">Vista previa</span>
               </div>
 
-              <p class="sr-only">Animación de ejemplo: una landing page se construye por fases, desde la estructura hasta su publicación, y se adapta a escritorio, tableta y celular.</p>
+              <p class="sr-only" role="status" aria-live="polite" data-studio-status></p>
 
               <div class="browser-stage" aria-hidden="true">
-                <div class="sm-screen" data-device="desktop">
-                  <div class="sm-page">
-                    <div class="sm-nav">
-                      <span class="sm-logo"><i></i><span class="sk">TuMarca</span></span>
-                      <span class="sm-links"><span class="sk">Inicio</span><span class="sk">Servicios</span><span class="sk">Casos</span></span>
-                      <span class="sm-navbtn sk">Contacto</span>
-                    </div>
-                    <div class="sm-hero">
-                      <div class="sm-copy">
-                        <span class="sm-eyebrow sk">Nuevo · 2026</span>
-                        <strong class="sm-title"><span class="sk">Tu marca, lista para crecer en línea.</span></strong>
-                        <span class="sm-text"><span class="sk">Una página rápida y a medida que convierte visitas en clientes.</span></span>
-                        <span class="sm-actions"><span class="sm-cta sk">Agendar ahora</span><span class="sm-ghost sk">Ver más</span></span>
-                      </div>
-                      <div class="sm-art">
-                        <i class="sm-orb sm-orb-1"></i>
-                        <i class="sm-orb sm-orb-2"></i>
-                        <span class="sm-art-card">
-                          <span class="sm-art-head"><i></i><i></i></span>
-                          <span class="sm-bars"><i style="--h:42%"></i><i style="--h:64%"></i><i style="--h:50%"></i><i style="--h:82%"></i><i style="--h:95%"></i></span>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="sm-cards">
-                      <span class="sm-card" style="--sd:.1s"><i class="sm-ico"></i><b class="sk">Diseño único</b><em class="sk">Hecho para tu marca</em></span>
-                      <span class="sm-card" style="--sd:.2s"><i class="sm-ico"></i><b class="sk">Carga veloz</b><em class="sk">Optimizada al detalle</em></span>
-                      <span class="sm-card" style="--sd:.3s"><i class="sm-ico"></i><b class="sk">Conectada</b><em class="sk">WhatsApp, CRM e IA</em></span>
-                    </div>
-                  </div>
+                <div class="mk-screen is-skeleton" data-mk-screen data-sector="restaurante" data-theme="jade" data-layout="split" data-device="desktop">
+                  <div class="mk-page"></div>
 
-                  <span class="sm-cursor"><svg viewBox="0 0 24 24"><path d="M4 2.5v17.2l4.7-4.4 3 6.9 3-1.3-3-6.8h6.5z" fill="#fff" stroke="#141d24" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
-                  <span class="sm-ripple"></span>
-
-                  <div class="sm-launch">
-                    <div class="sm-toast">
-                      <span class="sm-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                      <span><b>Publicado en tumarca.com</b><small>Métricas objetivo de cada entrega</small></span>
+                  <div class="mk-launch">
+                    <div class="mk-toast">
+                      <span class="mk-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                      <span><b>Publicado en <span data-mk="domain">laterraza.co</span></b><small>Métricas objetivo de cada entrega</small></span>
                     </div>
-                    <div class="sm-scores">
-                      <span class="sm-score" style="--off:2"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="98">98</b></span><small>Rendimiento</small></span>
-                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>Accesibilidad</small></span>
-                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>SEO</small></span>
-                      <span class="sm-score" style="--off:0"><span class="sm-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b data-count="100">100</b></span><small>Buenas prácticas</small></span>
+                    <div class="mk-scores">
+                      <span class="mk-score" style="--off:2"><span class="mk-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b>98</b></span><small>Rendimiento</small></span>
+                      <span class="mk-score" style="--off:0"><span class="mk-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b>100</b></span><small>Accesibilidad</small></span>
+                      <span class="mk-score" style="--off:0"><span class="mk-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b>100</b></span><small>SEO</small></span>
+                      <span class="mk-score" style="--off:0"><span class="mk-ring"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" pathLength="100"/><circle class="fill" cx="20" cy="20" r="16" pathLength="100"/></svg><b>100</b></span><small>Buenas prácticas</small></span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <ol class="build-steps" aria-label="Fases de construcción">
-              <li><span class="num">01</span><b>Estructura</b><small>Wireframe y jerarquía</small><span class="bar" aria-hidden="true"><i></i></span></li>
-              <li><span class="num">02</span><b>Diseño</b><small>Marca, color y tipografía</small><span class="bar" aria-hidden="true"><i></i></span></li>
-              <li><span class="num">03</span><b>Interacción</b><small>Animación y respuesta</small><span class="bar" aria-hidden="true"><i></i></span></li>
-              <li><span class="num">04</span><b>Lanzamiento</b><small>Publicación y métricas</small><span class="bar" aria-hidden="true"><i></i></span></li>
-            </ol>
           </div>
+        </div>
 
-          <div class="web-plans">
-            <article class="plan reveal-on-scroll" data-spotlight>
-              <div class="plan-head">
-                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-                <div><h3>Landing page</h3><small>Una página, un objetivo</small></div>
-              </div>
-              <p>Enfocada en una sola acción: agendar, comprar o escribir por WhatsApp. Ideal para campañas y lanzamientos.</p>
-              <ul>
-                <li>Copy orientado a conversión</li>
-                <li>Diseño y animaciones a medida</li>
-                <li>Formularios, WhatsApp y analítica</li>
-              </ul>
-            </article>
+        <div class="web-plans">
+          <article class="plan reveal-on-scroll" data-spotlight>
+            <div class="plan-head">
+              <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+              <div><h3>Landing page</h3><small>Una página, un objetivo</small></div>
+            </div>
+            <p>Enfocada en una sola acción: agendar, comprar o escribir por WhatsApp. Ideal para campañas y lanzamientos.</p>
+            <ul>
+              <li>Copy orientado a conversión</li>
+              <li>Diseño y animaciones a medida</li>
+              <li>Formularios, WhatsApp y analítica</li>
+            </ul>
+          </article>
 
-            <article class="plan reveal-on-scroll" data-spotlight style="transition-delay: 0.1s">
-              <div class="plan-head">
-                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
-                <div><h3>Sitio web corporativo</h3><small>Tu empresa, con autoridad</small></div>
-              </div>
-              <p>Varias páginas para presentar tu empresa, servicios y casos de éxito con una imagen sólida y profesional.</p>
-              <ul>
-                <li>Arquitectura de contenidos</li>
-                <li>SEO técnico y velocidad</li>
-                <li>Publicación en tu dominio</li>
-              </ul>
-            </article>
+          <article class="plan reveal-on-scroll" data-spotlight style="transition-delay: 0.1s">
+            <div class="plan-head">
+              <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
+              <div><h3>Sitio web corporativo</h3><small>Tu empresa, con autoridad</small></div>
+            </div>
+            <p>Varias páginas para presentar tu empresa, servicios y casos de éxito con una imagen sólida y profesional.</p>
+            <ul>
+              <li>Arquitectura de contenidos</li>
+              <li>SEO técnico y velocidad</li>
+              <li>Publicación en tu dominio</li>
+            </ul>
+          </article>
 
-            <article class="plan plan-featured reveal-on-scroll" data-spotlight style="transition-delay: 0.2s">
-              <span class="plan-badge">Más completo</span>
-              <div class="plan-head">
-                <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-                <div><h3>Web + Jade IA</h3><small>Tu sitio trabajando 24/7</small></div>
-              </div>
-              <p>Tu página conectada al agente: cada visita puede convertirse en una conversación calificada y una cita en tu agenda.</p>
-              <ul>
-                <li>Agente en web y WhatsApp</li>
-                <li>Agenda y CRM conectados</li>
-                <li>Medición de todo el recorrido</li>
-              </ul>
-            </article>
-          </div>
+          <article class="plan plan-featured reveal-on-scroll" data-spotlight style="transition-delay: 0.2s">
+            <span class="plan-badge">Más completo</span>
+            <div class="plan-head">
+              <span class="plan-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+              <div><h3>Web + Jade IA</h3><small>Tu sitio trabajando 24/7</small></div>
+            </div>
+            <p>Tu página conectada al agente: cada visita puede convertirse en una conversación calificada y una cita en tu agenda.</p>
+            <ul>
+              <li>Agente en web y WhatsApp</li>
+              <li>Agenda y CRM conectados</li>
+              <li>Medición de todo el recorrido</li>
+            </ul>
+          </article>
         </div>
 
         <div class="web-marquee" aria-label="Qué incluye cada proyecto web">
@@ -919,6 +1046,6 @@
   </a>
 
   <script src="neural-field.js?v=1" defer></script>
-  <script src="app.js?v=45"></script>
+  <script src="app.js?v=51"></script>
 </body>
 </html>
