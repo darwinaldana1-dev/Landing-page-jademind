@@ -105,7 +105,7 @@ if (navToggle && navLinks) {
   });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024) closeMenu();
+    if (window.innerWidth > 1199) closeMenu();
   });
 }
 
@@ -113,7 +113,7 @@ if (navToggle && navLinks) {
 const CIRCUIT_CONTENT = {
   captar: {
     kicker: 'Etapa 01 · Captar',
-    title: 'Cada canal entra al mismo recorrido.',
+    title: 'Todos tus canales, un solo recorrido comercial.',
     text: 'La conversación puede comenzar desde una landing, un anuncio o un acceso directo a WhatsApp sin perder el origen del prospecto.',
     items: ['Identificación del canal de entrada', 'Mensaje inicial adaptado al contexto', 'Continuidad entre web y WhatsApp'],
     log: 'lead.created  origen=meta_ads  canal=whatsapp'
@@ -135,8 +135,8 @@ const CIRCUIT_CONTENT = {
   convertir: {
     kicker: 'Etapa 04 · Avanzar',
     title: 'La oportunidad pasa a la acción adecuada.',
-    text: 'Cuando se cumplen las condiciones, el prospecto puede agendar, recibir una instrucción concreta o hablar con una persona.',
-    items: ['Agenda conectada con disponibilidad real', 'Transferencia humana con contexto', 'Siguiente paso explícito para el prospecto'],
+    text: 'Cuando se cumplen las condiciones, el prospecto puede agendar, recibir una instrucción concreta o hablar con un asesor humano.',
+    items: ['Agenda conectada con disponibilidad real', 'Transferencia a un asesor humano con contexto', 'Siguiente paso explícito para el prospecto'],
     log: 'meeting.booked  jue 10:30  asignado=andres'
   },
   registrar: {
@@ -1470,3 +1470,13 @@ if (panelTour) {
 
   setMode(mode);
 })();
+
+// Cinta de capacidades: duplica la lista para un desplazamiento continuo.
+// La copia es decorativa (oculta a lectores de pantalla y buscadores no la indexan como texto propio).
+document.querySelectorAll('.web-marquee-track').forEach((track) => {
+  const list = track.querySelector('ul');
+  if (!list || track.children.length > 1) return;
+  const copy = list.cloneNode(true);
+  copy.setAttribute('aria-hidden', 'true');
+  track.append(copy);
+});
