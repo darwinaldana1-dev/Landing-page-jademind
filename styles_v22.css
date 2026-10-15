@@ -425,6 +425,12 @@ section[id] {
   padding-bottom: clamp(3rem, 5vw, 4.5rem);
 }
 
+/* El hero se oscurece al final hasta el tono de la sección siguiente: sin línea de corte */
+.hero:has(+ .scrolly) {
+  padding-bottom: clamp(5rem, 9vw, 7.5rem);
+  background: linear-gradient(180deg, rgba(13, 15, 19, 0) 62%, rgba(13, 15, 19, 0.85) 88%, #0d0f13 100%);
+}
+
 .hero::after {
   content: "";
   position: absolute;
@@ -6399,5 +6405,268 @@ section[id] {
 
   .pricing-enterprise .btn {
     width: 100%;
+  }
+}
+
+/* Del caos al orden: animación controlada por scroll (secuencia de fotogramas) */
+/* Paso suave hacia la sección siguiente */
+.scrolly + .section {
+  border-top: 0;
+}
+
+.scrolly + .section::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 0;
+  height: clamp(8rem, 22vh, 14rem);
+  pointer-events: none;
+  background: linear-gradient(180deg, #0d0f13, rgba(13, 15, 19, 0));
+}
+
+.scrolly + .section > .container {
+  position: relative;
+  z-index: 1;
+}
+.scrolly {
+  /* mismo tono que el fondo de los fotogramas: no hay bordes visibles */
+  --scrolly-bg: #0d0f13;
+  position: relative;
+  height: 340vh;
+  background: var(--scrolly-bg);
+}
+
+.scrolly-sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  height: 100svh;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--scrolly-bg);
+}
+
+/* El lienzo cubre toda la pantalla; la animación se dibuja en la zona bajo el texto */
+.scrolly-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Brillo ambiental: rojo en el caos, verde en el orden (sigue el progreso --p) */
+.scrolly-sticky::before,
+.scrolly-sticky::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.scrolly-sticky::before {
+  background: radial-gradient(60% 55% at 50% 62%, rgba(255, 77, 94, 0.16), transparent 70%);
+  opacity: clamp(0, calc(1 - var(--p, 0) * 2.6), 1);
+}
+
+.scrolly-sticky::after {
+  background: radial-gradient(55% 55% at 50% 60%, rgba(16, 209, 138, 0.2), transparent 70%);
+  opacity: clamp(0, calc((var(--p, 0) - 0.22) * 2.6), 1);
+}
+
+.scrolly-copy {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  padding-top: clamp(6rem, 12vh, 8rem);
+  padding-bottom: clamp(0.5rem, 2vh, 1.25rem);
+  text-align: center;
+}
+
+.scrolly-copy .eyebrow {
+  margin-bottom: 0.8rem;
+}
+
+.scrolly-steps {
+  display: grid;
+  max-width: 820px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+}
+
+.scrolly-steps li {
+  display: grid;
+  gap: 0.55rem;
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.scrolly-steps li.is-active {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.scrolly-steps strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.scrolly-steps span {
+  color: var(--text-soft);
+  font-size: clamp(0.98rem, 1.5vw, 1.12rem);
+}
+
+/* Zona de la animación (el JS la mide para dibujar ahí) */
+.scrolly-stage {
+  position: relative;
+  z-index: 0;
+  flex: 1;
+  min-height: 0;
+  margin: 0 0 clamp(0.75rem, 3vh, 2rem);
+}
+
+.scrolly-poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.scrolly.is-ready .scrolly-poster {
+  visibility: hidden;
+}
+
+.scrolly-progress {
+  position: absolute;
+  right: clamp(1rem, 3vw, 2.5rem);
+  top: 50%;
+  z-index: 2;
+  width: 3px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: rgba(232, 242, 238, 0.12);
+  transform: translateY(-50%);
+}
+
+.scrolly-progress i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transform: scaleY(var(--p, 0));
+  transform-origin: top;
+}
+
+.scrolly-hint {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  z-index: 2;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  transition: opacity 0.4s ease;
+  animation: scrolly-hint 1.8s ease-in-out infinite;
+}
+
+.scrolly.is-moving .scrolly-hint {
+  opacity: 0;
+}
+
+@keyframes scrolly-hint {
+  50% { transform: translate(-50%, 6px); }
+}
+
+/* Pantallas bajas: texto más compacto para darle espacio a la animación */
+@media (max-height: 820px) {
+  .scrolly-copy {
+    padding-top: 5.4rem;
+  }
+
+  .scrolly-copy .eyebrow {
+    margin-bottom: 0.4rem;
+  }
+
+  .scrolly-steps strong {
+    font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  }
+
+  .scrolly-steps span {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-height: 640px) {
+  .scrolly-steps span {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .scrolly {
+    height: 300vh;
+  }
+
+  .scrolly-copy {
+    padding-top: 5.5rem;
+  }
+
+  .scrolly-progress {
+    display: none;
+  }
+}
+
+/* Movimiento reducido: imagen final fija y los tres mensajes visibles */
+@media (prefers-reduced-motion: reduce) {
+  .scrolly {
+    height: auto;
+  }
+
+  .scrolly-sticky {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .scrolly-canvas,
+  .scrolly-hint,
+  .scrolly-progress {
+    display: none;
+  }
+
+  .scrolly-stage {
+    min-height: 60vh;
+  }
+
+  .scrolly.is-ready .scrolly-poster {
+    visibility: visible;
+  }
+
+  .scrolly-steps {
+    gap: 1.6rem;
+  }
+
+  .scrolly-steps li {
+    grid-area: auto;
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }

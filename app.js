@@ -1480,3 +1480,107 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
   copy.setAttribute('aria-hidden', 'true');
   track.append(copy);
 });
+
+// Del caos al orden: el scroll elige el fotograma de la animación
+(() => {
+  const section = document.querySelector('[data-scrolly]');
+  if (!section) return;
+  const canvas = section.querySelector('.scrolly-canvas');
+  const ctx = canvas.getContext('2d');
+  const stage = section.querySelector('.scrolly-stage');
+  const poster = section.querySelector('.scrolly-poster');
+  const steps = Array.from(section.querySelectorAll('.scrolly-steps li'));
+  const total = Number(section.dataset.frames) || 120;
+  const BG = '#0d0f13';
+  let frames = [], set = '', current = -1, ticking = false, dpr = 1;
+
+  const src = (s, i) => `assets/scroll/${s}/f${String(i).padStart(3, '0')}.webp`;
+  // Zona con contenido de cada versión (proporciones del fotograma): el resto es fondo liso
+  // y puede quedar fuera de pantalla. Se amplía hasta que esa zona llene el espacio disponible.
+  const SETS = {
+    desktop: { w: 1600, h: 800, safe: [0.11, 0.06, 0.89, 0.97] },
+    mobile: { w: 720, h: 900, safe: [0.04, 0.04, 0.96, 0.95] }
+  };
+  // margen lateral mínimo para que nada toque el borde de la pantalla
+  const sidePad = (w) => Math.max(18, w * 0.045);
+  function fit(name, bw, bh) {
+    const f = SETS[name], [x0, y0, x1, y1] = f.safe;
+    const s = Math.min((bw - sidePad(bw) * 2) / (f.w * (x1 - x0)), bh / (f.h * (y1 - y0)));
+    return { s, area: f.w * (x1 - x0) * s * f.h * (y1 - y0) * s };
+  }
+  // la versión que se vea más grande en el espacio disponible
+  const wantSet = () => { const w = stage.clientWidth, h = Math.max(1, stage.clientHeight); return fit('mobile', w, h).area > fit('desktop', w, h).area * 1.05 ? 'mobile' : 'desktop'; };
+
+  function load() {
+    const next = wantSet();
+    if (next === set) return;
+    set = next; frames = new Array(total); current = -1;
+    if (poster) poster.src = src(set, total - 1);
+    const order = [0, total - 1];
+    for (let step = 16; step >= 1; step = Math.floor(step / 2)) for (let i = 0; i < total; i += step) if (!order.includes(i)) order.push(i);
+    let k = 0;
+    const pump = () => {
+      for (let n = 0; n < 6 && k < order.length; n++, k++) {
+        const i = order[k], img = new Image(); img.decoding = 'async';
+        img.onload = () => { if (set === next) { frames[i] = img; if (Math.abs(i - target()) < 3 || i === 0) draw(true); } };
+        img.src = src(next, i);
+      }
+      if (k < order.length) setTimeout(pump, 40);
+    };
+    pump();
+  }
+
+  function progress() {
+    const r = section.getBoundingClientRect();
+    const run = r.height - window.innerHeight;
+    return run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
+  }
+  const target = () => Math.round(progress() * (total - 1));
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; current = -1; }
+  }
+
+  function draw(force) {
+    const u = progress();
+    const want = Math.round(u * (total - 1));
+    let i = want, d = 0;
+    while (!frames[i] && d < total) { d++; i = frames[want - d] ? want - d : frames[want + d] ? want + d : want; }
+    const img = frames[i];
+    section.style.setProperty('--p', u.toFixed(4));
+    section.classList.toggle('is-moving', u > 0.02);
+    steps.forEach((li) => li.classList.toggle('is-active', u >= Number(li.dataset.from) && u < Number(li.dataset.to)));
+    if (!img || (!force && i === current)) return;
+    current = i;
+    // la animación entra completa en la zona bajo el texto
+    const box = stage.getBoundingClientRect(), base = canvas.getBoundingClientRect();
+    const bx = (box.left - base.left) * dpr, by = (box.top - base.top) * dpr, bw = box.width * dpr, bh = box.height * dpr;
+    const f = SETS[set], [x0, y0, x1, y1] = f.safe, k = img.naturalWidth / f.w;
+    const pad = sidePad(box.width) * dpr;
+    const s = Math.min((bw - pad * 2) / (img.naturalWidth * (x1 - x0)), bh / (img.naturalHeight * (y1 - y0)));
+    const w = img.naturalWidth * s, h = img.naturalHeight * s;
+    // centra la zona con contenido dentro del espacio de la animación
+    const ox = bx + bw / 2 - ((x0 + x1) / 2) * w, oy = by + bh / 2 - ((y0 + y1) / 2) * h;
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, ox, oy, w, h);
+  }
+
+  const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { ticking = false; draw(false); }); };
+
+  function start() {
+    if (prefersReducedMotion.matches) { section.classList.remove('is-ready'); if (poster) poster.src = src(wantSet(), total - 1); return; }
+    section.classList.add('is-ready');
+    size(); load(); draw(true);
+  }
+
+  new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    start();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }, { rootMargin: '150% 0px' }).observe(section);
+
+  window.addEventListener('resize', () => { if (!section.classList.contains('is-ready')) return; size(); load(); draw(true); });
+  prefersReducedMotion.addEventListener?.('change', start);
+})();
