@@ -5966,35 +5966,6 @@ section[id] {
 }
 
 /* Selector de modalidad */
-.pricing-switch {
-  display: grid;
-  justify-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.pricing-includes {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  max-width: 640px;
-  padding: 0.55rem 1.1rem;
-  margin: 0;
-  border: 1px solid rgba(16, 209, 138, 0.25);
-  border-radius: 999px;
-  background: rgba(16, 209, 138, 0.07);
-  color: var(--accent-soft);
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-.pricing-includes svg {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 auto;
-  color: var(--accent);
-}
-
 /* Tarjetas */
 .pricing-grid {
   display: grid;
@@ -6219,15 +6190,6 @@ section[id] {
 }
 
 @media (max-width: 640px) {
-  .pricing-switch {
-    margin-bottom: 1.75rem;
-  }
-
-  .pricing-includes {
-    border-radius: var(--radius-lg);
-    font-size: 0.84rem;
-  }
-
   .pricing-grid {
     grid-template-columns: minmax(0, 1fr);
   }
