@@ -1320,6 +1320,12 @@ document.querySelectorAll('[data-prefill-message]').forEach((link) => {
   });
 });
 
+function restartClass(element, className) {
+  element.classList.remove(className);
+  void element.offsetWidth; // fuerza reflow para reiniciar las animaciones CSS
+  element.classList.add(className);
+}
+
 // Recorrido del panel: capturas reales del CRM que avanzan solas.
 // Solo corre en pantalla, se pausa con el mouse o el foco encima y respeta
 // prefers-reduced-motion (ahí solo cambian con las pestañas).
