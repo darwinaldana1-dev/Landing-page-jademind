@@ -82,10 +82,6 @@ html {
   background: var(--bg);
 }
 
-html {
-  overflow-x: clip;
-}
-
 body {
   min-height: 100vh;
   margin: 0;
