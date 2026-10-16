@@ -29,7 +29,7 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles_v22.css?v=71">
+  <link rel="stylesheet" href="styles_v22.css?v=80">
 
   <script type="application/ld+json">
   {
@@ -78,7 +78,6 @@
 
       <div class="nav-links" id="nav-links">
         <a href="#circuito">Cómo funciona</a>
-        <a href="#soluciones">Soluciones</a>
         <a href="#planes">Planes</a>
         <a href="#diseno-web">Desarrollo web</a>
         <a href="#faq">Preguntas frecuentes</a>
@@ -145,22 +144,33 @@
 
     <!-- Pruébalo: lleva al agente de ventas real de JadeMind (Esteban) en WhatsApp -->
     <section class="scrolly" id="del-caos-al-orden" aria-labelledby="scrolly-title" data-scrolly data-frames="120">
-      <div class="scrolly-sticky">
+      <div class="container scrolly-layout">
+      <div class="scrolly-inner">
+        <p class="eyebrow">Del caos al orden</p>
+        <h2 class="sr-only" id="scrolly-title">Del caos al orden con JadeMind</h2>
+        <ol class="scrolly-steps">
+          <li class="is-active"><strong>Te escriben a toda hora y desde todos lados.</strong><span>Mensajes sin responder, clientes esperando y oportunidades que se enfrían.</span></li>
+          <li><strong>JadeMind conecta cada conversación.</strong><span>El agente responde con contexto y reúne la información de cada cliente.</span></li>
+          <li class="scrolly-final"><strong>Mientras tú descansas, <em>JadeMind sigue atendiendo.</em></strong><span>Cada mensaje recibe respuesta en segundos, cada cliente queda calificado y cada cita llega a tu agenda. Tu equipo se enfoca en quienes ya están listos para avanzar.</span></li>
+        </ol>
+        <ol class="scrolly-phases" aria-hidden="true">
+          <li><span>Caos</span><i></i></li>
+          <li><span>Conexión</span><i></i></li>
+          <li><span>Orden</span><i></i></li>
+        </ol>
+      </div>
+
+      <div class="scrolly-stage">
         <canvas class="scrolly-canvas" aria-hidden="true"></canvas>
-        <div class="scrolly-copy container">
-          <p class="eyebrow">Del caos al orden</p>
-          <h2 class="sr-only" id="scrolly-title">Del caos al orden con JadeMind</h2>
-          <ol class="scrolly-steps">
-            <li class="is-active" data-from="0" data-to="0.3"><strong>Te escriben a toda hora y desde todos lados.</strong><span>Mensajes sin responder, clientes esperando y oportunidades que se enfrían.</span></li>
-            <li data-from="0.3" data-to="0.74"><strong>JadeMind conecta cada conversación.</strong><span>El agente responde con contexto y reúne la información de cada cliente.</span></li>
-            <li data-from="0.74" data-to="1.01"><strong>Y la convierte en orden.</strong><span>Conversaciones, citas y pedidos organizados en tu panel.</span></li>
-          </ol>
+      </div>
+
+      <div class="scrolly-actions">
+        <div class="scrolly-cta">
+          <a class="btn btn-primary" href="https://wa.me/573009403058?text=Hola%2C%20quiero%20probar%20el%20agente%20de%20JadeMind" target="_blank" rel="noopener noreferrer" data-track="caos_whatsapp">Probar por WhatsApp</a>
+          <a class="btn btn-secondary" href="#planes" data-track="caos_planes">Ver planes</a>
         </div>
-        <div class="scrolly-stage">
-          <img class="scrolly-poster" src="assets/scroll/desktop/f119.webp" width="1600" height="800" alt="" loading="lazy" decoding="async">
-        </div>
-        <div class="scrolly-progress" aria-hidden="true"><i></i></div>
-        <span class="scrolly-hint" aria-hidden="true">Sigue bajando</span>
+        <p class="scrolly-trust"><span class="status-dot" aria-hidden="true"></span>Activo 24/7 · Transferencia a un asesor humano cuando lo necesitas</p>
+      </div>
       </div>
     </section>
 
@@ -238,175 +248,210 @@
           <p>Un recorrido comercial conectado que acompaña cada oportunidad desde el primer mensaje hasta su registro, seguimiento o transferencia al equipo.</p>
         </div>
 
-        <div class="circuit-shell" data-circuit>
-          <div class="circuit-steps" role="group" aria-label="Etapas del Circuito Jade">
-            <button class="circuit-step is-active" type="button" data-step="captar" aria-pressed="true" aria-controls="circuit-copy">
-              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg></span>
-              <span class="step-head"><strong>Captar</strong><small>Landing, pauta o WhatsApp</small></span>
-              <span class="step-num" aria-hidden="true">01</span>
-              <span class="step-progress" aria-hidden="true"><i></i></span>
-            </button>
-            <button class="circuit-step" type="button" data-step="conversar" aria-pressed="false" aria-controls="circuit-copy">
-              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg></span>
-              <span class="step-head"><strong>Conversar</strong><small>Respuesta con contexto</small></span>
-              <span class="step-num" aria-hidden="true">02</span>
-              <span class="step-progress" aria-hidden="true"><i></i></span>
-            </button>
-            <button class="circuit-step" type="button" data-step="calificar" aria-pressed="false" aria-controls="circuit-copy">
-              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg></span>
-              <span class="step-head"><strong>Calificar</strong><small>Datos y reglas del negocio</small></span>
-              <span class="step-num" aria-hidden="true">03</span>
-              <span class="step-progress" aria-hidden="true"><i></i></span>
-            </button>
-            <button class="circuit-step" type="button" data-step="convertir" aria-pressed="false" aria-controls="circuit-copy">
-              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></span>
-              <span class="step-head"><strong>Avanzar</strong><small>Agenda o transferencia</small></span>
-              <span class="step-num" aria-hidden="true">04</span>
-              <span class="step-progress" aria-hidden="true"><i></i></span>
-            </button>
-            <button class="circuit-step" type="button" data-step="registrar" aria-pressed="false" aria-controls="circuit-copy">
-              <span class="step-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></span>
-              <span class="step-head"><strong>Registrar</strong><small>CRM y seguimiento</small></span>
-              <span class="step-num" aria-hidden="true">05</span>
-              <span class="step-progress" aria-hidden="true"><i></i></span>
-            </button>
-          </div>
-
-          <div class="circuit-copy" id="circuit-copy">
-            <p class="stage-kicker" id="circuit-kicker">Etapa 01 · Captar</p>
-            <h3 id="circuit-detail-title">Todos tus canales, un solo recorrido comercial.</h3>
-            <p id="circuit-detail-text">La conversación puede comenzar desde una landing, un anuncio o un acceso directo a WhatsApp sin perder el origen del prospecto.</p>
-            <ul id="circuit-detail-list">
-              <li>Identificación del canal de entrada</li>
-              <li>Mensaje inicial adaptado al contexto</li>
-              <li>Continuidad entre web y WhatsApp</li>
-            </ul>
-          </div>
-
-          <div class="circuit-stage" id="circuit-detail" data-active="captar">
-            <div class="console">
-              <div class="console-bar">
-                <span class="console-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                <span class="console-title" aria-hidden="true">jade-agent<span class="hide-sm"> · flujo comercial</span></span>
-                <span class="console-counter" id="circuit-counter" aria-hidden="true">01 / 05</span>
-                <span class="console-live" aria-hidden="true"><i></i>EN VIVO</span>
-                <button class="console-toggle" type="button" aria-pressed="false" aria-label="Pausar recorrido automático">
-                  <svg class="icon-pause" viewBox="0 0 12 12" aria-hidden="true"><rect x="2" y="1.5" width="3" height="9" rx="1"/><rect x="7" y="1.5" width="3" height="9" rx="1"/></svg>
-                  <svg class="icon-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L3.9 1.3a.6.6 0 0 0-.9.5z"/></svg>
-                </button>
-              </div>
-
-              <div class="console-body" aria-hidden="true">
-                <!-- 01 · Captar -->
-                <div class="scene scene-captar is-active" data-scene="captar">
-                  <ul class="src-list">
-                    <li class="src a-left" style="--d:.1s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-8v18L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span><span><b>Anuncio Meta</b><small>Campaña de julio</small></span></li>
-                    <li class="src a-left" style="--d:.25s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span><span><b>Landing web</b><small>/diagnostico</small></span></li>
-                    <li class="src a-left" style="--d:.4s"><span class="src-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span><span><b>WhatsApp</b><small>Enlace directo</small></span></li>
-                  </ul>
-                  <svg class="src-wires" viewBox="0 0 80 240" preserveAspectRatio="none">
-                    <path class="wire" d="M0 36 C 45 36, 35 120, 80 120"/>
-                    <path class="wire" d="M0 120 L 80 120"/>
-                    <path class="wire" d="M0 204 C 45 204, 35 120, 80 120"/>
-                    <path class="packet" pathLength="100" style="--d:.6s" d="M0 36 C 45 36, 35 120, 80 120"/>
-                    <path class="packet" pathLength="100" style="--d:1.2s" d="M0 120 L 80 120"/>
-                    <path class="packet" pathLength="100" style="--d:1.8s" d="M0 204 C 45 204, 35 120, 80 120"/>
-                  </svg>
-                  <div class="hub a-pop" style="--d:.5s"><span class="hub-ring"></span><span class="hub-ring"></span><span class="hub-core">J</span></div>
-                  <div class="row-card a-rise" style="--d:1.6s">
-                    <span class="avatar">LG</span>
-                    <div><b>Nuevo prospecto · Laura G.</b><small>Meta Ads → WhatsApp · 09:41</small></div>
-                    <span class="tag">Origen guardado</span>
-                  </div>
-                </div>
-
-                <!-- 02 · Conversar -->
-                <div class="scene scene-conversar" data-scene="conversar">
-                  <div class="chat-meta a-rise">
-                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Respuesta en 3 s</span>
-                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Tono de marca</span>
-                    <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Activo 24/7</span>
-                  </div>
-                  <p class="bubble in a-rise" style="--d:.3s">Hola, vi su anuncio. ¿Pueden responder los mensajes que llegan de mis campañas?</p>
-                  <div class="typing" style="--d:1s"><i></i><i></i><i></i></div>
-                  <p class="bubble out a-rise" style="--d:2.4s">¡Hola, Laura! Sí. Puedo atender esas conversaciones con la información aprobada de tu negocio. Para entender mejor tu operación, ¿cuántos mensajes reciben por semana?</p>
-                  <span class="chip is-source a-rise" style="--d:2.9s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Fuente: catálogo de servicios</span>
-                  <p class="bubble in a-rise" style="--d:3.6s">Unos 300, casi todos desde Instagram.</p>
-                  <p class="bubble out a-rise" style="--d:4.8s">Perfecto. Con ese volumen puedo ayudarte a calificar las conversaciones y gestionar el agendamiento de las oportunidades que cumplan tus criterios.</p>
-                </div>
-
-                <!-- 03 · Calificar -->
-                <div class="scene scene-calificar" data-scene="calificar">
-                  <div class="score a-pop" style="--d:.1s">
-                    <div class="score-ring">
-                      <svg viewBox="0 0 120 120">
-                        <defs><linearGradient id="score-grad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a6edcb"/><stop offset="1" stop-color="#02bb83"/></linearGradient></defs>
-                        <circle class="score-track" cx="60" cy="60" r="50"/>
-                        <circle class="score-fill" cx="60" cy="60" r="50" pathLength="100"/>
-                      </svg>
-                      <div class="score-val"><b data-count="87">87</b><small>de 100</small></div>
+        <ol class="flow-stack" data-flow>
+          <li class="flow-card" style="--i: 0; --tint: 16, 209, 138;">
+            <article class="flow-card-inner" aria-labelledby="flow-t1">
+              <div class="flow-visual">
+                <div class="flow-phone" aria-hidden="true" data-steps="400,1100,1800,3000,3700" data-cycle="7600">
+                  <div class="phone-screen">
+                    <div class="phone-status"><span>9:41</span><i></i></div>
+                    <div class="ph-lock">
+                      <p class="ph-lock-time">9:41</p>
+                      <p class="ph-lock-date">jueves, 10 de octubre</p>
                     </div>
-                    <span class="score-tag">Prioridad alta</span>
-                  </div>
-                  <dl class="fields">
-                    <div class="field" style="--d:.3s"><dt>Intención</dt><dd>Automatizar campañas</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="field" style="--d:.8s"><dt>Volumen</dt><dd>~300 chats por semana</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="field" style="--d:1.3s"><dt>Canal principal</dt><dd>Instagram + WhatsApp</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                    <div class="field" style="--d:1.8s"><dt>Horizonte de decisión</dt><dd>Prevé decidir este mes</dd><span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span></div>
-                  </dl>
-                </div>
-
-                <!-- 04 · Avanzar -->
-                <div class="scene scene-convertir" data-scene="convertir">
-                  <div class="cal a-rise">
-                    <div class="cal-head"><b>Agenda del equipo</b><small>Disponibilidad real</small></div>
-                    <div class="cal-grid">
-                      <span class="cal-day">Lun</span><span class="cal-day">Mar</span><span class="cal-day">Mié</span><span class="cal-day">Jue</span><span class="cal-day">Vie</span>
-                      <span class="slot busy" style="--d:.15s">—</span><span class="slot" style="--d:.2s">09:00</span><span class="slot busy" style="--d:.25s">—</span><span class="slot busy" style="--d:.3s">—</span><span class="slot" style="--d:.35s">09:00</span>
-                      <span class="slot" style="--d:.2s">10:30</span><span class="slot busy" style="--d:.25s">—</span><span class="slot" style="--d:.3s">10:30</span><span class="slot pick" style="--d:.35s">10:30</span><span class="slot busy" style="--d:.4s">—</span>
-                      <span class="slot busy" style="--d:.25s">—</span><span class="slot" style="--d:.3s">15:00</span><span class="slot busy" style="--d:.35s">—</span><span class="slot" style="--d:.4s">15:00</span><span class="slot" style="--d:.45s">15:00</span>
+                    <div class="ph-notifs">
+                      <div class="ph-notif n1"><b class="ph-ico ico-ads">Ad</b><span><strong>Meta Ads</strong><small>Clic en «Enviar mensaje»</small></span><em>ahora</em></div>
+                      <div class="ph-notif n2"><b class="ph-ico ico-web">www</b><span><strong>Landing</strong><small>Formulario completado</small></span><em>ahora</em></div>
+                      <div class="ph-notif n3"><b class="ph-ico ico-wa"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg></b><span><strong>WhatsApp</strong><small>Hola, quiero información</small></span><em>ahora</em></div>
                     </div>
-                  </div>
-                  <div class="row-card a-rise" style="--d:2s">
-                    <span class="avatar is-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-                    <div><b>Llamada confirmada · jueves 10:30</b><small>Invitación enviada al calendario de Laura</small></div>
-                  </div>
-                  <div class="row-card a-rise" style="--d:2.8s">
-                    <span class="avatar">AR</span>
-                    <div><b>Asignado a Andrés · Ventas</b><small>Recibe el resumen y todo el historial</small></div>
-                  </div>
-                </div>
-
-                <!-- 05 · Registrar -->
-                <div class="scene scene-registrar" data-scene="registrar">
-                  <div class="crm a-rise">
-                    <div class="crm-head">
-                      <b>CRM · Oportunidades</b>
-                      <span class="sync">
-                        <span class="sync-pending"><i class="sync-spin"></i>Sincronizando</span>
-                        <span class="sync-done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Sincronizado</span>
-                      </span>
+                    <div class="ph-lead">
+                      <div class="ph-lead-pulse"></div>
+                      <div class="ph-avatar">LG</div>
+                      <p class="ph-lead-label">Nuevo prospecto</p>
+                      <p class="ph-lead-name">Laura G.</p>
+                      <div class="ph-tags">
+                        <span>Origen · Meta Ads</span>
+                        <span>Canal · WhatsApp</span>
+                        <span>Campaña · Instagram</span>
+                      </div>
                     </div>
-                    <div class="crm-row head"><span>Prospecto</span><span>Estado</span><span>Puntaje</span><span class="col-next">Próximo paso</span></div>
-                    <div class="crm-row new"><span class="who">Laura G.</span><span><span class="pill ok">Calificado</span></span><span>87</span><span class="col-next">Llamada jue 10:30</span></div>
-                    <div class="crm-row"><span class="who">Carlos M.</span><span><span class="pill">Conversando</span></span><span>64</span><span class="col-next">Enviar propuesta</span></div>
-                    <div class="crm-row"><span class="who">Ana P.</span><span><span class="pill ok">Agendado</span></span><span>91</span><span class="col-next">Demo vie 09:00</span></div>
-                  </div>
-                  <div class="summary">
-                    <b>Resumen generado por Jade IA</b>
-                    <p>Laura busca automatizar aproximadamente 300 conversaciones semanales provenientes de campañas en Instagram. Tiene previsto decidir este mes y ya cuenta con una llamada agendada con Andrés.</p>
                   </div>
                 </div>
               </div>
-
-              <div class="console-log" aria-hidden="true">
-                <span class="log-prompt">›</span>
-                <code id="circuit-log">lead.created  origen=meta_ads  canal=whatsapp</code>
-                <span class="caret"></span>
+              <div class="flow-copy">
+                <p class="flow-kicker"><span class="flow-num">01</span><span class="flow-of">/ 05</span><span class="flow-stage">Captar</span></p>
+                <h3 id="flow-t1">Todos tus canales, un solo recorrido comercial.</h3>
+                <p class="flow-text">La conversación puede comenzar desde una landing, un anuncio o un acceso directo a WhatsApp sin perder el origen del prospecto.</p>
+                <ul class="flow-list">
+                  <li>Identificación del canal de entrada</li>
+                  <li>Mensaje inicial adaptado al contexto</li>
+                  <li>Continuidad entre web y WhatsApp</li>
+                </ul>
+                <p class="flow-log"><span>›</span> lead.created  origen=meta_ads  canal=whatsapp</p>
               </div>
-            </div>
-          </div>
-        </div>
+            </article>
+          </li>
+
+          <li class="flow-card" style="--i: 1; --tint: 37, 211, 102;">
+            <article class="flow-card-inner" aria-labelledby="flow-t2">
+              <div class="flow-visual">
+                <div class="flow-phone" aria-hidden="true" data-steps="400,1300,2500,3700,4500,5600" data-cycle="9000">
+                  <div class="phone-screen ph-chat">
+                    <div class="phone-status"><span>9:41</span><i></i></div>
+                    <div class="ph-chat-head">
+                      <div class="ph-avatar is-jade">J</div>
+                      <span><strong>Jade IA</strong><small>en línea</small></span>
+                    </div>
+                    <div class="ph-chat-body">
+                      <p class="ph-day">Hoy</p>
+                      <div class="ph-msg is-in m1">Hola, vi su anuncio. ¿Cómo funciona el agente?<time>9:41</time></div>
+                      <div class="ph-msg is-out m2"><span class="ph-typing"><i></i><i></i><i></i></span><span class="ph-msg-text">¡Hola, Laura! Responde tu WhatsApp con la información aprobada de tu negocio, a cualquier hora. ¿Cuántos mensajes recibes por semana?<time>9:41</time></span></div>
+                      <div class="ph-source m2b">Fuente · Catálogo de servicios</div>
+                      <div class="ph-msg is-in m3">Unos 300, casi todos de Instagram.<time>9:42</time></div>
+                      <div class="ph-msg is-out m4"><span class="ph-typing"><i></i><i></i><i></i></span><span class="ph-msg-text">Perfecto. ¿Prefieres ver los planes o agendar una llamada con el equipo?<time>9:42</time></span></div>
+                    </div>
+                    <div class="ph-chat-input"><span>Mensaje</span><b></b></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-copy">
+                <p class="flow-kicker"><span class="flow-num">02</span><span class="flow-of">/ 05</span><span class="flow-stage">Conversar</span></p>
+                <h3 id="flow-t2">La primera respuesta llega con contexto.</h3>
+                <p class="flow-text">El agente utiliza la información aprobada del negocio para orientar la conversación y reconocer qué necesita la persona.</p>
+                <ul class="flow-list">
+                  <li>Respuestas basadas en conocimiento autorizado</li>
+                  <li>Tono y reglas definidos para la marca</li>
+                  <li>Preguntas progresivas, no un formulario rígido</li>
+                </ul>
+                <p class="flow-log"><span>›</span> agent.reply  fuente=catalogo_servicios</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="flow-card" style="--i: 2; --tint: 88, 233, 244;">
+            <article class="flow-card-inner" aria-labelledby="flow-t3">
+              <div class="flow-visual">
+                <div class="flow-phone" aria-hidden="true" data-steps="300,1000,1700,2400,3100,3900" data-cycle="8200">
+                  <div class="phone-screen">
+                    <div class="phone-status"><span>9:41</span><i></i></div>
+                    <div class="ph-app-head"><small>Prospecto · Laura G.</small><strong>Calificación</strong></div>
+                    <div class="ph-score">
+                      <svg viewBox="0 0 120 120"><circle class="ph-ring-bg" cx="60" cy="60" r="50"/><circle class="ph-ring" cx="60" cy="60" r="50"/></svg>
+                      <div class="ph-score-num"><b data-count-to="87" data-count-step="1">0</b><small>puntaje</small></div>
+                    </div>
+                    <p class="ph-priority">Prioridad alta</p>
+                    <ul class="ph-fields">
+                      <li class="f1"><span>Necesidad</span><b>Automatizar WhatsApp</b><i></i></li>
+                      <li class="f2"><span>Volumen</span><b>~300 conv. / semana</b><i></i></li>
+                      <li class="f3"><span>Canal principal</span><b>Instagram</b><i></i></li>
+                      <li class="f4"><span>Decisión</span><b>Este mes</b><i></i></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-copy">
+                <p class="flow-kicker"><span class="flow-num">03</span><span class="flow-of">/ 05</span><span class="flow-stage">Calificar</span></p>
+                <h3 id="flow-t3">Cada respuesta prepara la siguiente decisión.</h3>
+                <p class="flow-text">El flujo recopila solo los datos necesarios para identificar intención, prioridad y encaje con la oferta.</p>
+                <ul class="flow-list">
+                  <li>Criterios de calificación acordados</li>
+                  <li>Campos estructurados para seguimiento</li>
+                  <li>Detección de excepciones y datos faltantes</li>
+                </ul>
+                <p class="flow-log"><span>›</span> lead.scored  puntaje=87  prioridad=alta</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="flow-card" style="--i: 3; --tint: 255, 204, 62;">
+            <article class="flow-card-inner" aria-labelledby="flow-t4">
+              <div class="flow-visual">
+                <div class="flow-phone" aria-hidden="true" data-steps="300,1200,1900,2800,3500,4600" data-cycle="8800">
+                  <div class="phone-screen">
+                    <div class="phone-status"><span>9:41</span><i></i></div>
+                    <div class="ph-app-head"><small>Llamada con el equipo</small><strong>Elige un horario</strong></div>
+                    <div class="ph-week">
+                      <span><small>Lun</small>7</span>
+                      <span><small>Mar</small>8</span>
+                      <span><small>Mié</small>9</span>
+                      <span class="is-pick"><small>Jue</small>10</span>
+                      <span><small>Vie</small>11</span>
+                    </div>
+                    <div class="ph-slots">
+                      <span>9:00</span>
+                      <span class="is-pick">10:30</span>
+                      <span>15:00</span>
+                    </div>
+                    <div class="ph-confirm">
+                      <i></i>
+                      <span><strong>Llamada confirmada</strong><small>Jueves 10 · 10:30 a. m.</small></span>
+                    </div>
+                    <div class="ph-handoff">
+                      <div class="ph-avatar is-human">A</div>
+                      <span><strong>Andrés</strong><small>Asesor humano · recibe el contexto</small></span>
+                      <em>Asignado</em>
+                    </div>
+                    <div class="ph-tap"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-copy">
+                <p class="flow-kicker"><span class="flow-num">04</span><span class="flow-of">/ 05</span><span class="flow-stage">Avanzar</span></p>
+                <h3 id="flow-t4">La oportunidad pasa a la acción adecuada.</h3>
+                <p class="flow-text">Cuando se cumplen las condiciones, el prospecto puede agendar, recibir una instrucción concreta o hablar con un asesor humano.</p>
+                <ul class="flow-list">
+                  <li>Agenda conectada con disponibilidad real</li>
+                  <li>Transferencia a un asesor humano con contexto</li>
+                  <li>Siguiente paso explícito para el prospecto</li>
+                </ul>
+                <p class="flow-log"><span>›</span> meeting.booked  jue 10:30  asignado=andres</p>
+              </div>
+            </article>
+          </li>
+
+          <li class="flow-card" style="--i: 4; --tint: 16, 209, 138;">
+            <article class="flow-card-inner" aria-labelledby="flow-t5">
+              <div class="flow-visual">
+                <div class="flow-phone" aria-hidden="true" data-steps="300,1100,2400,3100" data-cycle="8200">
+                  <div class="phone-screen">
+                    <div class="phone-status"><span>9:41</span><i></i></div>
+                    <div class="ph-app-head"><small>JadeMind CRM</small><strong>Prospectos</strong></div>
+                    <div class="ph-crm">
+                      <div class="ph-row is-ghost"><i></i><span></span><em></em></div>
+                      <div class="ph-row is-new">
+                        <div class="ph-avatar">LG</div>
+                        <span><strong>Laura G.</strong><small>Llamada agendada</small></span>
+                        <em class="ph-sync"><i></i><b class="is-wait">Sincronizando</b><b class="is-ok">Sincronizado</b></em>
+                      </div>
+                      <div class="ph-row is-ghost"><i></i><span></span><em></em></div>
+                    </div>
+                    <div class="ph-grid">
+                      <span class="g1"><small>Origen</small>Meta Ads</span>
+                      <span class="g2"><small>Puntaje</small>87</span>
+                      <span class="g3"><small>Etapa</small>Llamada</span>
+                      <span class="g4"><small>Asesor</small>Andrés</span>
+                    </div>
+                    <div class="ph-summary">
+                      <small>Resumen generado por Jade IA</small>
+                      <p>Busca automatizar ~300 conversaciones semanales de Instagram. Decide este mes; llamada con Andrés el jueves.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-copy">
+                <p class="flow-kicker"><span class="flow-num">05</span><span class="flow-of">/ 05</span><span class="flow-stage">Registrar</span></p>
+                <h3 id="flow-t5">El resultado no queda perdido en el chat.</h3>
+                <p class="flow-text">La información útil puede enviarse al CRM, una hoja operativa o la herramienta definida para que el equipo continúe el proceso.</p>
+                <ul class="flow-list">
+                  <li>Resumen de la conversación</li>
+                  <li>Estado y datos relevantes del prospecto</li>
+                  <li>Base para seguimiento y mejora del flujo</li>
+                </ul>
+                <p class="flow-log"><span>›</span> crm.sync  estado=ok  resumen=listo</p>
+              </div>
+            </article>
+          </li>
+        </ol>
       </div>
     </section>
 
@@ -486,50 +531,6 @@
             </div>
             <h3>Coexistencia con WhatsApp Business</h3>
             <p>Funcionalidad de Meta que permite conectar un mismo número con WhatsApp Business y la integración de JadeMind. El agente puede gestionar la atención automatizada mientras tu equipo interviene manualmente cuando sea necesario.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section solutions-section" id="soluciones" aria-labelledby="solutions-title">
-      <div class="container">
-        <div class="section-heading reveal-on-scroll">
-          <p class="eyebrow">Soluciones modulares</p>
-          <h2 id="solutions-title">Empieza por el cuello de botella correcto.</h2>
-          <p>No todos los negocios necesitan el mismo nivel de automatización. El alcance se define después de entender el proceso actual.</p>
-        </div>
-
-        <div class="solution-grid">
-          <article class="solution-card reveal-on-scroll">
-            <span class="solution-number">01</span>
-            <h3>Agente de atención y calificación</h3>
-            <p>Para equipos que ya reciben conversaciones y necesitan responder, recopilar datos clave y transferir con contexto.</p>
-            <ul>
-              <li>Base de conocimiento del negocio</li>
-              <li>Preguntas de calificación</li>
-              <li>Transferencia a un asesor humano</li>
-            </ul>
-          </article>
-          <article class="solution-card solution-card-featured reveal-on-scroll" style="transition-delay: 0.15s">
-            <span class="solution-label">Circuito completo</span>
-            <span class="solution-number">02</span>
-            <h3>Captación, conversación y agenda</h3>
-            <p>Para conectar landing, campañas, WhatsApp, calendario y registro de oportunidades en un solo recorrido.</p>
-            <ul>
-              <li>Landing conectada al recorrido comercial</li>
-              <li>Agente y agenda conectados</li>
-              <li>Registro en CRM o sistema definido</li>
-            </ul>
-          </article>
-          <article class="solution-card reveal-on-scroll" style="transition-delay: 0.3s">
-            <span class="solution-number">03</span>
-            <h3>Automatización a la medida</h3>
-            <p>Para procesos que requieren reglas, integraciones o seguimiento más allá de una conversación inicial.</p>
-            <ul>
-              <li>Mapeo del proceso</li>
-              <li>Integraciones y automatizaciones por webhook</li>
-              <li>Monitoreo y mejora continua</li>
-            </ul>
           </article>
         </div>
       </div>
@@ -870,22 +871,26 @@
       </div>
     </section>
 
-    <section class="section media-section" aria-labelledby="media-title">
+    <section class="section media-section" id="video" aria-labelledby="media-title">
       <div class="container media-layout">
         <div class="section-heading reveal-on-scroll">
-          <p class="eyebrow">Demostración visual</p>
-          <h2 id="media-title">Mira cómo funciona el recorrido antes de hablar con nuestro equipo.</h2>
-          <p id="video-description">El video muestra cómo el agente responde preguntas iniciales, recopila información relevante y conduce la conversación hacia el siguiente paso comercial.</p>
-          <details class="video-transcript">
-            <summary>Ver descripción de la demostración</summary>
-            <p>La secuencia muestra un ejemplo conceptual de atención comercial automatizada: entrada del prospecto, respuesta inicial, recopilación de datos y preparación de una acción como agenda o transferencia.</p>
-          </details>
+          <p class="eyebrow">JadeMind en 40 segundos</p>
+          <h2 id="media-title">Responde, califica y agenda sin perder el control humano.</h2>
+          <p id="video-description">Los mensajes llegan de noche y en fines de semana, y los prospectos se enfrían. Mira cómo JadeMind atiende tu WhatsApp las 24 horas, califica a cada prospecto y deja todo registrado en tu CRM.</p>
         </div>
-        <div class="video-frame reveal-on-scroll">
-          <video autoplay loop muted playsinline disablePictureInPicture disableRemotePlayback controlsList="nodownload noplaybackrate nofullscreen" preload="metadata" poster="banner.jpg" width="960" height="540" aria-describedby="video-description">
-            <source src="video/vende-en-piloto-automatico.mp4" type="video/mp4">
-            Tu navegador no puede reproducir este video. Puedes leer la descripción disponible junto a él.
-          </video>
+        <div class="video-stage reveal-on-scroll">
+          <div class="video-frame" data-video>
+            <video loop playsinline disablePictureInPicture disableRemotePlayback controlsList="nodownload noplaybackrate nofullscreen" preload="metadata" poster="video/jademind-anuncio-poster.webp" width="720" height="1280" aria-describedby="video-description">
+              <source src="video/jademind-anuncio.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video. Puedes ver el resumen junto a él.
+            </video>
+            <button class="video-sound" type="button" aria-pressed="false">
+              <svg class="icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="m22 9-6 6M16 9l6 6"/></svg>
+              <svg class="icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+              <span>Activar sonido</span>
+            </button>
+            <div class="video-progress" aria-hidden="true"><i></i></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1050,6 +1055,6 @@
   </a>
 
   <script src="neural-field.js?v=1" defer></script>
-  <script src="app.js?v=58"></script>
+  <script src="app.js?v=65"></script>
 </body>
 </html>
