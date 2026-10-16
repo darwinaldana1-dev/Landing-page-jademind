@@ -883,7 +883,7 @@ section[id] {
 
 .problem-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -2341,52 +2341,6 @@ section[id] {
   font-size: 0.92rem;
 }
 
-/* Transparencia */
-.transparency-section {
-  padding-bottom: 0;
-}
-
-.transparency-panel {
-  padding: clamp(2rem, 6vw, 5rem);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-xl);
-  background:
-    radial-gradient(circle at 90% 0%, rgba(16, 209, 138, 0.15), transparent 22rem),
-    var(--surface);
-}
-
-.transparency-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 3rem;
-}
-
-.transparency-grid article {
-  padding: 1.4rem;
-  border-top: 1px solid var(--line-strong);
-}
-
-.transparency-grid article > span {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  margin-bottom: 1.2rem;
-  border: 1px solid rgba(16, 209, 138, 0.25);
-  border-radius: 10px;
-  background: rgba(16, 209, 138, 0.08);
-  color: var(--accent);
-  font-family: var(--font-display);
-  font-weight: 700;
-}
-
-.transparency-grid p {
-  margin-bottom: 0;
-  color: var(--text-soft);
-  font-size: 0.9rem;
-}
-
 /* Video */
 .media-layout {
   display: grid;
@@ -3161,19 +3115,8 @@ section[id] {
     gap: 2.5rem;
   }
 
-  .transparency-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .transparency-grid article {
-    display: grid;
-    grid-template-columns: 52px minmax(0, 1fr);
-    gap: 0 1rem;
-  }
 
-  .transparency-grid article > span {
-    grid-row: 1 / 3;
-  }
 }
 
 /* Menú hamburguesa: el menú completo solo cabe en una línea desde ~1200 px */
@@ -3301,18 +3244,8 @@ section[id] {
   }
 
 
-  .transparency-panel {
-    padding: 1.5rem;
-    border-radius: var(--radius-lg);
-  }
 
-  .transparency-grid article {
-    grid-template-columns: 1fr;
-  }
 
-  .transparency-grid article > span {
-    grid-row: auto;
-  }
 
   .media-layout {
     grid-template-columns: minmax(0, 1fr);
@@ -5714,28 +5647,32 @@ section[id] {
   font-size: 0.9rem;
 }
 
+/* Código QR como tarjeta en la columna derecha */
 .try-qr {
-  display: flex;
-  align-items: center;
-  gap: 1.1rem;
-  width: fit-content;
-  margin: 2.2rem 0 0;
-  padding: 0.9rem 1.2rem 0.9rem 0.9rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: rgba(17, 24, 29, 0.6);
+  display: grid;
+  justify-items: center;
+  justify-self: center;
+  gap: 1.2rem;
+  width: min(100%, 22rem);
+  margin: 0;
+  padding: 2rem 1.8rem;
+  border: 1px solid rgba(16, 209, 138, 0.22);
+  border-radius: var(--radius-xl);
+  background: linear-gradient(160deg, rgba(25, 34, 41, 0.9), rgba(11, 16, 19, 0.96));
+  box-shadow: var(--shadow-lg), 0 0 80px rgba(16, 209, 138, 0.08);
+  text-align: center;
 }
 
 .try-qr img {
-  width: 96px;
-  height: 96px;
+  width: 200px;
+  height: 200px;
   padding: 8px;
   border-radius: var(--radius-sm);
   background: #fff;
 }
 
 .try-qr figcaption {
-  max-width: 13rem;
+  max-width: 16rem;
   color: var(--text-muted);
   font-size: 0.85rem;
   line-height: 1.45;
@@ -5747,110 +5684,6 @@ section[id] {
   color: var(--text);
   font-family: var(--font-display);
   font-weight: 600;
-}
-
-.try-chat {
-  overflow: hidden;
-  border: 1px solid rgba(16, 209, 138, 0.22);
-  border-radius: var(--radius-xl);
-  background: linear-gradient(160deg, rgba(25, 34, 41, 0.9), rgba(11, 16, 19, 0.96));
-  box-shadow: var(--shadow-lg), 0 0 80px rgba(16, 209, 138, 0.08);
-}
-
-.try-chat-head {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 1.2rem;
-  border-bottom: 1px solid var(--line);
-}
-
-.try-chat-head .agent-mark {
-  width: 38px;
-  height: 38px;
-}
-
-.try-chat-head strong {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 600;
-}
-
-.try-chat-head small {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
-.try-chat-body {
-  display: flex;
-  min-height: 330px;
-  flex-direction: column;
-  gap: 0.6rem;
-  padding: 1.3rem 1.2rem 1.5rem;
-}
-
-.try-bubble {
-  max-width: 82%;
-  margin: 0;
-  padding: 0.7rem 0.95rem;
-  border-radius: 14px;
-  font-size: 0.93rem;
-  line-height: 1.45;
-}
-
-.try-bubble.in {
-  align-self: flex-start;
-  border-top-left-radius: 5px;
-  background: var(--surface-2);
-  color: var(--text);
-}
-
-.try-bubble.out {
-  align-self: flex-end;
-  border-top-right-radius: 5px;
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.try-typing {
-  display: inline-flex;
-  gap: 0.3rem;
-  width: fit-content;
-}
-
-.try-typing i {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--text-soft);
-  opacity: 0.5;
-  animation: typing-dot 0.9s ease-in-out infinite;
-}
-
-.try-typing i:nth-child(2) { animation-delay: 0.15s; }
-.try-typing i:nth-child(3) { animation-delay: 0.3s; }
-
-/* Las burbujas entran una por una cuando el chat aparece en pantalla */
-.try-chat .try-bubble {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.try-chat.is-visible .try-bubble {
-  animation: try-bubble-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.try-chat.is-visible .try-bubble:nth-child(1) { animation-delay: 0.3s; }
-.try-chat.is-visible .try-bubble:nth-child(2) { animation-delay: 1.2s; }
-.try-chat.is-visible .try-bubble:nth-child(3) { animation-delay: 2s; }
-.try-chat.is-visible .try-bubble:nth-child(4) { animation-delay: 3.2s; }
-.try-chat.is-visible .try-bubble:nth-child(5) { animation-delay: 4s; }
-
-@keyframes try-bubble-in {
-  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ── Así se ve tu panel: capturas reales del CRM ── */
@@ -6024,10 +5857,6 @@ section[id] {
     width: 100%;
   }
 
-  .try-chat-body {
-    min-height: 0;
-  }
-
   .panel-tab {
     padding: 0.65rem;
   }
@@ -6047,13 +5876,6 @@ section[id] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .try-chat .try-bubble,
-  .try-chat.is-visible .try-bubble {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-
   .panel-shot {
     transition: none;
   }
