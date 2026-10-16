@@ -109,231 +109,275 @@ if (navToggle && navLinks) {
   });
 }
 
-// Circuito Jade · consola en vivo
-const CIRCUIT_CONTENT = {
-  captar: {
-    kicker: 'Etapa 01 · Captar',
-    title: 'Todos tus canales, un solo recorrido comercial.',
-    text: 'La conversación puede comenzar desde una landing, un anuncio o un acceso directo a WhatsApp sin perder el origen del prospecto.',
-    items: ['Identificación del canal de entrada', 'Mensaje inicial adaptado al contexto', 'Continuidad entre web y WhatsApp'],
-    log: 'lead.created  origen=meta_ads  canal=whatsapp'
-  },
-  conversar: {
-    kicker: 'Etapa 02 · Conversar',
-    title: 'La primera respuesta llega con contexto.',
-    text: 'El agente utiliza la información aprobada del negocio para orientar la conversación y reconocer qué necesita la persona.',
-    items: ['Respuestas basadas en conocimiento autorizado', 'Tono y reglas definidos para la marca', 'Preguntas progresivas, no un formulario rígido'],
-    log: 'agent.reply  latencia=2.8s  fuente=catalogo_servicios'
-  },
-  calificar: {
-    kicker: 'Etapa 03 · Calificar',
-    title: 'Cada respuesta prepara la siguiente decisión.',
-    text: 'El flujo recopila solo los datos necesarios para identificar intención, prioridad y encaje con la oferta.',
-    items: ['Criterios de calificación acordados', 'Campos estructurados para seguimiento', 'Detección de excepciones y datos faltantes'],
-    log: 'lead.scored  puntaje=87  prioridad=alta'
-  },
-  convertir: {
-    kicker: 'Etapa 04 · Avanzar',
-    title: 'La oportunidad pasa a la acción adecuada.',
-    text: 'Cuando se cumplen las condiciones, el prospecto puede agendar, recibir una instrucción concreta o hablar con un asesor humano.',
-    items: ['Agenda conectada con disponibilidad real', 'Transferencia a un asesor humano con contexto', 'Siguiente paso explícito para el prospecto'],
-    log: 'meeting.booked  jue 10:30  asignado=andres'
-  },
-  registrar: {
-    kicker: 'Etapa 05 · Registrar',
-    title: 'El resultado no queda perdido en el chat.',
-    text: 'La información útil puede enviarse al CRM, una hoja operativa o la herramienta definida para que el equipo continúe el proceso.',
-    items: ['Resumen de la conversación', 'Estado y datos relevantes del prospecto', 'Base para seguimiento y mejora del flujo'],
-    log: 'crm.sync  estado=ok  campos=12  resumen=listo'
-  }
-};
+// Recorrido · tarjetas que se apilan al hacer scroll, cada una con su celular animado
+const flowStack = document.querySelector('[data-flow]');
 
-const circuitShell = document.querySelector('[data-circuit]');
-const circuitStage = document.getElementById('circuit-detail');
-const circuitCopy = document.getElementById('circuit-copy');
-const circuitKicker = document.getElementById('circuit-kicker');
-const circuitTitle = document.getElementById('circuit-detail-title');
-const circuitText = document.getElementById('circuit-detail-text');
-const circuitList = document.getElementById('circuit-detail-list');
-const circuitLog = document.getElementById('circuit-log');
-const circuitCounter = document.getElementById('circuit-counter');
-const circuitToggle = document.querySelector('.console-toggle');
-const circuitStepsRail = document.querySelector('.circuit-steps');
-const circuitButtons = Array.from(document.querySelectorAll('.circuit-step'));
-const circuitOrder = circuitButtons.map((button) => button.dataset.step);
-const circuitScenes = new Map(
-  Array.from(document.querySelectorAll('.scene[data-scene]')).map((scene) => [scene.dataset.scene, scene])
-);
-let circuitCurrent = circuitOrder[0];
-let circuitLogTimer = 0;
-let circuitCountFrame = 0;
+if (flowStack) {
+  const cards = Array.from(flowStack.querySelectorAll('.flow-card'));
+  const inners = cards.map((card) => card.querySelector('.flow-card-inner'));
+  const phones = cards.map((card) => card.querySelector('.flow-phone'));
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  let stickTops = [];
+  let cardHeight = 1;
+  let inView = false;
+  let current = -1;
+  let ticking = false;
+  const styled = [];
 
-function restartClass(element, className) {
-  element.classList.remove(className);
-  void element.offsetWidth; // fuerza reflow para reiniciar las animaciones CSS
-  element.classList.add(className);
-}
+  // Cada celular avanza por pasos (clases s1…sN) y se repite con un fundido.
+  const players = phones.map((phone) => {
+    const steps = phone.dataset.steps.split(',').map(Number);
+    const cycle = Number(phone.dataset.cycle);
+    const tap = phone.querySelector('.ph-tap');
+    const counter = phone.querySelector('[data-count-to]');
+    let timers = [];
+    let countFrame = 0;
+    let running = false;
 
-function typeCircuitLog(text) {
-  if (!circuitLog) return;
-  clearTimeout(circuitLogTimer);
-  if (prefersReducedMotion.matches) {
-    circuitLog.textContent = text;
-    return;
-  }
-  let length = 0;
-  const tick = () => {
-    length += 2;
-    circuitLog.textContent = text.slice(0, length);
-    if (length < text.length) circuitLogTimer = setTimeout(tick, 26);
-  };
-  circuitLog.textContent = '';
-  circuitLogTimer = setTimeout(tick, 250);
-}
+    const placeTap = (target) => {
+      if (!tap) return;
+      const x = target ? target.offsetLeft + target.offsetWidth / 2 : 121;
+      const y = target ? target.offsetTop + target.offsetHeight / 2 : 470;
+      tap.style.setProperty('--tx', `${x}px`);
+      tap.style.setProperty('--ty', `${y}px`);
+    };
 
-function countUp(element) {
-  cancelAnimationFrame(circuitCountFrame);
-  const target = Number(element.dataset.count) || 0;
-  if (prefersReducedMotion.matches) {
-    element.textContent = String(target);
-    return;
-  }
-  const start = performance.now();
-  const delay = 400;
-  const duration = 2000;
-  const step = (now) => {
-    const progress = Math.min(1, Math.max(0, (now - start - delay) / duration));
-    const eased = 1 - Math.pow(1 - progress, 3);
-    element.textContent = String(Math.round(target * eased));
-    if (progress < 1) circuitCountFrame = requestAnimationFrame(step);
-  };
-  element.textContent = '0';
-  circuitCountFrame = requestAnimationFrame(step);
-}
+    const countUp = () => {
+      const goal = Number(counter.dataset.countTo);
+      const start = performance.now();
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / 1500);
+        counter.textContent = String(Math.round(goal * (1 - Math.pow(1 - t, 3))));
+        if (t < 1) countFrame = requestAnimationFrame(tick);
+      };
+      countFrame = requestAnimationFrame(tick);
+    };
 
-function selectCircuitStep(key, { fromUser = false } = {}) {
-  const content = CIRCUIT_CONTENT[key];
-  if (!content || !circuitStage) return;
-  circuitCurrent = key;
-  circuitStage.dataset.active = key;
+    const setStep = (n) => {
+      phone.classList.add(`s${n}`);
+      if (tap && n === 1) placeTap(phone.querySelector('.ph-week .is-pick'));
+      if (tap && n === 3) placeTap(phone.querySelector('.ph-slots .is-pick'));
+      if (counter && n === Number(counter.dataset.countStep)) countUp();
+    };
 
-  if (circuitCopy) {
-    // Solo se anuncia a lectores de pantalla cuando la persona elige la etapa.
-    circuitCopy.setAttribute('aria-live', fromUser ? 'polite' : 'off');
-    circuitKicker.textContent = content.kicker;
-    circuitTitle.textContent = content.title;
-    circuitText.textContent = content.text;
-    circuitList.replaceChildren(...content.items.map((item) => {
-      const listItem = document.createElement('li');
-      listItem.textContent = item;
-      return listItem;
+    const clear = () => {
+      timers.forEach(clearTimeout);
+      timers = [];
+      cancelAnimationFrame(countFrame);
+    };
+
+    const reset = () => {
+      phone.classList.add('no-tr');
+      steps.forEach((_, k) => phone.classList.remove(`s${k + 1}`));
+      if (counter) counter.textContent = '0';
+      placeTap(null);
+      void phone.offsetWidth;
+      phone.classList.remove('no-tr');
+    };
+
+    const run = () => {
+      steps.forEach((time, k) => timers.push(setTimeout(() => setStep(k + 1), time)));
+      timers.push(setTimeout(() => {
+        phone.classList.add('is-fading');
+        timers.push(setTimeout(() => {
+          reset();
+          phone.classList.remove('is-fading');
+          run();
+        }, 480));
+      }, cycle));
+    };
+
+    return {
+      start() {
+        if (running) return;
+        running = true;
+        clear();
+        phone.classList.remove('is-fading');
+        reset();
+        run();
+      },
+      stop() {
+        running = false;
+        clear();
+      },
+      // Sin movimiento: se muestra directamente el estado final de la escena.
+      finish() {
+        running = false;
+        clear();
+        phone.classList.remove('is-fading');
+        steps.forEach((_, k) => phone.classList.add(`s${k + 1}`));
+        if (counter) counter.textContent = counter.dataset.countTo;
+        if (tap) tap.style.opacity = '0';
+      }
+    };
+  });
+
+  const measure = () => {
+    stickTops = cards.map((card) => parseFloat(getComputedStyle(card).top) || 0);
+    cardHeight = cards[0].offsetHeight || 1;
+    // Todos los celulares usan la misma escala: la que cabe en la tarjeta más justa.
+    const scale = Math.min(1, ...phones.map((phone) => {
+      const box = phone.parentElement;
+      return Math.min((box.clientHeight - 36) / 540, (box.clientWidth - 28) / 260);
     }));
-    restartClass(circuitCopy, 'is-swapping');
-  }
-
-  circuitScenes.forEach((scene, sceneKey) => {
-    if (sceneKey === key) restartClass(scene, 'is-active');
-    else scene.classList.remove('is-active');
-  });
-
-  const counter = circuitScenes.get(key)?.querySelector('[data-count]');
-  if (counter) countUp(counter);
-
-  const index = circuitOrder.indexOf(key);
-  if (circuitCounter) circuitCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(circuitOrder.length).padStart(2, '0')}`;
-  typeCircuitLog(content.log);
-
-  circuitButtons.forEach((button) => {
-    const active = button.dataset.step === key;
-    button.setAttribute('aria-pressed', String(active));
-    if (active) restartClass(button, 'is-active');
-    else button.classList.remove('is-active');
-
-    // En móvil las etapas son un carril horizontal: mantener visible la activa.
-    if (active && circuitStepsRail && circuitStepsRail.scrollWidth > circuitStepsRail.clientWidth) {
-      circuitStepsRail.scrollTo({
-        left: button.offsetLeft - 8,
-        behavior: prefersReducedMotion.matches ? 'auto' : 'smooth'
-      });
-    }
-  });
-}
-
-circuitButtons.forEach((button) => {
-  button.addEventListener('click', () => {
-    selectCircuitStep(button.dataset.step, { fromUser: true });
-    emitConversion('circuit_step', { step: button.dataset.step });
-  });
-});
-
-if (circuitShell) {
-  const setAutoplay = () => {
-    circuitShell.classList.toggle('is-autoplay', !prefersReducedMotion.matches);
+    phones.forEach((phone) => phone.style.setProperty('--ps', clamp(scale, 0.4, 1).toFixed(3)));
   };
-  setAutoplay();
-  prefersReducedMotion.addEventListener?.('change', setAutoplay);
 
-  // Avanza cuando termina la barra de progreso de la etapa activa.
-  circuitShell.addEventListener('animationend', (event) => {
-    if (!event.target.matches('.step-progress i')) return;
-    if (!circuitShell.classList.contains('is-autoplay')) return;
-    const next = circuitOrder[(circuitOrder.indexOf(circuitCurrent) + 1) % circuitOrder.length];
-    selectCircuitStep(next);
-  });
-
-  // Pausa mientras el ratón o el foco están sobre la sección.
-  circuitShell.addEventListener('pointerenter', (event) => {
-    if (event.pointerType === 'mouse') circuitShell.classList.add('is-hold');
-  });
-  circuitShell.addEventListener('pointerleave', () => circuitShell.classList.remove('is-hold'));
-  circuitShell.addEventListener('focusin', () => circuitShell.classList.add('is-hold'));
-  circuitShell.addEventListener('focusout', (event) => {
-    if (!circuitShell.contains(event.relatedTarget)) circuitShell.classList.remove('is-hold');
-  });
-
-  if (circuitToggle) {
-    circuitToggle.addEventListener('click', () => {
-      const paused = circuitShell.classList.toggle('is-user-paused');
-      circuitToggle.setAttribute('aria-pressed', String(paused));
-      circuitToggle.setAttribute('aria-label', paused ? 'Reanudar recorrido automático' : 'Pausar recorrido automático');
+  const setCurrent = (index) => {
+    if (index === current) return;
+    current = index;
+    players.forEach((player, k) => {
+      if (prefersReducedMotion.matches) player.finish();
+      else if (k === index) player.start();
+      else player.stop();
     });
-  }
+  };
 
-  // Todo queda congelado fuera de pantalla y arranca al entrar en ella.
-  if ('IntersectionObserver' in window) {
-    let firstView = true;
-    circuitShell.classList.add('is-offscreen');
-    new IntersectionObserver((entries) => {
-      const visible = entries[entries.length - 1].isIntersecting;
-      circuitShell.classList.toggle('is-offscreen', !visible);
-      if (visible && firstView) {
-        firstView = false;
-        selectCircuitStep(circuitCurrent);
+  const update = () => {
+    ticking = false;
+    const viewport = window.innerHeight;
+    // Cuánto ha cubierto cada tarjeta a la anterior (0 = abajo, 1 = encima).
+    const arrive = cards.map((card, k) => {
+      const top = card.getBoundingClientRect().top;
+      if (top < viewport * 0.82) card.classList.add('is-seen');
+      if (k === 0) return 1;
+      return clamp(1 - (top - stickTops[k]) / cardHeight, 0, 1);
+    });
+
+    let depth = 0;
+    let active = 0;
+    for (let k = cards.length - 1; k >= 0; k -= 1) {
+      const scale = prefersReducedMotion.matches ? 1 : 1 - depth * 0.045;
+      const dim = Math.min(0.72, depth * 0.3);
+      const key = `${scale.toFixed(4)}|${dim.toFixed(3)}`;
+      if (styled[k] !== key) {
+        styled[k] = key;
+        inners[k].style.setProperty('--sc', scale.toFixed(4));
+        inners[k].style.setProperty('--dim', dim.toFixed(3));
       }
-    }, { threshold: 0.3 }).observe(circuitShell);
+      if (!active && arrive[k] > 0.55) active = k;
+      depth += arrive[k];
+    }
+
+    setCurrent(inView ? active : -1);
+  };
+
+  const requestUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  };
+
+  flowStack.classList.add('is-enhanced');
+  measure();
+  update();
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', () => {
+    measure();
+    requestUpdate();
+  });
+  prefersReducedMotion.addEventListener?.('change', () => {
+    current = -1;
+    requestUpdate();
+  });
+
+  // Los celulares solo trabajan mientras el recorrido está en pantalla.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      inView = entries[entries.length - 1].isIntersecting;
+      requestUpdate();
+    }, { rootMargin: '-15% 0px' }).observe(flowStack);
+  } else {
+    inView = true;
   }
 }
 
-selectCircuitStep(circuitCurrent);
-
-// El video solo consume recursos de reproducción mientras está visible.
+// Video de presentación: arranca con sonido cuando el navegador lo permite,
+// solo se reproduce mientras está visible y muestra su avance.
 const demoVideo = document.querySelector('.video-frame video');
-if (demoVideo && 'IntersectionObserver' in window) {
-  const videoObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        if (demoVideo.paused) {
-          demoVideo.play().catch(err => console.warn('Autoplay prevented:', err));
-        }
-      } else {
-        if (!demoVideo.paused) {
-          demoVideo.pause();
-        }
-      }
-    });
-  }, { threshold: 0.15 });
+const videoFrame = document.querySelector('[data-video]');
+if (demoVideo && videoFrame) {
+  const soundButton = videoFrame.querySelector('.video-sound');
+  const soundLabel = soundButton.querySelector('span');
+  const progress = videoFrame.querySelector('.video-progress i');
+  let wantsSound = true;
+  let heardFromStart = false;
+  let visible = false;
+  let progressFrame = 0;
 
-  videoObserver.observe(demoVideo);
+  const showSound = () => {
+    const on = !demoVideo.muted;
+    soundButton.setAttribute('aria-pressed', String(on));
+    soundLabel.textContent = on ? 'Silenciar' : 'Activar sonido';
+    if (on) heardFromStart = true;
+  };
+
+  // La primera vez que suena, el anuncio empieza desde el principio.
+  const enableSound = () => {
+    if (!heardFromStart && demoVideo.currentTime > 1.5) demoVideo.currentTime = 0;
+    demoVideo.muted = false;
+    showSound();
+  };
+
+  // Intenta con sonido; si el navegador lo bloquea, sigue en silencio.
+  const start = () => {
+    if (wantsSound && demoVideo.muted && !heardFromStart) demoVideo.currentTime = 0;
+    demoVideo.muted = !wantsSound;
+    demoVideo.play()
+      .catch(() => {
+        demoVideo.muted = true;
+        return demoVideo.play().catch(() => {});
+      })
+      .finally(showSound);
+  };
+
+  // Los navegadores permiten el sonido tras la primera interacción con la página.
+  const unlock = (event) => {
+    if (soundButton.contains(event.target)) return;
+    if (wantsSound && visible && demoVideo.muted) enableSound();
+    if (!wantsSound || !demoVideo.muted) {
+      window.removeEventListener('pointerdown', unlock, true);
+      window.removeEventListener('keydown', unlock, true);
+    }
+  };
+  window.addEventListener('pointerdown', unlock, true);
+  window.addEventListener('keydown', unlock, true);
+
+  soundButton.addEventListener('click', () => {
+    if (demoVideo.muted) {
+      wantsSound = true;
+      enableSound();
+    } else {
+      wantsSound = false;
+      demoVideo.muted = true;
+      showSound();
+    }
+    demoVideo.play().catch(() => {});
+    emitConversion('video_sound', { on: !demoVideo.muted });
+  });
+
+  const drawProgress = () => {
+    const ratio = demoVideo.duration ? demoVideo.currentTime / demoVideo.duration : 0;
+    progress.style.transform = `scaleX(${ratio.toFixed(4)})`;
+    progressFrame = demoVideo.paused ? 0 : requestAnimationFrame(drawProgress);
+  };
+  demoVideo.addEventListener('play', () => {
+    cancelAnimationFrame(progressFrame);
+    progressFrame = requestAnimationFrame(drawProgress);
+  });
+  demoVideo.addEventListener('seeked', drawProgress);
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver((entries) => {
+      visible = entries[entries.length - 1].isIntersecting;
+      if (visible) start();
+      else if (!demoVideo.paused) demoVideo.pause();
+    }, { threshold: 0.35 }).observe(videoFrame);
+  } else {
+    visible = true;
+    start();
+  }
 }
 
 // Evita que el acceso flotante cubra el formulario.
@@ -1276,24 +1320,32 @@ document.querySelectorAll('[data-prefill-message]').forEach((link) => {
   });
 });
 
+function restartClass(element, className) {
+  element.classList.remove(className);
+  void element.offsetWidth; // fuerza reflow para reiniciar las animaciones CSS
+  element.classList.add(className);
+}
+
 // Recorrido del panel: capturas reales del CRM que avanzan solas.
-// Solo corre en pantalla, se pausa con el mouse o el foco encima y respeta
-// prefers-reduced-motion (ahí solo cambian con las pestañas).
+// Cambian cada 3 s mientras el panel está en pantalla; elegir una pestaña
+// reinicia la cuenta. Respeta prefers-reduced-motion (ahí solo cambian con las pestañas).
 const panelTour = document.querySelector('[data-panel-tour]');
 if (panelTour) {
-  const PANEL_DURATION = 5000;
+  const PANEL_DURATION = 3000;
   const tabs = [...panelTour.querySelectorAll('[data-panel-tab]')];
   const shots = [...panelTour.querySelectorAll('[data-panel-shot]')];
   const urlLabel = panelTour.querySelector('[data-panel-url]');
+  const stage = panelTour.querySelector('.panel-stage');
   let current = 0;
   let timer = null;
   let onScreen = false;
-  let hovering = false;
 
   panelTour.style.setProperty('--panel-duration', `${PANEL_DURATION}ms`);
 
   const showPanel = (index) => {
+    const changed = ((index + tabs.length) % tabs.length) !== current;
     current = (index + tabs.length) % tabs.length;
+    if (changed && stage) restartClass(stage, 'is-switching');
     const key = tabs[current].dataset.panelTab;
     tabs.forEach((tab, i) => {
       const active = i === current;
@@ -1313,7 +1365,7 @@ if (panelTour) {
 
   const schedule = () => {
     stop();
-    const autoplay = onScreen && !hovering && !prefersReducedMotion.matches;
+    const autoplay = onScreen && !prefersReducedMotion.matches;
     panelTour.classList.toggle('is-autoplay', autoplay);
     panelTour.classList.toggle('is-paused', !autoplay);
     if (!autoplay) return;
@@ -1331,10 +1383,6 @@ if (panelTour) {
     });
   });
 
-  panelTour.addEventListener('mouseenter', () => { hovering = true; schedule(); });
-  panelTour.addEventListener('mouseleave', () => { hovering = false; showPanel(current); schedule(); });
-  panelTour.addEventListener('focusin', () => { hovering = true; schedule(); });
-  panelTour.addEventListener('focusout', () => { hovering = false; schedule(); });
   prefersReducedMotion.addEventListener?.('change', schedule);
 
   if ('IntersectionObserver' in window) {
@@ -1481,106 +1529,253 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
   track.append(copy);
 });
 
-// Del caos al orden: el scroll elige el fotograma de la animación
+// Del caos al orden: animación en vivo (60 fps) que se repite en bucle
 (() => {
   const section = document.querySelector('[data-scrolly]');
   if (!section) return;
+  const stage = section.querySelector('.scrolly-stage');
   const canvas = section.querySelector('.scrolly-canvas');
   const ctx = canvas.getContext('2d');
-  const stage = section.querySelector('.scrolly-stage');
-  const poster = section.querySelector('.scrolly-poster');
   const steps = Array.from(section.querySelectorAll('.scrolly-steps li'));
-  const total = Number(section.dataset.frames) || 120;
+  const phases = Array.from(section.querySelectorAll('.scrolly-phases li'));
   const BG = '#0d0f13';
-  let frames = [], set = '', current = -1, ticking = false, dpr = 1;
+  const COL = { a: '#10d18a', soft: '#a6edcb', text: '#e8f2ee', muted: '#92aba1' };
 
-  const src = (s, i) => `assets/scroll/${s}/f${String(i).padStart(3, '0')}.webp`;
-  // Zona con contenido de cada versión (proporciones del fotograma): el resto es fondo liso
-  // y puede quedar fuera de pantalla. Se amplía hasta que esa zona llene el espacio disponible.
-  const SETS = {
-    desktop: { w: 1600, h: 800, safe: [0.11, 0.06, 0.89, 0.97] },
-    mobile: { w: 720, h: 900, safe: [0.04, 0.04, 0.96, 0.95] }
-  };
-  // margen lateral mínimo para que nada toque el borde de la pantalla
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const p = (t, a, b) => clamp((t - a) / (b - a));
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+  const outBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+  const rng = (seed) => { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; };
+
+  // Guion (segundos → progreso de la escena) y bucle
+  const SEG = [[0, 2.8, 0, 0.27, easeOut], [2.8, 6.4, 0.27, 0.74, ease], [6.4, 8.6, 0.74, 1, easeOut]];
+  const END = 8.6, HOLD = 12.2, CYCLE = 12.8, FADE_IN = 0.45;
+  const STEP_AT = [0, 2.6, 6.3];
+  const uAt = (t) => { for (const [a, b, u0, u1, e] of SEG) if (t <= b) return lerp(u0, u1, e(clamp((t - a) / (b - a)))); return 1; };
+
+  // Composición horizontal (computador) y vertical (celular), con su zona útil
+  const SETS = { desktop: { w: 1600, h: 800, safe: [0.08, 0.06, 0.93, 0.95] }, mobile: { w: 720, h: 1000, safe: [0.04, 0.05, 0.96, 0.96] } };
+  // Tarjetas que flotan alrededor del logo: centro relativo al logo (en anchos de logo)
+  const ORBIT = { desktop: [[-0.95, -0.3], [0.98, -0.02], [-0.8, 0.52]], mobile: [[-0.22, -0.6], [0.24, 0.5], [-0.2, 0.76]] };
   const sidePad = (w) => Math.max(18, w * 0.045);
-  function fit(name, bw, bh) {
-    const f = SETS[name], [x0, y0, x1, y1] = f.safe;
-    const s = Math.min((bw - sidePad(bw) * 2) / (f.w * (x1 - x0)), bh / (f.h * (y1 - y0)));
-    return { s, area: f.w * (x1 - x0) * s * f.h * (y1 - y0) * s };
-  }
-  // la versión que se vea más grande en el espacio disponible
-  const wantSet = () => { const w = stage.clientWidth, h = Math.max(1, stage.clientHeight); return fit('mobile', w, h).area > fit('desktop', w, h).area * 1.05 ? 'mobile' : 'desktop'; };
+  const fitArea = (name, bw, bh) => { const f = SETS[name], [x0, y0, x1, y1] = f.safe; const s = Math.min((bw - sidePad(bw) * 2) / (f.w * (x1 - x0)), bh / (f.h * (y1 - y0))); return f.w * (x1 - x0) * s * f.h * (y1 - y0) * s; };
+  const wantSet = () => { const w = stage.clientWidth, h = Math.max(1, stage.clientHeight); return fitArea('mobile', w, h) > fitArea('desktop', w, h) * 1.05 ? 'mobile' : 'desktop'; };
 
-  function load() {
-    const next = wantSet();
-    if (next === set) return;
-    set = next; frames = new Array(total); current = -1;
-    if (poster) poster.src = src(set, total - 1);
-    const order = [0, total - 1];
-    for (let step = 16; step >= 1; step = Math.floor(step / 2)) for (let i = 0; i < total; i += step) if (!order.includes(i)) order.push(i);
-    let k = 0;
-    const pump = () => {
-      for (let n = 0; n < 6 && k < order.length; n++, k++) {
-        const i = order[k], img = new Image(); img.decoding = 'async';
-        img.onload = () => { if (set === next) { frames[i] = img; if (Math.abs(i - target()) < 3 || i === 0) draw(true); } };
-        img.src = src(next, i);
+  const MSGS = ['¿Tienen cita hoy?', '¿Cuánto vale?', 'Hola, ¿me ayudan?', '¿Hacen envíos?', '¿Siguen abiertos?', 'Quiero comprar', '¿Me pueden llamar?', '¿Hay disponibilidad?', '¿Precio del plan?', 'Necesito información', '¿Aceptan tarjeta?', '¿Dónde quedan?'];
+  const NAMES = ['Laura', 'Andrés', 'Valentina', 'Camila', 'Sebastián', 'Mariana', 'Juan Pablo', 'Sofía', 'Daniel', 'Isabella', 'Mateo', 'Paula'];
+  const AV = ['#e07a5f', '#3d5a80', '#81b29a', '#6d597a', '#c08552', '#355070', '#b56576', '#588157'];
+  const N = 260, SS = 2;
+  const BRAIN = [-0.263,0.393,0.111,0.407,-0.140,-0.426,-0.049,0.045,0.103,0.263,0.278,-0.080,-0.027,0.335,-0.138,-0.019,-0.409,0.237,0.333,-0.136,-0.379,-0.045,-0.045,-0.375,-0.387,0.115,0.272,-0.397,-0.148,-0.179,-0.191,-0.327,0.374,0.119,-0.327,-0.064,0.191,0.247,0.241,0.364,0.138,0.313,-0.177,0.366,-0.294,-0.214,0.449,0.204,-0.206,0.309,0.259,-0.276,-0.084,-0.163,-0.148,-0.282,0.177,0.189,-0.060,-0.222,-0.401,-0.109,-0.035,0.237,0.360,0.261,-0.268,0.175,0.084,-0.405,0.241,0.307,0.062,0.335,-0.444,0.235,-0.366,0.251,0.175,-0.255,-0.058,-0.305,0.247,0.235,0.086,-0.333,0.138,-0.037,-0.232,-0.152,0.181,-0.189,0.060,0.095,0.263,0.029,-0.212,-0.282,-0.074,0.399,-0.255,-0.066,-0.364,-0.161,-0.321,0.173,0.424,-0.062,-0.212,-0.099,0.082,0.294,-0.340,0.148,-0.132,0.350,0.284,-0.204,0.027,0.354,-0.088,0.136,0.226,0.331,-0.239,-0.113,-0.111,0.204,0.340,-0.088,-0.381,0.212,0.304,-0.311,-0.163,-0.385,-0.191,-0.053,0.284,-0.136,-0.150,-0.333,-0.097,-0.010,0.337,-0.179,0.204,-0.403,0.097,-0.294,-0.319,-0.239,0.181,0.333,0.230,0.414,-0.327,-0.016,0.274,-0.025,-0.113,0.093,0.126,0.214,0.230,-0.354,0.342,0.317,-0.214,0.426,-0.239,-0.179,0.115,0.130,-0.109,-0.288,0.362,0.348,0.366,-0.232,0.169,-0.014,0.074,0.023,0.148,-0.360,-0.302,-0.119,0.208,-0.321,0.455,-0.054,-0.391,0.004,-0.076,0.193,-0.249,-0.018,-0.389,0.288,-0.070,-0.422,0.237,-0.230,0.082,0.414,-0.307,-0.294,0.387,0.300,-0.193,0.161,0.101,0.165,-0.084,-0.370,0.230,-0.018,0.315,0.274,0.093,-0.183,0.202,0.311,-0.185,-0.411,0.208,0.165,-0.043,-0.198,0.233,-0.261,-0.130,0.296,-0.218,0.016,0.107,-0.216,-0.064,0.333,0.424,0.132,-0.354,-0.074,-0.134,0.142,-0.385,0.337,0.066,-0.257,0.031,-0.342,0.391,-0.035,-0.311,0.352,-0.039,-0.037,-0.117,-0.253,-0.232,-0.379,-0.304,0.125,-0.121,0.430,0.152,-0.140,0.146,-0.173,0.130,-0.115,-0.296,0.268,-0.259,-0.335,0.144,0.148,0.352,0.086,-0.249,0.305,0.115,-0.442,-0.444,-0.089,-0.146,0.072,0.053,-0.185,0.191,-0.377,0.185,0.286,0.167,-0.327,0.243,-0.323,-0.241,0.150,-0.183,-0.364,0.274,-0.327,-0.438,0.107,-0.436,0.265,-0.119,-0.208,0.196,-0.134,-0.432,-0.049,-0.047,0.181,-0.270,0.123,0.228,0.206,0.175,0.411,0.031,0.154,-0.179,-0.282,0.298,0.375,0.084,-0.099,0.309,0.142,0.132,-0.414,-0.393,-0.177,-0.202,-0.212,0.097,0.097,-0.342,0.193,-0.117,-0.177,-0.062,0.224,0.035,-0.066,-0.233,0.263,0.181,-0.086,-0.158,-0.123,0.047,0.185,0.253,0.189,0.216,-0.181,-0.191,-0.004,-0.243,-0.280,-0.272,0.253,-0.165,0.119,0.329,-0.218,-0.113,-0.047,-0.163,0.393,-0.222,-0.411,-0.161,0.331,0.259,0.397,0.228,-0.123,0.206,0.002,-0.060,0.119,0.319,0.179,-0.043,0.012,-0.352,0.099,-0.086,0.047,-0.245,0.224,-0.107,-0.346,0.035,0.313,0.074,0.058,0.292,0.253,-0.195,-0.177,-0.261,-0.206,0.405,-0.138,-0.288,-0.247,-0.309,0.041,-0.196,-0.126,-0.428,0.202,-0.436,0.148,0.051,-0.387,-0.411,0.097,0.035,-0.117,0.440,-0.125,0.091,0.196,0.082,-0.053,0.249,0.144,0.354,0.000,-0.372,-0.101,0.311,-0.115,-0.037,0.095,-0.331,0.247,-0.399,0.163,-0.325,-0.097,0.362,-0.134,0.037,-0.156,-0.311,-0.175,0.282,0.208,0.058,-0.319,0.469,0.150,-0.307,-0.339,-0.344,0.311,0.321,0.208,0.125,-0.307,0.399,-0.187,0.288,0.321,-0.253,-0.241,-0.111,0.167,0.389,0.220,-0.193,0.337,0.183,-0.350,0.163,-0.434,-0.426,-0.019,0.261,-0.161,0.447,0.241,0.146,0.350,0.315,-0.278,-0.282,0.027,-0.099,-0.128,0.191,0.031,0.358,0.195,-0.191,0.228,0.397,-0.091,-0.278,-0.023,-0.093,0.270,0.311,0.033,0.253,-0.200,0.080,0.379,-0.117,0.012,-0.366,0.027]; // nodos de la red y escala de los dibujos prerrenderizados
+  const TILES = [['Conversaciones', '386', 'Respondidas con contexto'], ['Citas', '41', 'En la agenda del equipo'], ['Pedidos', '54', 'Registrados automáticamente']];
+
+  let logo, logoAR = 1, glow, sphere = [], neigh = [], targets = [];
+  const scenes = {};
+  let scene = null, dpr = 1, t = 0, now = 0, last = 0, raf = 0, visible = false, ready = false, done = false;
+
+  function makeGlow() {
+    const g = document.createElement('canvas'); g.width = g.height = 64; const c = g.getContext('2d');
+    const gr = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(240,255,248,1)'); gr.addColorStop(0.18, 'rgba(16,209,138,0.95)'); gr.addColorStop(0.5, 'rgba(16,209,138,0.22)'); gr.addColorStop(1, 'rgba(16,209,138,0)');
+    c.fillStyle = gr; c.fillRect(0, 0, 64, 64); return g;
+  }
+
+  function cardSprite(card) {
+    const { w, h } = card, pad = h * 0.6;
+    const cv = document.createElement('canvas'); cv.width = Math.ceil((w + pad * 2) * SS); cv.height = Math.ceil((h + pad * 2) * SS);
+    const X = cv.getContext('2d'); X.scale(SS, SS); X.translate(pad + w / 2, pad + h / 2);
+    X.shadowColor = 'rgba(0,0,0,0.45)'; X.shadowBlur = h * 0.5 * SS; X.shadowOffsetY = h * 0.15 * SS;
+    X.fillStyle = '#18222a'; X.beginPath(); X.roundRect(-w / 2, -h / 2, w, h, h * 0.28); X.fill(); X.shadowColor = 'transparent';
+    X.strokeStyle = 'rgba(255,255,255,0.08)'; X.lineWidth = 1.2; X.stroke();
+    const ar = h * 0.27;
+    X.fillStyle = card.av; X.beginPath(); X.arc(-w / 2 + h * 0.48, 0, ar, 0, 7); X.fill();
+    X.fillStyle = '#fff'; X.font = `700 ${ar * 0.95}px Poppins`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.fillText(card.name[0], -w / 2 + h * 0.48, ar * 0.05);
+    X.textAlign = 'left'; X.fillStyle = COL.text; X.font = `600 ${h * 0.2}px Inter`; X.fillText(card.name, -w / 2 + h * 0.9, -h * 0.14);
+    X.fillStyle = COL.muted; X.font = `400 ${h * 0.18}px Inter`; X.fillText(card.msg, -w / 2 + h * 0.9, h * 0.16);
+    X.fillStyle = '#25d366'; X.beginPath(); X.arc(w / 2 - h * 0.32, 0, h * 0.15, 0, 7); X.fill();
+    X.fillStyle = '#04140d'; X.font = `800 ${h * 0.17}px Inter`; X.textAlign = 'center'; X.fillText(String(card.n), w / 2 - h * 0.32, h * 0.01);
+    card.sprite = cv; card.sw = w + pad * 2; card.sh = h + pad * 2;
+  }
+
+  function buildScene(name) {
+    const { w: W, h: H } = SETS[name], portrait = H > W;
+    const M = Math.min(W, H), cx = W / 2, cy = H * (portrait ? 0.47 : 0.5);
+    const r = rng(21), NC = portrait ? 30 : 42;
+    const cw = portrait ? W * 0.42 : W * 0.15, ch = cw * 0.36, cards = [];
+    for (let i = 0; i < NC; i++) {
+      let x, y, tries = 0;
+      do { x = cw * 0.55 + r() * (W - cw * 1.1); y = ch * 0.7 + r() * (H - ch * 1.4); tries++; } while (tries < 40 && cards.some((c) => Math.abs(c.x - x) < cw * 0.8 && Math.abs(c.y - y) < ch * 1.1));
+      const card = { x, y, w: cw * (0.85 + r() * 0.25), h: ch, rot: (r() - 0.5) * 0.16, ph: r() * 6.28, msg: MSGS[i % MSGS.length], name: NAMES[(i * 5) % NAMES.length], av: AV[i % AV.length], n: 1 + Math.floor(r() * 6), d: r() * 0.12 };
+      cardSprite(card); cards.push(card);
+    }
+    // isotipo con su brillo, dibujado una sola vez
+    const LW = M * (portrait ? 0.78 : 0.62), lpad = M * 0.12;
+    const lc = document.createElement('canvas'); lc.width = Math.ceil((LW + lpad * 2) * SS); lc.height = Math.ceil((LW * logoAR + lpad * 2) * SS);
+    const L = lc.getContext('2d'); L.scale(SS, SS); L.shadowColor = 'rgba(16,209,138,0.38)'; L.shadowBlur = M * 0.05 * SS;
+    L.drawImage(logo, lpad, lpad, LW, LW * logoAR);
+    return { name, W, H, portrait, M, cx, cy, cards, LW, lpad, logoSprite: lc };
+  }
+
+  async function init() {
+    await Promise.all(['700 20px Poppins', '600 20px Inter', '400 20px Inter', '800 20px Inter'].map((f) => document.fonts.load(f).catch(() => {})));
+    logo = new Image(); logo.src = 'assets/logo-brain.webp';
+    await (logo.decode ? logo.decode() : new Promise((res, rej) => { logo.onload = res; logo.onerror = rej; }));
+    logoAR = logo.height / logo.width;
+    glow = makeGlow();
+    for (let i = 0; i < N; i++) { const y = 1 - 2 * (i + 0.5) / N, rr = Math.sqrt(1 - y * y), th = i * 2.399963; sphere.push([Math.cos(th) * rr, y, Math.sin(th) * rr]); }
+    for (let i = 0; i < N; i++) { const d = sphere.map((q, j) => [j, (q[0] - sphere[i][0]) ** 2 + (q[1] - sphere[i][1]) ** 2 + (q[2] - sphere[i][2]) ** 2]).sort((a, b) => a[1] - b[1]); neigh.push(d.slice(1, 4).map((x) => x[0])); }
+    // Forma del cerebro precalculada a partir del isotipo (no se leen píxeles del logo:
+    // el navegador lo bloquea al abrir la página como archivo local).
+    for (let i = 0; i < N; i++) targets.push([BRAIN[i * 2], BRAIN[i * 2 + 1]]);
+  }
+
+  function drawScene(u) {
+    const S = scene, { M, cx, cy, W, H, portrait } = S;
+    const R = M * (portrait ? 0.34 : 0.32), ry = u * 5.2, rx = 0.36;
+    const morph = ease(p(u, 0.52, 0.76));
+    const cY = Math.cos(ry), sY = Math.sin(ry), cA = Math.cos(rx), sA = Math.sin(rx);
+    const nodes = new Array(N);
+    for (let i = 0; i < N; i++) {
+      const [x, y, z] = sphere[i];
+      const x1 = x * cY + z * sY, z1 = -x * sY + z * cY, y1 = y * cA - z1 * sA, z2 = y * sA + z1 * cA, f = 1 / (1 + z2 * 0.38);
+      const tx = cx + targets[i][0] * S.LW, ty = cy + targets[i][1] * S.LW;
+      nodes[i] = { x: lerp(cx + x1 * R * f, tx, morph), y: lerp(cy + y1 * R * f, ty, morph), z: lerp(z2, 0, morph), f: lerp(f, 1, morph) };
+    }
+    // mensajes que viajan hacia la red
+    S.cards.forEach((c, i) => {
+      const k = ease(p(u, 0.2 + c.d, 0.42 + c.d));
+      const appear = outBack(p(u, c.d * 0.5 - 0.06, c.d * 0.5 + 0.04));
+      if (k >= 1 || appear <= 0) return;
+      const node = nodes[(i * 6) % N];
+      const fx = Math.sin(u * 9 + c.ph) * M * 0.012 * (1 - k), fy = Math.cos(u * 7 + c.ph) * M * 0.01 * (1 - k);
+      const sc = lerp(appear, 0.05, k);
+      ctx.save(); ctx.globalAlpha = clamp(appear) * (1 - p(k, 0.6, 1));
+      ctx.translate(lerp(c.x + fx, node.x, k), lerp(c.y + fy, node.y, k)); ctx.rotate(c.rot * (1 - k)); ctx.scale(sc, sc);
+      ctx.drawImage(c.sprite, -c.sw / 2, -c.sh / 2, c.sw, c.sh);
+      ctx.restore();
+    });
+    // red neuronal: líneas agrupadas por intensidad (pocos trazos por fotograma)
+    const netIn = ease(p(u, 0.32, 0.5)), netOut = 1 - p(u, 0.78, 0.88);
+    const lineA = 0.3 * netIn * (1 - morph * 0.7) * netOut, nodeA = netIn * netOut;
+    if (nodeA > 0) {
+      ctx.lineWidth = Math.max(1, M / 900);
+      const buckets = [[], [], [], [], []];
+      for (let i = 0; i < N; i++) for (const j of neigh[i]) {
+        if (j < i) continue; const a = nodes[i], b = nodes[j];
+        const q = clamp(0.3 + (1 - (a.z + b.z) / 2) * 0.4, 0.3, 0.7);
+        buckets[Math.round((q - 0.3) / 0.4 * 4)].push(a.x, a.y, b.x, b.y);
       }
-      if (k < order.length) setTimeout(pump, 40);
-    };
-    pump();
+      buckets.forEach((seg, k) => {
+        if (!seg.length) return;
+        ctx.strokeStyle = `rgba(16,209,138,${(lineA * (0.3 + k * 0.1)).toFixed(3)})`;
+        ctx.beginPath(); for (let n = 0; n < seg.length; n += 4) { ctx.moveTo(seg[n], seg[n + 1]); ctx.lineTo(seg[n + 2], seg[n + 3]); } ctx.stroke();
+      });
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = 0; i < N; i++) { const q = nodes[i]; const s = M * (0.006 + 0.006 * q.f) * lerp(1, 0.6, morph); ctx.globalAlpha = nodeA * clamp(0.35 + (1 - q.z) * 0.5); ctx.drawImage(glow, q.x - s, q.y - s, s * 2, s * 2); }
+      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    }
+    // isotipo
+    const li = ease(p(u, 0.74, 0.84));
+    if (li > 0) {
+      const k = lerp(0.92, 1, ease(p(u, 0.74, 0.9))), lw = S.LW * k, ly = cy + Math.sin(now * 1.1) * M * 0.008 * li;
+      ctx.globalAlpha = li;
+      ctx.drawImage(S.logoSprite, cx - (S.LW / 2 + S.lpad) * k, ly - (S.LW * logoAR / 2 + S.lpad) * k, (S.LW + S.lpad * 2) * k, (S.LW * logoAR + S.lpad * 2) * k);
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = `rgba(16,209,138,${0.35 * li})`; ctx.lineWidth = Math.max(1.5, M / 600); ctx.setLineDash([3, 12]);
+      ctx.beginPath(); ctx.ellipse(cx, ly, lw * 0.78, lw * 0.78 * 0.34, -0.2, 0, Math.PI * 2 * li); ctx.stroke(); ctx.setLineDash([]);
+    }
+    // tres tarjetas del panel
+    TILES.forEach(([lab, val, sub], i) => {
+      const k = outBack(p(u, 0.83 + i * 0.035, 0.93 + i * 0.035)); if (k <= 0) return;
+      const [ox, oy] = ORBIT[S.name][i], tw = portrait ? W * 0.54 : W * 0.215, th = portrait ? H * 0.108 : H * 0.125;
+      const fx = Math.cos(now * 0.8 + i * 1.7) * M * 0.006, fy = Math.sin(now * 1.05 + i * 2.1) * M * 0.014;
+      const tcx = cx + ox * S.LW + fx, tcy = cy + oy * S.LW + fy, tx = tcx - tw / 2, ty = tcy - th / 2;
+      // hilo que une cada tarjeta con el logo
+      ctx.save(); ctx.globalAlpha = clamp(k) * 0.5; ctx.strokeStyle = 'rgba(16,209,138,0.55)'; ctx.lineWidth = Math.max(1.2, M / 700); ctx.setLineDash([2, 7]);
+      ctx.beginPath(); ctx.moveTo(tcx, tcy); ctx.lineTo(lerp(tcx, cx, 0.62), lerp(tcy, cy, 0.62)); ctx.stroke(); ctx.restore();
+      ctx.save(); ctx.globalAlpha = clamp(k); ctx.translate(tx + tw / 2, ty + th / 2); ctx.scale(lerp(0.85, 1, k), lerp(0.85, 1, k)); ctx.translate(-(tx + tw / 2), -(ty + th / 2) + (1 - clamp(k)) * th * 0.6);
+      ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = th * 0.5; ctx.shadowOffsetY = th * 0.12;
+      ctx.fillStyle = 'rgba(18,26,31,0.92)'; ctx.strokeStyle = 'rgba(16,209,138,0.5)'; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.roundRect(tx, ty, tw, th, th * 0.22); ctx.fill(); ctx.shadowColor = 'transparent'; ctx.stroke();
+      const ic = th * 0.36; ctx.fillStyle = 'rgba(16,209,138,0.16)'; ctx.beginPath(); ctx.roundRect(tx + th * 0.18, ty + th / 2 - ic / 2, ic, ic, ic * 0.3); ctx.fill();
+      ctx.strokeStyle = COL.a; ctx.lineWidth = Math.max(2, ic * 0.09); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(tx + th * 0.18 + ic * 0.26, ty + th / 2); ctx.lineTo(tx + th * 0.18 + ic * 0.44, ty + th / 2 + ic * 0.18); ctx.lineTo(tx + th * 0.18 + ic * 0.76, ty + th / 2 - ic * 0.18); ctx.stroke();
+      const tx2 = tx + th * 0.18 + ic + th * 0.18;
+      ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillStyle = COL.muted; ctx.font = `500 ${th * 0.17}px Inter`; ctx.fillText(lab, tx2, ty + th * 0.3);
+      ctx.fillStyle = COL.text; ctx.font = `700 ${th * 0.3}px Poppins`; ctx.fillText(val, tx2, ty + th * 0.6);
+      const vw = ctx.measureText(val).width; let fs = th * 0.15; ctx.font = `500 ${fs}px Inter`; const room = tx + tw - th * 0.18 - (tx2 + vw + th * 0.12);
+      while (ctx.measureText(sub).width > room && fs > th * 0.1) { fs -= 0.5; ctx.font = `500 ${fs}px Inter`; }
+      if (ctx.measureText(sub).width <= room) { ctx.fillStyle = COL.soft; ctx.fillText(sub, tx2 + vw + th * 0.12, ty + th * 0.62); }
+      ctx.restore();
+    });
   }
-
-  function progress() {
-    const r = section.getBoundingClientRect();
-    const run = r.height - window.innerHeight;
-    return run > 0 ? Math.min(1, Math.max(0, -r.top / run)) : 0;
-  }
-  const target = () => Math.round(progress() * (total - 1));
 
   function size() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // en pantallas pequeñas una resolución interna algo menor mantiene la fluidez sin perder nitidez visible
+    dpr = Math.min(window.devicePixelRatio || 1, canvas.clientWidth < 700 ? 1.5 : 2);
     const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
-    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; current = -1; }
+    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+    const name = wantSet();
+    scene = scenes[name] || (scenes[name] = buildScene(name));
   }
 
-  function draw(force) {
-    const u = progress();
-    const want = Math.round(u * (total - 1));
-    let i = want, d = 0;
-    while (!frames[i] && d < total) { d++; i = frames[want - d] ? want - d : frames[want + d] ? want + d : want; }
-    const img = frames[i];
+  function ui(time) {
+    const u = uAt(time);
     section.style.setProperty('--p', u.toFixed(4));
-    section.classList.toggle('is-moving', u > 0.02);
-    steps.forEach((li) => li.classList.toggle('is-active', u >= Number(li.dataset.from) && u < Number(li.dataset.to)));
-    if (!img || (!force && i === current)) return;
-    current = i;
-    // la animación entra completa en la zona bajo el texto
-    const box = stage.getBoundingClientRect(), base = canvas.getBoundingClientRect();
-    const bx = (box.left - base.left) * dpr, by = (box.top - base.top) * dpr, bw = box.width * dpr, bh = box.height * dpr;
-    const f = SETS[set], [x0, y0, x1, y1] = f.safe, k = img.naturalWidth / f.w;
-    const pad = sidePad(box.width) * dpr;
-    const s = Math.min((bw - pad * 2) / (img.naturalWidth * (x1 - x0)), bh / (img.naturalHeight * (y1 - y0)));
-    const w = img.naturalWidth * s, h = img.naturalHeight * s;
-    // centra la zona con contenido dentro del espacio de la animación
-    const ox = bx + bw / 2 - ((x0 + x1) / 2) * w, oy = by + bh / 2 - ((y0 + y1) / 2) * h;
-    ctx.fillStyle = BG; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, ox, oy, w, h);
+    const stepIdx = STEP_AT.reduce((acc, at, i) => (time >= at ? i : acc), 0);
+    steps.forEach((li, i) => li.classList.toggle('is-active', i === stepIdx));
+    phases.forEach((li, i) => {
+      const [a, b] = SEG[i], f = clamp((time - a) / (b - a));
+      li.style.setProperty('--f', f.toFixed(3));
+      li.classList.toggle('is-active', f > 0 && f < 1);
+      li.classList.toggle('is-done', f >= 1);
+    });
+    if (time >= END && !done) { done = true; section.classList.add('is-done'); }
+    return u;
   }
 
-  const onScroll = () => { if (ticking) return; ticking = true; requestAnimationFrame(() => { ticking = false; draw(false); }); };
-
-  function start() {
-    if (prefersReducedMotion.matches) { section.classList.remove('is-ready'); if (poster) poster.src = src(wantSet(), total - 1); return; }
-    section.classList.add('is-ready');
-    size(); load(); draw(true);
+  function render(time) {
+    const u = ui(time);
+    const cw = canvas.width, ch = canvas.height, f = SETS[scene.name], [x0, y0, x1, y1] = f.safe;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = BG; ctx.fillRect(0, 0, cw, ch);
+    const pad = sidePad(canvas.clientWidth) * dpr;
+    const s = Math.min((cw - pad * 2) / (f.w * (x1 - x0)), ch / (f.h * (y1 - y0)));
+    ctx.setTransform(s, 0, 0, s, cw / 2 - ((x0 + x1) / 2) * f.w * s, ch / 2 - ((y0 + y1) / 2) * f.h * s);
+    now = time;
+    drawScene(u);
+    // fundido suave al cerrar y abrir cada vuelta del bucle
+    const fade = time > HOLD ? p(time, HOLD, CYCLE) : 1 - p(time, 0, FADE_IN);
+    if (fade > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = fade; ctx.fillStyle = BG; ctx.fillRect(0, 0, cw, ch); ctx.globalAlpha = 1; }
   }
 
+  function tick(now) {
+    raf = 0;
+    if (!visible) return;
+    t += Math.min(0.05, (now - last) / 1000); last = now;
+    if (t >= CYCLE) t -= CYCLE;
+    render(t);
+    raf = requestAnimationFrame(tick);
+  }
+
+  function play() { if (!ready || raf || !visible || prefersReducedMotion.matches) return; last = performance.now(); raf = requestAnimationFrame(tick); }
+
+  let preparing = false;
+  async function prepare() {
+    if (ready || preparing) return;
+    preparing = true;
+    try { await init(); size(); ready = true; } catch (err) { preparing = false; console.warn('Animación del caos al orden:', err); return; }
+    if (prefersReducedMotion.matches) { t = END; render(t); return; }
+    render(t); play();
+  }
+
+  new IntersectionObserver(([entry]) => { if (entry.isIntersecting) prepare(); }, { rootMargin: '100% 0px' }).observe(section);
   new IntersectionObserver(([entry]) => {
-    if (!entry.isIntersecting) return;
-    start();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }, { rootMargin: '150% 0px' }).observe(section);
+    visible = entry.isIntersecting;
+    if (visible) play(); else if (raf) { cancelAnimationFrame(raf); raf = 0; }
+  }, { threshold: 0.2 }).observe(stage);
 
-  window.addEventListener('resize', () => { if (!section.classList.contains('is-ready')) return; size(); load(); draw(true); });
-  prefersReducedMotion.addEventListener?.('change', start);
+  window.addEventListener('resize', () => { if (!ready) return; size(); render(t); });
+  prefersReducedMotion.addEventListener?.('change', () => { if (!ready) return; if (prefersReducedMotion.matches) { t = END; render(t); } else play(); });
 })();
