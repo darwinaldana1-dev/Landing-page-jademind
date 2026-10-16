@@ -5,23 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formsubmit.co; form-action https://formsubmit.co; object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <title>JadeMind | Automatización comercial para WhatsApp y web</title>
-  <meta name="description" content="JadeMind conecta tu landing, WhatsApp y calendario para responder, calificar prospectos, agendar citas y transferir conversaciones a tu equipo.">
-  <meta name="robots" content="index,follow,max-image-preview:large">
+  <title>JadeMind | Agentes de IA para WhatsApp y CRM de ventas</title>
+  <meta name="description" content="JadeMind es el CRM con agentes de IA para WhatsApp: responde al instante, califica prospectos, agenda citas y pasa la conversación a tu equipo. Hecho en Colombia.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="theme-color" content="#0b1013">
   <link rel="canonical" href="https://jademind.com.co/">
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_CO">
   <meta property="og:site_name" content="JadeMind">
-  <meta property="og:title" content="JadeMind | De la conversación a la cita">
-  <meta property="og:description" content="Automatización comercial para responder, calificar y agendar desde WhatsApp y web.">
+  <meta property="og:title" content="JadeMind | Agentes de IA para WhatsApp y CRM de ventas">
+  <meta property="og:description" content="Responde, califica y agenda desde WhatsApp con agentes de IA, sin perder el control humano.">
   <meta property="og:url" content="https://jademind.com.co/">
   <meta property="og:image" content="https://jademind.com.co/banner.jpg">
+  <meta property="og:image:width" content="1672">
+  <meta property="og:image:height" content="941">
   <meta property="og:image:alt" content="JadeMind, automatización comercial con inteligencia artificial">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="JadeMind | De la conversación a la cita">
-  <meta name="twitter:description" content="Automatización comercial para WhatsApp y web.">
+  <meta name="twitter:title" content="JadeMind | Agentes de IA para WhatsApp y CRM de ventas">
+  <meta name="twitter:description" content="Responde, califica y agenda desde WhatsApp con agentes de IA, sin perder el control humano.">
   <meta name="twitter:image" content="https://jademind.com.co/banner.jpg">
 
   <link rel="icon" type="image/png" sizes="192x192" href="visual/jademind-icono-192.png">
@@ -29,28 +31,68 @@
   <link rel="manifest" href="site.webmanifest">
   <link rel="preload" href="assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/poppins-700.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles_v22.css?v=82">
+  <link rel="stylesheet" href="styles_v22.css?v=85">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "JadeMind",
-    "url": "https://jademind.com.co/",
-    "logo": "https://jademind.com.co/visual/jademind-icono-512.png",
-    "image": "https://jademind.com.co/banner.jpg",
-    "description": "Automatización comercial para WhatsApp y web: atención inicial, calificación de prospectos, agenda y transferencia a equipos humanos.",
-    "email": "info@jademind.com.co",
-    "telephone": "+573009403058",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Medellín",
-      "addressCountry": "CO"
-    },
-    "areaServed": ["Colombia", "Latinoamérica"],
-    "sameAs": [
-      "https://www.instagram.com/jademind_oficial/",
-      "https://www.facebook.com/profile.php?id=61561292698761"
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://jademind.com.co/#organization",
+        "name": "JadeMind",
+        "alternateName": "Jade Mind",
+        "url": "https://jademind.com.co/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://jademind.com.co/visual/jademind-icono-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "image": "https://jademind.com.co/banner.jpg",
+        "description": "CRM con agentes de IA para WhatsApp: atención inicial, calificación de prospectos, agenda, pedidos y transferencia a equipos humanos.",
+        "email": "info@jademind.com.co",
+        "telephone": "+573009403058",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Medellín",
+          "addressRegion": "Antioquia",
+          "addressCountry": "CO"
+        },
+        "areaServed": ["Colombia", "Latinoamérica"],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+573009403058",
+          "email": "info@jademind.com.co",
+          "availableLanguage": "es"
+        },
+        "sameAs": [
+          "https://www.instagram.com/jademind_oficial/",
+          "https://www.facebook.com/profile.php?id=61561292698761"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://jademind.com.co/#website",
+        "name": "JadeMind",
+        "alternateName": ["Jade Mind", "jademind.com.co"],
+        "url": "https://jademind.com.co/",
+        "inLanguage": "es-CO",
+        "publisher": { "@id": "https://jademind.com.co/#organization" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://jademind.com.co/#software",
+        "name": "JadeMind",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "CRM",
+        "operatingSystem": "Web",
+        "url": "https://jademind.com.co/",
+        "description": "CRM con agentes de IA que atienden por WhatsApp, califican prospectos, agendan citas y registran pedidos, con transferencia a una persona cuando hace falta.",
+        "inLanguage": "es",
+        "publisher": { "@id": "https://jademind.com.co/#organization" }
+      }
     ]
   }
   </script>
@@ -519,30 +561,12 @@
     </section>
 
     <section class="section pricing-section" id="planes" aria-labelledby="pricing-title">
-      <div class="container" data-pricing data-mode="activo">
+      <div class="container">
         <div class="section-heading section-heading-centered reveal-on-scroll">
           <p class="eyebrow">Planes y precios</p>
           <h2 id="pricing-title">Elige cómo quieres que trabaje tu agente.</h2>
-          <p>Implementa tu agente con el activo digital y mantenlo al día con la membresía mensual. Todos los precios incluyen IVA.</p>
+          <p>Una membresía mensual según lo que tu agente debe hacer por tu negocio. Todos los precios incluyen IVA.</p>
         </div>
-
-        <div class="pricing-switch reveal-on-scroll">
-          <div class="pricing-toggle" role="group" aria-label="Tipo de precio">
-            <span class="pricing-toggle-thumb" aria-hidden="true"></span>
-            <button type="button" data-pricing-mode="activo" aria-pressed="true">
-              <b>Activo digital</b><small>Implementación</small>
-            </button>
-            <button type="button" data-pricing-mode="membresia" aria-pressed="false">
-              <b>Membresía mensual</b><small>Cada mes</small>
-            </button>
-          </div>
-          <p class="pricing-includes">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>
-            <span data-pricing-includes>Incluye agente, capacitación de interfaz, servidor y capacitación de Meta Ads.</span>
-          </p>
-        </div>
-
-        <p class="sr-only" role="status" aria-live="polite" data-pricing-status></p>
 
         <div class="pricing-grid">
           <article class="price-card reveal-on-scroll" data-plan="informativo" data-spotlight>
@@ -551,17 +575,16 @@
               <h3>Informativo</h3>
             </div>
             <div class="price-amount">
-              <span class="price-number">$<span data-price>499.900</span></span>
-              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+              <span class="price-number">$<span>129.900</span></span>
+              <span class="price-unit"><b>COP / mes</b><small>IVA incluido</small></span>
             </div>
-            <p class="price-alt" data-alt>Membresía: $129.900 COP / mes</p>
-            <ul class="price-features" data-features>
-              <li>Preguntas frecuentes e información clave</li>
-              <li>Comparte catálogo básico</li>
+            <ul class="price-features">
+              <li>Responde preguntas frecuentes</li>
+              <li>Comparte información clave del negocio</li>
               <li>Captura datos del cliente</li>
-              <li>Entrega a un asesor</li>
+              <li>Entrega a un asesor cuando sea necesario</li>
             </ul>
-            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_informativo" data-prefill-message="Hola, me interesa el plan Informativo (Activo digital).">Quiero este plan</a>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-track="plan_informativo" data-prefill-message="Hola, me interesa el plan Informativo.">Quiero este plan</a>
           </article>
 
           <article class="price-card reveal-on-scroll" data-plan="citas" data-spotlight style="transition-delay: 0.08s">
@@ -570,17 +593,16 @@
               <h3>Citas y reservas</h3>
             </div>
             <div class="price-amount">
-              <span class="price-number">$<span data-price>599.900</span></span>
-              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+              <span class="price-number">$<span>139.900</span></span>
+              <span class="price-unit"><b>COP / mes</b><small>IVA incluido</small></span>
             </div>
-            <p class="price-alt" data-alt>Membresía: $139.900 COP / mes</p>
-            <ul class="price-features" data-features>
+            <ul class="price-features">
               <li>Agenda citas y reservas</li>
-              <li>Envía confirmaciones automáticas</li>
-              <li>Gestiona cambios y recordatorios</li>
-              <li>Entrega a un asesor</li>
+              <li>Envía confirmaciones y recordatorios</li>
+              <li>Gestiona cancelaciones y reprogramaciones</li>
+              <li>Entrega a un asesor cuando se requiere</li>
             </ul>
-            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_citas" data-prefill-message="Hola, me interesa el plan Citas y reservas (Activo digital).">Quiero este plan</a>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-track="plan_citas" data-prefill-message="Hola, me interesa el plan Citas y reservas.">Quiero este plan</a>
           </article>
 
           <article class="price-card reveal-on-scroll" data-plan="pedidos" data-spotlight style="transition-delay: 0.16s">
@@ -589,17 +611,16 @@
               <h3>Pedidos y ventas</h3>
             </div>
             <div class="price-amount">
-              <span class="price-number">$<span data-price>719.900</span></span>
-              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+              <span class="price-number">$<span>159.900</span></span>
+              <span class="price-unit"><b>COP / mes</b><small>IVA incluido</small></span>
             </div>
-            <p class="price-alt" data-alt>Membresía: $159.900 COP / mes</p>
-            <ul class="price-features" data-features>
+            <ul class="price-features">
               <li>Comparte catálogo y productos</li>
               <li>Valida datos del cliente</li>
-              <li>Genera pedidos</li>
+              <li>Toma pedidos y acompaña la compra</li>
               <li>Consulta estado del pedido</li>
             </ul>
-            <a class="btn btn-secondary price-cta" href="#contacto" data-plan-cta data-track="plan_pedidos" data-prefill-message="Hola, me interesa el plan Pedidos y ventas (Activo digital).">Quiero este plan</a>
+            <a class="btn btn-secondary price-cta" href="#contacto" data-track="plan_pedidos" data-prefill-message="Hola, me interesa el plan Pedidos y ventas.">Quiero este plan</a>
           </article>
 
           <article class="price-card is-featured reveal-on-scroll" data-plan="hibrido" data-spotlight style="transition-delay: 0.24s">
@@ -609,24 +630,23 @@
               <h3>Híbrido</h3>
             </div>
             <div class="price-amount">
-              <span class="price-number">$<span data-price>999.900</span></span>
-              <span class="price-unit"><b data-unit>COP</b><small>IVA incluido</small></span>
+              <span class="price-number">$<span>169.900</span></span>
+              <span class="price-unit"><b>COP / mes</b><small>IVA incluido</small></span>
             </div>
-            <p class="price-alt" data-alt>Membresía: $169.900 COP / mes</p>
-            <ul class="price-features" data-features>
-              <li>Integra información, citas y pedidos</li>
-              <li>Reúne varios flujos en un mismo agente</li>
+            <ul class="price-features">
+              <li>Combina información, citas y ventas</li>
+              <li>Atiende varios flujos en un mismo agente</li>
               <li>Captura y clasifica leads</li>
-              <li>Atención más completa para el negocio</li>
+              <li>Entrega a tu equipo cuando haga falta</li>
             </ul>
-            <a class="btn btn-primary price-cta" href="#contacto" data-plan-cta data-track="plan_hibrido" data-prefill-message="Hola, me interesa el plan Híbrido (Activo digital).">Quiero este plan</a>
+            <a class="btn btn-primary price-cta" href="#contacto" data-track="plan_hibrido" data-prefill-message="Hola, me interesa el plan Híbrido.">Quiero este plan</a>
           </article>
         </div>
 
         <div class="pricing-enterprise reveal-on-scroll">
           <span class="price-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="22" x2="9" y2="18"/><line x1="15" y1="22" x2="15" y2="18"/><line x1="8" y1="6" x2="8.01" y2="6"/><line x1="12" y1="6" x2="12.01" y2="6"/><line x1="16" y1="6" x2="16.01" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/></svg></span>
           <p><strong>Para empresas: funciona a través de cotización previa.</strong>Soluciones personalizadas según las necesidades de tu empresa, con la misma tecnología y respaldo de JadeMind.</p>
-          <a class="btn btn-secondary" href="#contacto" data-plan-cta data-track="plan_empresas" data-prefill-message="Hola, quiero una cotización de JadeMind para mi empresa.">Solicitar cotización</a>
+          <a class="btn btn-secondary" href="#contacto" data-track="plan_empresas" data-prefill-message="Hola, quiero una cotización de JadeMind para mi empresa.">Solicitar cotización</a>
         </div>
       </div>
     </section>
@@ -1002,7 +1022,7 @@
     <div class="container footer-grid">
       <div>
         <img src="visual/jademind-horizontal-web.png" width="146" height="48" loading="lazy" decoding="async" alt="JadeMind">
-        <p>Automatización comercial con IA para responder, organizar y hacer avanzar cada conversación.</p>
+        <p>CRM con agentes de IA para WhatsApp. Automatización comercial con IA para responder, organizar y hacer avanzar cada conversación.</p>
       </div>
       <nav aria-label="Enlaces legales">
         <a href="politicas-de-privacidad.html">Privacidad</a>
@@ -1022,6 +1042,6 @@
   </a>
 
   <script src="neural-field.js?v=1" defer></script>
-  <script src="app.js?v=68"></script>
+  <script src="app.js?v=69"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 {
   "name": "JadeMind",
   "short_name": "JadeMind",
-  "description": "Automatización comercial para WhatsApp y web.",
+  "description": "CRM con agentes de IA para WhatsApp.",
   "lang": "es-CO",
   "start_url": "/",
   "scope": "/",

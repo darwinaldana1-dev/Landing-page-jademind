@@ -2361,6 +2361,12 @@ section[id] {
   justify-content: flex-end;
 }
 
+/* El halo decorativo se extiende un 18 % por fuera del escenario: la sección lo recorta
+   para que nunca ensanche la página en el celular (era un desborde de 48 px). */
+.media-section {
+  overflow: hidden;
+}
+
 .video-stage::before {
   content: "";
   position: absolute;
@@ -3692,7 +3698,7 @@ section[id] {
 
 .advanced-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
   gap: 1.5rem;
   margin-top: 3.5rem;
 }
@@ -5872,9 +5878,40 @@ section[id] {
   .panel-tabs {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }
 
 @media (max-width: 640px) {
+  /* Dos columnas en el celular: pestaña compacta para que "Conversaciones" entre completo */
+  .panel-tab {
+    gap: 0.55rem;
+    padding: 0.7rem 0.7rem;
+  }
+
+  .panel-tab-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .panel-tab-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .panel-tab-text strong {
+    font-size: 0.8rem;
+  }
+
+  .panel-tab-text small {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 374px) {
+  /* Por debajo de 375 px "Conversaciones" ya no entra en dos columnas: una pestaña por fila */
+  .panel-tabs {
+    grid-template-columns: minmax(0, 1fr);
+  }
   /* En el celular ya está en WhatsApp: el QR sobra */
   .try-qr {
     display: none;
@@ -5912,7 +5949,7 @@ section[id] {
   }
 }
 
-/* Planes y precios: activo digital / membresía mensual */
+/* Planes y precios: membresía mensual */
 .pricing-section {
   position: relative;
   overflow: hidden;
@@ -5929,108 +5966,6 @@ section[id] {
 }
 
 /* Selector de modalidad */
-.pricing-switch {
-  display: grid;
-  justify-items: center;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-}
-
-.pricing-toggle {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: min(100%, 520px);
-  padding: 0.35rem;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: rgba(17, 24, 29, 0.85);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 40px rgba(0, 0, 0, 0.3);
-}
-
-.pricing-toggle-thumb {
-  position: absolute;
-  top: 0.35rem;
-  bottom: 0.35rem;
-  left: 0.35rem;
-  width: calc(50% - 0.35rem);
-  border-radius: 999px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
-  box-shadow: 0 8px 24px rgba(16, 209, 138, 0.35);
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-}
-
-[data-mode="membresia"] .pricing-toggle-thumb {
-  transform: translateX(100%);
-}
-
-.pricing-toggle button {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  min-height: 56px;
-  place-content: center;
-  gap: 0.05rem;
-  padding: 0.45rem 1rem;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--text-soft);
-  cursor: pointer;
-  text-align: center;
-  transition: color 0.35s ease;
-}
-
-.pricing-toggle button b {
-  font-family: var(--font-display);
-  font-size: 0.98rem;
-  font-weight: 600;
-}
-
-.pricing-toggle button small {
-  color: inherit;
-  font-size: 0.74rem;
-  opacity: 0.75;
-}
-
-.pricing-toggle button:hover {
-  color: var(--text);
-}
-
-.pricing-toggle button[aria-pressed="true"] {
-  color: #04140d;
-}
-
-.pricing-includes {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  max-width: 640px;
-  padding: 0.55rem 1.1rem;
-  margin: 0;
-  border: 1px solid rgba(16, 209, 138, 0.25);
-  border-radius: 999px;
-  background: rgba(16, 209, 138, 0.07);
-  color: var(--accent-soft);
-  font-size: 0.9rem;
-  text-align: left;
-}
-
-.pricing-includes svg {
-  width: 16px;
-  height: 16px;
-  flex: 0 0 auto;
-  color: var(--accent);
-}
-
-.pricing-includes.is-swapping span {
-  animation: pricing-fade 0.45s ease both;
-}
-
-@keyframes pricing-fade {
-  from { opacity: 0; transform: translateY(4px); }
-}
-
 /* Tarjetas */
 .pricing-grid {
   display: grid;
@@ -6169,12 +6104,6 @@ section[id] {
   font-size: 0.72rem;
 }
 
-.price-alt {
-  margin: 0.7rem 0 0;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
 .price-features {
   display: grid;
   gap: 0.65rem;
@@ -6223,45 +6152,6 @@ section[id] {
   margin-top: auto;
 }
 
-/* Cambio de modalidad: el contenido sale hacia arriba y el nuevo entra desde abajo,
-   escalonado por tarjeta. Sin cifras intermedias ni cambios de altura. */
-.price-card {
-  --c: 0;
-}
-
-.price-card:nth-child(2) { --c: 1; }
-.price-card:nth-child(3) { --c: 2; }
-.price-card:nth-child(4) { --c: 3; }
-
-.price-amount { --s: 0ms; }
-.price-alt { --s: 50ms; }
-.price-features { --s: 100ms; }
-
-.price-amount,
-.price-alt,
-.price-features {
-  transition: opacity 0.2s ease, transform 0.2s ease, filter 0.2s ease;
-}
-
-[data-pricing].is-swap-out :is(.price-amount, .price-alt, .price-features) {
-  opacity: 0;
-  filter: blur(3px);
-  transform: translateY(-8px);
-  transition-delay: calc(var(--c) * 25ms);
-}
-
-[data-pricing].is-swap-in :is(.price-amount, .price-alt, .price-features) {
-  animation: price-swap-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--c) * 60ms + var(--s)) both;
-}
-
-@keyframes price-swap-in {
-  from {
-    opacity: 0;
-    filter: blur(3px);
-    transform: translateY(10px);
-  }
-}
-
 /* Empresas */
 .pricing-enterprise {
   display: flex;
@@ -6300,24 +6190,6 @@ section[id] {
 }
 
 @media (max-width: 640px) {
-  .pricing-switch {
-    margin-bottom: 1.75rem;
-  }
-
-  .pricing-toggle button {
-    min-height: 52px;
-    padding-inline: 0.5rem;
-  }
-
-  .pricing-toggle button b {
-    font-size: 0.86rem;
-  }
-
-  .pricing-includes {
-    border-radius: var(--radius-lg);
-    font-size: 0.84rem;
-  }
-
   .pricing-grid {
     grid-template-columns: minmax(0, 1fr);
   }
