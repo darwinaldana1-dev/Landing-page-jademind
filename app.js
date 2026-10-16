@@ -1327,23 +1327,25 @@ function restartClass(element, className) {
 }
 
 // Recorrido del panel: capturas reales del CRM que avanzan solas.
-// Solo corre en pantalla, se pausa con el mouse o el foco encima y respeta
-// prefers-reduced-motion (ahí solo cambian con las pestañas).
+// Cambian cada 3 s mientras el panel está en pantalla; elegir una pestaña
+// reinicia la cuenta. Respeta prefers-reduced-motion (ahí solo cambian con las pestañas).
 const panelTour = document.querySelector('[data-panel-tour]');
 if (panelTour) {
-  const PANEL_DURATION = 5000;
+  const PANEL_DURATION = 3000;
   const tabs = [...panelTour.querySelectorAll('[data-panel-tab]')];
   const shots = [...panelTour.querySelectorAll('[data-panel-shot]')];
   const urlLabel = panelTour.querySelector('[data-panel-url]');
+  const stage = panelTour.querySelector('.panel-stage');
   let current = 0;
   let timer = null;
   let onScreen = false;
-  let hovering = false;
 
   panelTour.style.setProperty('--panel-duration', `${PANEL_DURATION}ms`);
 
   const showPanel = (index) => {
+    const changed = ((index + tabs.length) % tabs.length) !== current;
     current = (index + tabs.length) % tabs.length;
+    if (changed && stage) restartClass(stage, 'is-switching');
     const key = tabs[current].dataset.panelTab;
     tabs.forEach((tab, i) => {
       const active = i === current;
@@ -1363,7 +1365,7 @@ if (panelTour) {
 
   const schedule = () => {
     stop();
-    const autoplay = onScreen && !hovering && !prefersReducedMotion.matches;
+    const autoplay = onScreen && !prefersReducedMotion.matches;
     panelTour.classList.toggle('is-autoplay', autoplay);
     panelTour.classList.toggle('is-paused', !autoplay);
     if (!autoplay) return;
@@ -1381,10 +1383,6 @@ if (panelTour) {
     });
   });
 
-  panelTour.addEventListener('mouseenter', () => { hovering = true; schedule(); });
-  panelTour.addEventListener('mouseleave', () => { hovering = false; showPanel(current); schedule(); });
-  panelTour.addEventListener('focusin', () => { hovering = true; schedule(); });
-  panelTour.addEventListener('focusout', () => { hovering = false; schedule(); });
   prefersReducedMotion.addEventListener?.('change', schedule);
 
   if ('IntersectionObserver' in window) {
