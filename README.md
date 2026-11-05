@@ -23,6 +23,8 @@ node scripts/validate-site.mjs
 - `site.webmanifest`
 - `neural-field.js` (fondo animado del hero)
 - `assets/fonts/`: Poppins + Inter, las tipografías del CRM, servidas desde el sitio
+- `assets/restaurante/`: capturas reales del menú digital de un restaurante (sección “Para restaurantes”)
+- `assets/integraciones/`: logos de Shopify, Dropi, Mastershop y Effi (sección “Dropshipping”)
 - `banner.jpg`, `video/vende-en-piloto-automatico.mp4`, `assets/logo-icon.png` y los logos de `visual/`
 
 ## Antes de publicar

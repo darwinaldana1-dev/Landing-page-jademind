@@ -1534,12 +1534,10 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
   const section = document.querySelector('[data-scrolly]');
   if (!section) return;
   const stage = section.querySelector('.scrolly-stage');
-  const canvas = section.querySelector('.scrolly-canvas');
-  const ctx = canvas.getContext('2d');
+  const root = section.querySelector('.cz');
+  if (!stage || !root) return;
   const steps = Array.from(section.querySelectorAll('.scrolly-steps li'));
   const phases = Array.from(section.querySelectorAll('.scrolly-phases li'));
-  const BG = '#0d0f13';
-  const COL = { a: '#10d18a', soft: '#a6edcb', text: '#e8f2ee', muted: '#92aba1' };
 
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const p = (t, a, b) => clamp((t - a) / (b - a));
@@ -1547,177 +1545,140 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
   const ease = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
   const easeOut = (x) => 1 - Math.pow(1 - x, 3);
   const outBack = (x) => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
-  const rng = (seed) => { let s = seed >>> 0; return () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; };
 
-  // Guion (segundos → progreso de la escena) y bucle
-  const SEG = [[0, 2.8, 0, 0.27, easeOut], [2.8, 6.4, 0.27, 0.74, ease], [6.4, 8.6, 0.74, 1, easeOut]];
-  const END = 8.6, HOLD = 12.2, CYCLE = 12.8, FADE_IN = 0.45;
-  const STEP_AT = [0, 2.6, 6.3];
-  const uAt = (t) => { for (const [a, b, u0, u1, e] of SEG) if (t <= b) return lerp(u0, u1, e(clamp((t - a) / (b - a)))); return 1; };
+  // Escena lógica de 400 × 600: se escala para caber en cualquier pantalla
+  const W = 400, H = 600;
 
-  // Composición horizontal (computador) y vertical (celular), con su zona útil
-  const SETS = { desktop: { w: 1600, h: 800, safe: [0.08, 0.06, 0.93, 0.95] }, mobile: { w: 720, h: 1000, safe: [0.04, 0.05, 0.96, 0.96] } };
-  // Tarjetas que flotan alrededor del logo: centro relativo al logo (en anchos de logo)
-  const ORBIT = { desktop: [[-0.95, -0.3], [0.98, -0.02], [-0.8, 0.52]], mobile: [[-0.22, -0.6], [0.24, 0.5], [-0.2, 0.76]] };
-  const sidePad = (w) => Math.max(18, w * 0.045);
-  const fitArea = (name, bw, bh) => { const f = SETS[name], [x0, y0, x1, y1] = f.safe; const s = Math.min((bw - sidePad(bw) * 2) / (f.w * (x1 - x0)), bh / (f.h * (y1 - y0))); return f.w * (x1 - x0) * s * f.h * (y1 - y0) * s; };
-  const wantSet = () => { const w = stage.clientWidth, h = Math.max(1, stage.clientHeight); return fitArea('mobile', w, h) > fitArea('desktop', w, h) * 1.05 ? 'mobile' : 'desktop'; };
+  // Guion (segundos): 1) el chat se llena y los clientes se enfrían, 2) JadeMind conecta y responde, 3) todo queda en orden
+  const CYCLE = 17.6, HOLD = 16.6, FADE_IN = 0.45, END = 11.8, STATIC = 15.2;
+  const PHASES = [[0, 6.6], [6.6, 10.4], [10.4, 15]];
+  const STEP_AT = [0, 6.4, 10.2];
+  const FLOOD = [0.5, 6.4];      // llegan los mensajes
+  const SCAN = [6.9, 9.0];       // JadeMind recorre la bandeja respondiendo
+  const MOVES = [13.0, 14.3];    // dos clientes avanzan en el tablero
 
-  const MSGS = ['¿Tienen cita hoy?', '¿Cuánto vale?', 'Hola, ¿me ayudan?', '¿Hacen envíos?', '¿Siguen abiertos?', 'Quiero comprar', '¿Me pueden llamar?', '¿Hay disponibilidad?', '¿Precio del plan?', 'Necesito información', '¿Aceptan tarjeta?', '¿Dónde quedan?'];
-  const NAMES = ['Laura', 'Andrés', 'Valentina', 'Camila', 'Sebastián', 'Mariana', 'Juan Pablo', 'Sofía', 'Daniel', 'Isabella', 'Mateo', 'Paula'];
+  // Reloj simulado: de 11:42 p. m. a 7:30 a. m. mientras nadie responde
+  const SIM_PER_SEC = 78, SIM_END = 6.6;
+  const sim = (x) => SIM_PER_SEC * clamp(x - FLOOD[0], 0, SIM_END - FLOOD[0]);
+  const COLD_MIN = 180, RISK = 185000;
+
+  const CH_ICONS = [
+    '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.6"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><circle cx="12" cy="12" r="8"/><path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3C7 3 3.5 6.5 3.5 11c0 2.3 1 4.3 2.7 5.7V21l2.9-1.6c.9.2 1.8.4 2.9.4 5 0 8.5-3.5 8.5-8S17 3 12 3z"/></svg>'
+  ];
+  const CH_BG = ['#25d366', 'linear-gradient(135deg,#f9a03f,#e1306c 55%,#7b3fe4)', '#3b82f6', '#0a84ff'];
   const AV = ['#e07a5f', '#3d5a80', '#81b29a', '#6d597a', '#c08552', '#355070', '#b56576', '#588157'];
-  const N = 260, SS = 2;
-  const BRAIN = [-0.263,0.393,0.111,0.407,-0.140,-0.426,-0.049,0.045,0.103,0.263,0.278,-0.080,-0.027,0.335,-0.138,-0.019,-0.409,0.237,0.333,-0.136,-0.379,-0.045,-0.045,-0.375,-0.387,0.115,0.272,-0.397,-0.148,-0.179,-0.191,-0.327,0.374,0.119,-0.327,-0.064,0.191,0.247,0.241,0.364,0.138,0.313,-0.177,0.366,-0.294,-0.214,0.449,0.204,-0.206,0.309,0.259,-0.276,-0.084,-0.163,-0.148,-0.282,0.177,0.189,-0.060,-0.222,-0.401,-0.109,-0.035,0.237,0.360,0.261,-0.268,0.175,0.084,-0.405,0.241,0.307,0.062,0.335,-0.444,0.235,-0.366,0.251,0.175,-0.255,-0.058,-0.305,0.247,0.235,0.086,-0.333,0.138,-0.037,-0.232,-0.152,0.181,-0.189,0.060,0.095,0.263,0.029,-0.212,-0.282,-0.074,0.399,-0.255,-0.066,-0.364,-0.161,-0.321,0.173,0.424,-0.062,-0.212,-0.099,0.082,0.294,-0.340,0.148,-0.132,0.350,0.284,-0.204,0.027,0.354,-0.088,0.136,0.226,0.331,-0.239,-0.113,-0.111,0.204,0.340,-0.088,-0.381,0.212,0.304,-0.311,-0.163,-0.385,-0.191,-0.053,0.284,-0.136,-0.150,-0.333,-0.097,-0.010,0.337,-0.179,0.204,-0.403,0.097,-0.294,-0.319,-0.239,0.181,0.333,0.230,0.414,-0.327,-0.016,0.274,-0.025,-0.113,0.093,0.126,0.214,0.230,-0.354,0.342,0.317,-0.214,0.426,-0.239,-0.179,0.115,0.130,-0.109,-0.288,0.362,0.348,0.366,-0.232,0.169,-0.014,0.074,0.023,0.148,-0.360,-0.302,-0.119,0.208,-0.321,0.455,-0.054,-0.391,0.004,-0.076,0.193,-0.249,-0.018,-0.389,0.288,-0.070,-0.422,0.237,-0.230,0.082,0.414,-0.307,-0.294,0.387,0.300,-0.193,0.161,0.101,0.165,-0.084,-0.370,0.230,-0.018,0.315,0.274,0.093,-0.183,0.202,0.311,-0.185,-0.411,0.208,0.165,-0.043,-0.198,0.233,-0.261,-0.130,0.296,-0.218,0.016,0.107,-0.216,-0.064,0.333,0.424,0.132,-0.354,-0.074,-0.134,0.142,-0.385,0.337,0.066,-0.257,0.031,-0.342,0.391,-0.035,-0.311,0.352,-0.039,-0.037,-0.117,-0.253,-0.232,-0.379,-0.304,0.125,-0.121,0.430,0.152,-0.140,0.146,-0.173,0.130,-0.115,-0.296,0.268,-0.259,-0.335,0.144,0.148,0.352,0.086,-0.249,0.305,0.115,-0.442,-0.444,-0.089,-0.146,0.072,0.053,-0.185,0.191,-0.377,0.185,0.286,0.167,-0.327,0.243,-0.323,-0.241,0.150,-0.183,-0.364,0.274,-0.327,-0.438,0.107,-0.436,0.265,-0.119,-0.208,0.196,-0.134,-0.432,-0.049,-0.047,0.181,-0.270,0.123,0.228,0.206,0.175,0.411,0.031,0.154,-0.179,-0.282,0.298,0.375,0.084,-0.099,0.309,0.142,0.132,-0.414,-0.393,-0.177,-0.202,-0.212,0.097,0.097,-0.342,0.193,-0.117,-0.177,-0.062,0.224,0.035,-0.066,-0.233,0.263,0.181,-0.086,-0.158,-0.123,0.047,0.185,0.253,0.189,0.216,-0.181,-0.191,-0.004,-0.243,-0.280,-0.272,0.253,-0.165,0.119,0.329,-0.218,-0.113,-0.047,-0.163,0.393,-0.222,-0.411,-0.161,0.331,0.259,0.397,0.228,-0.123,0.206,0.002,-0.060,0.119,0.319,0.179,-0.043,0.012,-0.352,0.099,-0.086,0.047,-0.245,0.224,-0.107,-0.346,0.035,0.313,0.074,0.058,0.292,0.253,-0.195,-0.177,-0.261,-0.206,0.405,-0.138,-0.288,-0.247,-0.309,0.041,-0.196,-0.126,-0.428,0.202,-0.436,0.148,0.051,-0.387,-0.411,0.097,0.035,-0.117,0.440,-0.125,0.091,0.196,0.082,-0.053,0.249,0.144,0.354,0.000,-0.372,-0.101,0.311,-0.115,-0.037,0.095,-0.331,0.247,-0.399,0.163,-0.325,-0.097,0.362,-0.134,0.037,-0.156,-0.311,-0.175,0.282,0.208,0.058,-0.319,0.469,0.150,-0.307,-0.339,-0.344,0.311,0.321,0.208,0.125,-0.307,0.399,-0.187,0.288,0.321,-0.253,-0.241,-0.111,0.167,0.389,0.220,-0.193,0.337,0.183,-0.350,0.163,-0.434,-0.426,-0.019,0.261,-0.161,0.447,0.241,0.146,0.350,0.315,-0.278,-0.282,0.027,-0.099,-0.128,0.191,0.031,0.358,0.195,-0.191,0.228,0.397,-0.091,-0.278,-0.023,-0.093,0.270,0.311,0.033,0.253,-0.200,0.080,0.379,-0.117,0.012,-0.366,0.027]; // nodos de la red y escala de los dibujos prerrenderizados
-  const TILES = [['Conversaciones', '386', 'Respondidas con contexto'], ['Citas', '41', 'En la agenda del equipo'], ['Pedidos', '54', 'Registrados automáticamente']];
+  // nombre, mensaje y canal (0 WhatsApp · 1 Instagram · 2 sitio web · 3 Messenger)
+  const ROWS = [
+    ['Laura', '¿Tienen cita hoy?', 0], ['Andrés', 'Quiero comprar', 1], ['Valentina', '¿Cuánto vale?', 0], ['Camila', '¿Hacen envíos?', 2],
+    ['Sebastián', '¿Precio del plan?', 0], ['Mariana', 'Hola, ¿me ayudan?', 1], ['Juan Pablo', '¿Me pueden llamar?', 0], ['Sofía', '¿Dónde quedan?', 3],
+    ['Daniel', '¿Hay disponibilidad?', 0], ['Isabella', 'Necesito información', 2], ['Mateo', '¿Aceptan tarjeta?', 1], ['Paula', 'Quiero agendar', 0],
+    ['Carlos', '¿Tienen stock?', 3], ['Natalia', 'Me interesa', 0]
+  ];
+  const ARRIVE = ROWS.map((_, i) => FLOOD[0] + (FLOOD[1] - FLOOD[0] - 0.4) * Math.pow(i / (ROWS.length - 1), 0.6));
+  const ROW_H = 56, PITCH = 64, VISIBLE = 6;
 
-  let logo, logoAR = 1, glow, sphere = [], neigh = [], targets = [];
-  const scenes = {};
-  let scene = null, dpr = 1, t = 0, now = 0, last = 0, raf = 0, visible = false, ready = false, done = false;
+  const COLS = [
+    { t: 'Calificados', c: '#3b82f6', cards: [['Laura', 'Interés alto', '87'], ['Andrés', 'Va a comprar', '92'], ['Valentina', 'Cotización', '76'], ['Daniel', 'Compara planes', '71']] },
+    { t: 'Citas', c: '#f59e0b', cards: [['Camila', 'Jue 10:30', '✓'], ['Sebastián', 'Vie 9:00', '✓'], ['Isabella', 'Lun 15:00', '✓'], ['Sofía', 'Mar 11:00', '✓']] },
+    { t: 'Pedidos', c: '#10b981', cards: [['Mariana', '$ 99.900', '✓'], ['Juan Pablo', '$ 119.900', '✓'], ['Mateo', '$ 79.900', '✓'], ['Paula', '$ 149.900', '✓']] }
+  ];
+  const COL_W = 120, COL_GAP = 8, CARD_H = 62, SLOT = 70, SLOT0 = 40;
+  const colX = (i) => i * (COL_W + COL_GAP);
 
-  function makeGlow() {
-    const g = document.createElement('canvas'); g.width = g.height = 64; const c = g.getContext('2d');
-    const gr = c.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gr.addColorStop(0, 'rgba(240,255,248,1)'); gr.addColorStop(0.18, 'rgba(16,209,138,0.95)'); gr.addColorStop(0.5, 'rgba(16,209,138,0.22)'); gr.addColorStop(1, 'rgba(16,209,138,0)');
-    c.fillStyle = gr; c.fillRect(0, 0, 64, 64); return g;
-  }
+  const el = {};
+  const rows = [], cards = [], losses = [], colHeads = [], colBoxes = [];
+  const cache = new WeakMap();
+  const setText = (node, value) => { if (cache.get(node) !== value) { cache.set(node, value); node.textContent = value; } };
+  const setAttr = (node, name, value) => { if (node.getAttribute(name) !== value) node.setAttribute(name, value); };
+  const fmtMoney = (n) => `$ ${Math.round(n).toLocaleString('es-CO')}`;
+  const fmtClock = (min) => {
+    const m = Math.floor(min) % 1440, h = Math.floor(m / 60), mm = String(m % 60).padStart(2, '0');
+    return `${h % 12 || 12}:${mm} ${h >= 12 ? 'p. m.' : 'a. m.'}`;
+  };
+  const fmtAge = (m) => (m < 1 ? 'ahora' : m < 60 ? `hace ${Math.round(m)} min` : `hace ${Math.floor(m / 60)} h`);
+  const fmtDur = (m) => (m < 60 ? `${Math.max(1, Math.round(m))} min` : `${Math.floor(m / 60)} h ${String(Math.round(m % 60)).padStart(2, '0')} min`);
 
-  function cardSprite(card) {
-    const { w, h } = card, pad = h * 0.6;
-    const cv = document.createElement('canvas'); cv.width = Math.ceil((w + pad * 2) * SS); cv.height = Math.ceil((h + pad * 2) * SS);
-    const X = cv.getContext('2d'); X.scale(SS, SS); X.translate(pad + w / 2, pad + h / 2);
-    X.shadowColor = 'rgba(0,0,0,0.45)'; X.shadowBlur = h * 0.5 * SS; X.shadowOffsetY = h * 0.15 * SS;
-    X.fillStyle = '#18222a'; X.beginPath(); X.roundRect(-w / 2, -h / 2, w, h, h * 0.28); X.fill(); X.shadowColor = 'transparent';
-    X.strokeStyle = 'rgba(255,255,255,0.08)'; X.lineWidth = 1.2; X.stroke();
-    const ar = h * 0.27;
-    X.fillStyle = card.av; X.beginPath(); X.arc(-w / 2 + h * 0.48, 0, ar, 0, 7); X.fill();
-    X.fillStyle = '#fff'; X.font = `700 ${ar * 0.95}px Poppins`; X.textAlign = 'center'; X.textBaseline = 'middle'; X.fillText(card.name[0], -w / 2 + h * 0.48, ar * 0.05);
-    X.textAlign = 'left'; X.fillStyle = COL.text; X.font = `600 ${h * 0.2}px Inter`; X.fillText(card.name, -w / 2 + h * 0.9, -h * 0.14);
-    X.fillStyle = COL.muted; X.font = `400 ${h * 0.18}px Inter`; X.fillText(card.msg, -w / 2 + h * 0.9, h * 0.16);
-    X.fillStyle = '#25d366'; X.beginPath(); X.arc(w / 2 - h * 0.32, 0, h * 0.15, 0, 7); X.fill();
-    X.fillStyle = '#04140d'; X.font = `800 ${h * 0.17}px Inter`; X.textAlign = 'center'; X.fillText(String(card.n), w / 2 - h * 0.32, h * 0.01);
-    card.sprite = cv; card.sw = w + pad * 2; card.sh = h + pad * 2;
-  }
+  let scene, ready = false, done = false, visible = false, raf = 0, t = 0, last = 0, scale = 1;
 
-  function buildScene(name) {
-    const { w: W, h: H } = SETS[name], portrait = H > W;
-    const M = Math.min(W, H), cx = W / 2, cy = H * (portrait ? 0.47 : 0.5);
-    const r = rng(21), NC = portrait ? 30 : 42;
-    const cw = portrait ? W * 0.42 : W * 0.15, ch = cw * 0.36, cards = [];
-    for (let i = 0; i < NC; i++) {
-      let x, y, tries = 0;
-      do { x = cw * 0.55 + r() * (W - cw * 1.1); y = ch * 0.7 + r() * (H - ch * 1.4); tries++; } while (tries < 40 && cards.some((c) => Math.abs(c.x - x) < cw * 0.8 && Math.abs(c.y - y) < ch * 1.1));
-      const card = { x, y, w: cw * (0.85 + r() * 0.25), h: ch, rot: (r() - 0.5) * 0.16, ph: r() * 6.28, msg: MSGS[i % MSGS.length], name: NAMES[(i * 5) % NAMES.length], av: AV[i % AV.length], n: 1 + Math.floor(r() * 6), d: r() * 0.12 };
-      cardSprite(card); cards.push(card);
-    }
-    // isotipo con su brillo, dibujado una sola vez
-    const LW = M * (portrait ? 0.78 : 0.62), lpad = M * 0.12;
-    const lc = document.createElement('canvas'); lc.width = Math.ceil((LW + lpad * 2) * SS); lc.height = Math.ceil((LW * logoAR + lpad * 2) * SS);
-    const L = lc.getContext('2d'); L.scale(SS, SS); L.shadowColor = 'rgba(16,209,138,0.38)'; L.shadowBlur = M * 0.05 * SS;
-    L.drawImage(logo, lpad, lpad, LW, LW * logoAR);
-    return { name, W, H, portrait, M, cx, cy, cards, LW, lpad, logoSprite: lc };
-  }
+  function build() {
+    const kpi = (label, v) => `<div class="cz-kpi"><div class="cz-k cz-ka"><small>${label[0]}</small><b>${v[0]}</b><i></i></div><div class="cz-k cz-kb"><small>${label[1]}</small><b>${v[1]}</b><i></i></div></div>`;
+    root.innerHTML = `
+      <div class="cz-scene" style="width:${W}px;height:${H}px">
+        <div class="cz-win">
+          <div class="cz-top">
+            <div class="cz-ttl"><b>Bandeja de entrada</b><span class="cz-chs">${CH_ICONS.map((s, i) => `<i style="background:${CH_BG[i]}">${s}</i>`).join('')}</span></div>
+            <span class="cz-clock">11:42 p. m.</span>
+            <span class="cz-jade"><img src="assets/logo-brain.webp" width="16" height="15" alt="">Jade IA · 24/7</span>
+            <span class="cz-badge">0</span>
+          </div>
+          <div class="cz-kpis">
+            ${kpi(['Sin responder', 'Respondidos'], ['0', '0%'])}
+            ${kpi(['Espera promedio', 'Respuesta'], ['—', '3 s'])}
+            ${kpi(['Se enfriaron', 'Citas agendadas'], ['0', '0'])}
+          </div>
+          <div class="cz-body">
+            <div class="cz-list"></div>
+            <div class="cz-scan"></div>
+            <div class="cz-brain"><i></i><i></i><img src="assets/logo-brain.webp" width="120" height="114" alt=""></div>
+            <div class="cz-board"></div>
+          </div>
+          <div class="cz-foot">
+            <div class="cz-team"><span class="cz-ico">👩‍💼</span><span class="cz-ft"><b>Tu equipo · 1 persona</b><small>Atendiendo todo a mano</small></span><span class="cz-load"><i></i></span></div>
+            <div class="cz-ai"><span class="cz-ico"><img src="assets/logo-brain.webp" width="22" height="21" alt=""></span><span class="cz-ft"><b>Jade IA atiende 24/7</b><small>Tu equipo, solo con quienes ya van a comprar</small></span><span class="cz-on"></span></div>
+          </div>
+        </div>
+        <div class="cz-losses"></div>
+      </div>`;
+    scene = root.querySelector('.cz-scene');
+    ['clock', 'jade', 'badge', 'list', 'scan', 'brain', 'board', 'team', 'ai', 'load', 'losses'].forEach((k) => { el[k] = root.querySelector(`.cz-${k}`); });
+    el.load = root.querySelector('.cz-load i');
+    el.kpis = [...root.querySelectorAll('.cz-kpi')].map((k) => ({ a: k.querySelector('.cz-ka'), b: k.querySelector('.cz-kb'), av: k.querySelector('.cz-ka b'), bv: k.querySelector('.cz-kb b'), as: k.querySelector('.cz-ka i'), bs: k.querySelector('.cz-kb i') }));
 
-  async function init() {
-    await Promise.all(['700 20px Poppins', '600 20px Inter', '400 20px Inter', '800 20px Inter'].map((f) => document.fonts.load(f).catch(() => {})));
-    logo = new Image(); logo.src = 'assets/logo-brain.webp';
-    await (logo.decode ? logo.decode() : new Promise((res, rej) => { logo.onload = res; logo.onerror = rej; }));
-    logoAR = logo.height / logo.width;
-    glow = makeGlow();
-    for (let i = 0; i < N; i++) { const y = 1 - 2 * (i + 0.5) / N, rr = Math.sqrt(1 - y * y), th = i * 2.399963; sphere.push([Math.cos(th) * rr, y, Math.sin(th) * rr]); }
-    for (let i = 0; i < N; i++) { const d = sphere.map((q, j) => [j, (q[0] - sphere[i][0]) ** 2 + (q[1] - sphere[i][1]) ** 2 + (q[2] - sphere[i][2]) ** 2]).sort((a, b) => a[1] - b[1]); neigh.push(d.slice(1, 4).map((x) => x[0])); }
-    // Forma del cerebro precalculada a partir del isotipo (no se leen píxeles del logo:
-    // el navegador lo bloquea al abrir la página como archivo local).
-    for (let i = 0; i < N; i++) targets.push([BRAIN[i * 2], BRAIN[i * 2 + 1]]);
-  }
-
-  function drawScene(u) {
-    const S = scene, { M, cx, cy, W, H, portrait } = S;
-    const R = M * (portrait ? 0.34 : 0.32), ry = u * 5.2, rx = 0.36;
-    const morph = ease(p(u, 0.52, 0.76));
-    const cY = Math.cos(ry), sY = Math.sin(ry), cA = Math.cos(rx), sA = Math.sin(rx);
-    const nodes = new Array(N);
-    for (let i = 0; i < N; i++) {
-      const [x, y, z] = sphere[i];
-      const x1 = x * cY + z * sY, z1 = -x * sY + z * cY, y1 = y * cA - z1 * sA, z2 = y * sA + z1 * cA, f = 1 / (1 + z2 * 0.38);
-      const tx = cx + targets[i][0] * S.LW, ty = cy + targets[i][1] * S.LW;
-      nodes[i] = { x: lerp(cx + x1 * R * f, tx, morph), y: lerp(cy + y1 * R * f, ty, morph), z: lerp(z2, 0, morph), f: lerp(f, 1, morph) };
-    }
-    // mensajes que viajan hacia la red
-    S.cards.forEach((c, i) => {
-      const k = ease(p(u, 0.2 + c.d, 0.42 + c.d));
-      const appear = outBack(p(u, c.d * 0.5 - 0.06, c.d * 0.5 + 0.04));
-      if (k >= 1 || appear <= 0) return;
-      const node = nodes[(i * 6) % N];
-      const fx = Math.sin(u * 9 + c.ph) * M * 0.012 * (1 - k), fy = Math.cos(u * 7 + c.ph) * M * 0.01 * (1 - k);
-      const sc = lerp(appear, 0.05, k);
-      ctx.save(); ctx.globalAlpha = clamp(appear) * (1 - p(k, 0.6, 1));
-      ctx.translate(lerp(c.x + fx, node.x, k), lerp(c.y + fy, node.y, k)); ctx.rotate(c.rot * (1 - k)); ctx.scale(sc, sc);
-      ctx.drawImage(c.sprite, -c.sw / 2, -c.sh / 2, c.sw, c.sh);
-      ctx.restore();
+    ROWS.forEach(([name, msg, ch], i) => {
+      const row = document.createElement('div');
+      row.className = 'cz-row';
+      row.innerHTML = `<span class="cz-av" style="background:${AV[i % AV.length]}">${name[0]}<i class="cz-ch" style="background:${CH_BG[ch]}">${CH_ICONS[ch]}</i></span><span class="cz-tx"><b>${name}</b><em>${msg}</em></span><span class="cz-age">ahora</span>`;
+      el.list.appendChild(row);
+      rows.push({ node: row, msg, age: row.querySelector('.cz-age'), sub: row.querySelector('em') });
+      const loss = document.createElement('span');
+      loss.className = 'cz-loss';
+      loss.textContent = `−${fmtMoney(RISK)}`;
+      el.losses.appendChild(loss);
+      losses.push(loss);
     });
-    // red neuronal: líneas agrupadas por intensidad (pocos trazos por fotograma)
-    const netIn = ease(p(u, 0.32, 0.5)), netOut = 1 - p(u, 0.78, 0.88);
-    const lineA = 0.3 * netIn * (1 - morph * 0.7) * netOut, nodeA = netIn * netOut;
-    if (nodeA > 0) {
-      ctx.lineWidth = Math.max(1, M / 900);
-      const buckets = [[], [], [], [], []];
-      for (let i = 0; i < N; i++) for (const j of neigh[i]) {
-        if (j < i) continue; const a = nodes[i], b = nodes[j];
-        const q = clamp(0.3 + (1 - (a.z + b.z) / 2) * 0.4, 0.3, 0.7);
-        buckets[Math.round((q - 0.3) / 0.4 * 4)].push(a.x, a.y, b.x, b.y);
-      }
-      buckets.forEach((seg, k) => {
-        if (!seg.length) return;
-        ctx.strokeStyle = `rgba(16,209,138,${(lineA * (0.3 + k * 0.1)).toFixed(3)})`;
-        ctx.beginPath(); for (let n = 0; n < seg.length; n += 4) { ctx.moveTo(seg[n], seg[n + 1]); ctx.lineTo(seg[n + 2], seg[n + 3]); } ctx.stroke();
+
+    COLS.forEach((col, ci) => {
+      const box = document.createElement('div');
+      box.className = 'cz-col';
+      box.style.left = `${colX(ci)}px`;
+      box.innerHTML = `<div class="cz-colh"><i style="background:${col.c}"></i><b>${col.t}</b><em>0</em></div>`;
+      el.board.appendChild(box);
+      colBoxes.push(box);
+      colHeads.push(box.querySelector('em'));
+      col.cards.forEach(([name, sub, chip], si) => {
+        const card = document.createElement('div');
+        card.className = 'cz-card';
+        const idx = ROWS.findIndex((r) => r[0] === name);
+        card.innerHTML = `<span class="cz-av cz-av-s" style="background:${AV[(idx < 0 ? si : idx) % AV.length]}">${name[0]}</span><span class="cz-ct"><b>${name}</b><em>${sub}</em></span><i class="cz-sc" data-c="${ci}">${chip}</i>`;
+        el.board.appendChild(card);
+        cards.push({ node: card, col: ci, slot: si, name });
       });
-      ctx.globalCompositeOperation = 'lighter';
-      for (let i = 0; i < N; i++) { const q = nodes[i]; const s = M * (0.006 + 0.006 * q.f) * lerp(1, 0.6, morph); ctx.globalAlpha = nodeA * clamp(0.35 + (1 - q.z) * 0.5); ctx.drawImage(glow, q.x - s, q.y - s, s * 2, s * 2); }
-      ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-    }
-    // isotipo
-    const li = ease(p(u, 0.74, 0.84));
-    if (li > 0) {
-      const k = lerp(0.92, 1, ease(p(u, 0.74, 0.9))), lw = S.LW * k, ly = cy + Math.sin(now * 1.1) * M * 0.008 * li;
-      ctx.globalAlpha = li;
-      ctx.drawImage(S.logoSprite, cx - (S.LW / 2 + S.lpad) * k, ly - (S.LW * logoAR / 2 + S.lpad) * k, (S.LW + S.lpad * 2) * k, (S.LW * logoAR + S.lpad * 2) * k);
-      ctx.globalAlpha = 1;
-      ctx.strokeStyle = `rgba(16,209,138,${0.35 * li})`; ctx.lineWidth = Math.max(1.5, M / 600); ctx.setLineDash([3, 12]);
-      ctx.beginPath(); ctx.ellipse(cx, ly, lw * 0.78, lw * 0.78 * 0.34, -0.2, 0, Math.PI * 2 * li); ctx.stroke(); ctx.setLineDash([]);
-    }
-    // tres tarjetas del panel
-    TILES.forEach(([lab, val, sub], i) => {
-      const k = outBack(p(u, 0.83 + i * 0.035, 0.93 + i * 0.035)); if (k <= 0) return;
-      const [ox, oy] = ORBIT[S.name][i], tw = portrait ? W * 0.54 : W * 0.215, th = portrait ? H * 0.108 : H * 0.125;
-      const fx = Math.cos(now * 0.8 + i * 1.7) * M * 0.006, fy = Math.sin(now * 1.05 + i * 2.1) * M * 0.014;
-      const tcx = cx + ox * S.LW + fx, tcy = cy + oy * S.LW + fy, tx = tcx - tw / 2, ty = tcy - th / 2;
-      // hilo que une cada tarjeta con el logo
-      ctx.save(); ctx.globalAlpha = clamp(k) * 0.5; ctx.strokeStyle = 'rgba(16,209,138,0.55)'; ctx.lineWidth = Math.max(1.2, M / 700); ctx.setLineDash([2, 7]);
-      ctx.beginPath(); ctx.moveTo(tcx, tcy); ctx.lineTo(lerp(tcx, cx, 0.62), lerp(tcy, cy, 0.62)); ctx.stroke(); ctx.restore();
-      ctx.save(); ctx.globalAlpha = clamp(k); ctx.translate(tx + tw / 2, ty + th / 2); ctx.scale(lerp(0.85, 1, k), lerp(0.85, 1, k)); ctx.translate(-(tx + tw / 2), -(ty + th / 2) + (1 - clamp(k)) * th * 0.6);
-      ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = th * 0.5; ctx.shadowOffsetY = th * 0.12;
-      ctx.fillStyle = 'rgba(18,26,31,0.92)'; ctx.strokeStyle = 'rgba(16,209,138,0.5)'; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.roundRect(tx, ty, tw, th, th * 0.22); ctx.fill(); ctx.shadowColor = 'transparent'; ctx.stroke();
-      const ic = th * 0.36; ctx.fillStyle = 'rgba(16,209,138,0.16)'; ctx.beginPath(); ctx.roundRect(tx + th * 0.18, ty + th / 2 - ic / 2, ic, ic, ic * 0.3); ctx.fill();
-      ctx.strokeStyle = COL.a; ctx.lineWidth = Math.max(2, ic * 0.09); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-      ctx.beginPath(); ctx.moveTo(tx + th * 0.18 + ic * 0.26, ty + th / 2); ctx.lineTo(tx + th * 0.18 + ic * 0.44, ty + th / 2 + ic * 0.18); ctx.lineTo(tx + th * 0.18 + ic * 0.76, ty + th / 2 - ic * 0.18); ctx.stroke();
-      const tx2 = tx + th * 0.18 + ic + th * 0.18;
-      ctx.textBaseline = 'middle'; ctx.textAlign = 'left'; ctx.fillStyle = COL.muted; ctx.font = `500 ${th * 0.17}px Inter`; ctx.fillText(lab, tx2, ty + th * 0.3);
-      ctx.fillStyle = COL.text; ctx.font = `700 ${th * 0.3}px Poppins`; ctx.fillText(val, tx2, ty + th * 0.6);
-      const vw = ctx.measureText(val).width; let fs = th * 0.15; ctx.font = `500 ${fs}px Inter`; const room = tx + tw - th * 0.18 - (tx2 + vw + th * 0.12);
-      while (ctx.measureText(sub).width > room && fs > th * 0.1) { fs -= 0.5; ctx.font = `500 ${fs}px Inter`; }
-      if (ctx.measureText(sub).width <= room) { ctx.fillStyle = COL.soft; ctx.fillText(sub, tx2 + vw + th * 0.12, ty + th * 0.62); }
-      ctx.restore();
     });
   }
 
-  function size() {
-    // en pantallas pequeñas una resolución interna algo menor mantiene la fluidez sin perder nitidez visible
-    dpr = Math.min(window.devicePixelRatio || 1, canvas.clientWidth < 700 ? 1.5 : 2);
-    const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
-    if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
-    const name = wantSet();
-    scene = scenes[name] || (scenes[name] = buildScene(name));
+  function fit() {
+    const w = stage.clientWidth, h = stage.clientHeight;
+    scale = Math.min(w / W, h / H) * 0.985;
+    scene.style.transform = `translate(${(w - W * scale) / 2}px, ${(h - H * scale) / 2}px) scale(${scale})`;
+  }
+
+  function uAt(time) {
+    if (time < PHASES[1][0]) return 0.3 * p(time, PHASES[0][0] + 0.5, PHASES[0][1]);
+    if (time < PHASES[2][0]) return 0.3 + 0.4 * p(time, PHASES[1][0], PHASES[1][1]);
+    return 0.7 + 0.3 * p(time, PHASES[2][0], PHASES[2][1]);
   }
 
   function ui(time) {
@@ -1726,34 +1687,134 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
     const stepIdx = STEP_AT.reduce((acc, at, i) => (time >= at ? i : acc), 0);
     steps.forEach((li, i) => li.classList.toggle('is-active', i === stepIdx));
     phases.forEach((li, i) => {
-      const [a, b] = SEG[i], f = clamp((time - a) / (b - a));
+      const [a, b] = PHASES[i], f = clamp((time - a) / (b - a));
       li.style.setProperty('--f', f.toFixed(3));
       li.classList.toggle('is-active', f > 0 && f < 1);
       li.classList.toggle('is-done', f >= 1);
     });
     if (time >= END && !done) { done = true; section.classList.add('is-done'); }
-    return u;
   }
 
   function render(time) {
-    const u = ui(time);
-    const cw = canvas.width, ch = canvas.height, f = SETS[scene.name], [x0, y0, x1, y1] = f.safe;
-    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
-    ctx.fillStyle = BG; ctx.fillRect(0, 0, cw, ch);
-    const pad = sidePad(canvas.clientWidth) * dpr;
-    const s = Math.min((cw - pad * 2) / (f.w * (x1 - x0)), ch / (f.h * (y1 - y0)));
-    ctx.setTransform(s, 0, 0, s, cw / 2 - ((x0 + x1) / 2) * f.w * s, ch / 2 - ((y0 + y1) / 2) * f.h * s);
-    now = time;
-    drawScene(u);
-    // fundido suave al cerrar y abrir cada vuelta del bucle
+    ui(time);
+    const g = ease(p(time, 6.6, 9.8));
+    scene.style.setProperty('--cz-g', g.toFixed(3));
+
+    // Encabezado: el reloj corre sin respuesta; luego aparece JadeMind
+    setText(el.clock, fmtClock(23 * 60 + 42 + sim(time)));
+    el.clock.style.opacity = (1 - p(time, 6.6, 7.2)).toFixed(3);
+    el.jade.style.opacity = ease(p(time, 7.0, 7.7)).toFixed(3);
+    el.jade.style.transform = `translateY(${((1 - ease(p(time, 7.0, 7.7))) * 6).toFixed(2)}px)`;
+
+    // Contadores del dolor
+    const flood = Math.pow(p(time, FLOOD[0], FLOOD[1]), 1.1);
+    const scan = ease(p(time, SCAN[0], SCAN[1]));
+    const unread = Math.round(47 * flood * (1 - scan));
+    setText(el.badge, String(unread));
+    el.badge.style.opacity = (unread > 0 ? 1 : 0).toString();
+    el.badge.style.transform = `scale(${unread > 20 && time < SCAN[0] ? 1 + 0.07 * Math.sin(time * 14) : 1})`;
+
+    // Bandeja: los mensajes llegan, esperan y se enfrían
+    const listOp = 1 - ease(p(time, 9.9, 10.7));
+    el.list.style.opacity = listOp.toFixed(3);
+    el.list.style.transform = `translateY(${(-12 * (1 - listOp)).toFixed(2)}px) scale(${(1 - 0.03 * (1 - listOp)).toFixed(3)})`;
+    el.list.style.visibility = listOp > 0.01 ? 'visible' : 'hidden';
+    const scanY = lerp(-60, VISIBLE * PITCH + 30, scan);
+    let cold = 0;
+    rows.forEach((r, i) => {
+      const a = ARRIVE[i];
+      if (time < a) { r.node.style.visibility = 'hidden'; return; }
+      let k = 0;
+      for (let j = i + 1; j < rows.length; j++) k += ease(p(time, ARRIVE[j], ARRIVE[j] + 0.4));
+      const age = sim(time) - sim(a);
+      if (age >= COLD_MIN) cold++;
+      const enter = p(time, a, a + 0.45);
+      const op = clamp(outBack(enter) * 2) * (1 - p(k, VISIBLE - 1, VISIBLE));
+      const y = k * PITCH;
+      const answered = time > SCAN[0] && scanY > y + ROW_H / 2;
+      r.node.style.visibility = op > 0.01 ? 'visible' : 'hidden';
+      r.node.style.opacity = op.toFixed(3);
+      r.node.style.transform = `translate(${(40 * (1 - easeOut(enter))).toFixed(2)}px, ${y.toFixed(2)}px)`;
+      const state = answered ? 'ok' : age >= COLD_MIN ? 'dead' : age >= 60 ? 'cold' : age >= 15 ? 'late' : 'wait';
+      setAttr(r.node, 'data-s', state);
+      setText(r.age, answered ? '✓ 3 s' : state === 'dead' ? 'Se enfrió' : fmtAge(age));
+      setText(r.sub, answered ? 'Jade IA respondió y lo atendió' : r.msg);
+    });
+    el.scan.style.transform = `translateY(${scanY.toFixed(2)}px)`;
+    el.scan.style.opacity = (p(time, 6.8, 7.1) * (1 - p(time, 8.9, 9.3))).toFixed(3);
+    const brainIn = ease(p(time, 6.6, 7.4)) * (1 - ease(p(time, 8.7, 9.7)));
+    el.brain.style.opacity = brainIn.toFixed(3);
+    el.brain.style.transform = `translate(-50%, -50%) scale(${(0.7 + 0.3 * ease(p(time, 6.6, 7.6))).toFixed(3)})`;
+
+    // Pérdidas: cada cliente que se enfría suma dinero que no entró
+    const waited = sim(time) * 0.42;
+    losses.forEach((n, i) => {
+      const c = ARRIVE[i] + COLD_MIN / SIM_PER_SEC, w = (time - c) / 1.4;
+      if (i % 2 || c >= SIM_END || w <= 0 || w >= 1) { n.style.opacity = '0'; return; }
+      n.style.opacity = Math.sqrt(Math.sin(Math.PI * w)).toFixed(3);
+      n.style.transform = `translate(0px, ${(-w * 30).toFixed(1)}px)`;
+    });
+
+    // Indicadores: del dolor al resultado
+    const [k1, k2, k3] = el.kpis;
+    setText(k1.av, String(unread));
+    setText(k2.av, waited < 4 ? '—' : fmtDur(waited));
+    setText(k3.av, String(cold));
+    setText(k3.as, cold ? `≈ ${fmtMoney(cold * RISK)}` : 'ventas en riesgo');
+    setText(k1.as, 'esperando respuesta');
+    setText(k2.as, 'por mensaje');
+    setText(k1.bv, `${Math.round(100 * ease(p(time, 10.4, 11.3)))}%`);
+    setText(k3.bv, String(Math.round(41 * ease(p(time, 10.7, 12.0)))));
+    setText(k1.bs, 'con respuesta');
+    setText(k2.bs, 'a cada mensaje');
+    setText(k3.bs, 'en tu agenda');
+    const q = ease(p(time, 8.8, 9.8));
+    el.kpis.forEach((k) => {
+      k.a.style.opacity = (1 - q).toFixed(3); k.a.style.transform = `translateY(${(-6 * q).toFixed(2)}px)`;
+      k.b.style.opacity = q.toFixed(3); k.b.style.transform = `translateY(${(6 * (1 - q)).toFixed(2)}px)`;
+    });
+
+    // Pie: el equipo sobrecargado pasa a trabajar solo con quienes van a comprar
+    el.load.style.width = `${(100 * clamp(0.3 + 0.7 * p(time, FLOOD[0], 5))).toFixed(1)}%`;
+    const qf = ease(p(time, 9.0, 10.0));
+    el.team.style.opacity = (1 - qf).toFixed(3); el.team.style.transform = `translateY(${(-8 * qf).toFixed(2)}px)`;
+    el.ai.style.opacity = qf.toFixed(3); el.ai.style.transform = `translateY(${(8 * (1 - qf)).toFixed(2)}px)`;
+
+    // Tablero ordenado
+    const m1 = ease(p(time, MOVES[0], MOVES[0] + 0.9)), m2 = ease(p(time, MOVES[1], MOVES[1] + 0.9));
+    el.board.style.visibility = time > 10.2 ? 'visible' : 'hidden';
+    colBoxes.forEach((box, ci) => {
+      const o = ease(p(time, 10.3 + ci * 0.14, 10.9 + ci * 0.14));
+      box.style.opacity = o.toFixed(3);
+      box.style.transform = `translateY(${(14 * (1 - o)).toFixed(2)}px)`;
+    });
+    setText(colHeads[0], String(m1 >= 0.5 ? 3 : 4));
+    setText(colHeads[1], String(4 + (m1 >= 0.5 ? 1 : 0) - (m2 >= 0.5 ? 1 : 0)));
+    setText(colHeads[2], String(4 + (m2 >= 0.5 ? 1 : 0)));
+    cards.forEach((c) => {
+      let x = colX(c.col) + 4, slot = c.slot, mv = 0;
+      if (c.col === 0 && c.slot === 0) { x = lerp(colX(0), colX(1), m1) + 4; slot = 4 * m1 - m2; mv = p(time, MOVES[0] + 0.7, MOVES[0] + 1.6); }
+      else if (c.col === 0) slot = c.slot - m1;
+      else if (c.col === 1 && c.slot === 0) { x = lerp(colX(1), colX(2), m2) + 4; slot = 4 * m2; mv = p(time, MOVES[1] + 0.7, MOVES[1] + 1.6); }
+      else if (c.col === 1) slot = c.slot - m2;
+      const start = 10.9 + c.col * 0.2 + c.slot * 0.09;
+      const k = outBack(p(time, start, start + 0.5));
+      const y = SLOT0 + slot * SLOT + (1 - clamp(k)) * 16;
+      c.node.style.opacity = clamp(k * 2).toFixed(3);
+      c.node.style.visibility = k > 0.01 ? 'visible' : 'hidden';
+      c.node.style.transform = `translate(${x.toFixed(2)}px, ${y.toFixed(2)}px) scale(${(0.92 + 0.08 * clamp(k)).toFixed(3)})`;
+      c.node.style.boxShadow = mv > 0 && mv < 1 ? `0 0 0 ${(7 * Math.sin(Math.PI * mv)).toFixed(1)}px rgba(16,209,138,${(0.35 * Math.sin(Math.PI * mv)).toFixed(2)})` : '';
+    });
+
+    // Fundido al cerrar y abrir cada vuelta del bucle
     const fade = time > HOLD ? p(time, HOLD, CYCLE) : 1 - p(time, 0, FADE_IN);
-    if (fade > 0) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = fade; ctx.fillStyle = BG; ctx.fillRect(0, 0, cw, ch); ctx.globalAlpha = 1; }
+    root.style.opacity = (1 - fade).toFixed(3);
   }
 
-  function tick(now) {
+  function tick(nowMs) {
     raf = 0;
     if (!visible) return;
-    t += Math.min(0.05, (now - last) / 1000); last = now;
+    t += Math.min(0.05, (nowMs - last) / 1000); last = nowMs;
     if (t >= CYCLE) t -= CYCLE;
     render(t);
     raf = requestAnimationFrame(tick);
@@ -1761,13 +1822,21 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
 
   function play() { if (!ready || raf || !visible || prefersReducedMotion.matches) return; last = performance.now(); raf = requestAnimationFrame(tick); }
 
-  let preparing = false;
-  async function prepare() {
-    if (ready || preparing) return;
-    preparing = true;
-    try { await init(); size(); ready = true; } catch (err) { preparing = false; console.warn('Animación del caos al orden:', err); return; }
-    if (prefersReducedMotion.matches) { t = END; render(t); return; }
-    render(t); play();
+  function showStatic() {
+    if (!ready) return;
+    done = false;
+    render(STATIC);
+    root.style.opacity = '1';
+  }
+
+  function prepare() {
+    if (ready) return;
+    build();
+    ready = true;
+    fit();
+    if (prefersReducedMotion.matches) { showStatic(); return; }
+    render(t);
+    play();
   }
 
   new IntersectionObserver(([entry]) => { if (entry.isIntersecting) prepare(); }, { rootMargin: '100% 0px' }).observe(section);
@@ -1776,6 +1845,315 @@ document.querySelectorAll('.web-marquee-track').forEach((track) => {
     if (visible) play(); else if (raf) { cancelAnimationFrame(raf); raf = 0; }
   }, { threshold: 0.2 }).observe(stage);
 
-  window.addEventListener('resize', () => { if (!ready) return; size(); render(t); });
-  prefersReducedMotion.addEventListener?.('change', () => { if (!ready) return; if (prefersReducedMotion.matches) { t = END; render(t); } else play(); });
+  window.addEventListener('resize', () => { if (!ready) return; fit(); if (prefersReducedMotion.matches) showStatic(); else render(t); });
+  prefersReducedMotion.addEventListener?.('change', () => { if (!ready) return; if (prefersReducedMotion.matches) showStatic(); else { t = 0; play(); } });
+})();
+
+// Restaurantes: recorrido animado de un pedido (en mesa o domicilio).
+// Cada paso fija data-step en el escenario y el CSS hace el resto; aquí solo se
+// decide qué pantalla del celular se ve, qué mensajes de WhatsApp están ya en el
+// chat y en qué columna del panel está el ticket. Avanza solo mientras está en
+// pantalla y respeta prefers-reduced-motion (ahí solo cambia al elegir un paso).
+(() => {
+  const root = document.querySelector('[data-resto-journey]');
+  if (!root) return;
+
+  const stage = root.querySelector('.rj-stage');
+  const stepButtons = [...root.querySelectorAll('[data-rj-step]')];
+  const modeButtons = [...root.querySelectorAll('[data-rj-mode]')];
+  const cols = root.querySelector('.rj-cols');
+  const columns = [...root.querySelectorAll('.rj-col')];
+  const counts = [...root.querySelectorAll('[data-rj-count]')];
+  const messages = [...root.querySelectorAll('.rj-m')];
+  const chips = [...root.querySelectorAll('[data-rj-chip]')];
+  const calls = [...root.querySelectorAll('[data-rj-call]')];
+  const caption = root.querySelector('.rj-caption');
+  const captionN = root.querySelector('[data-rj-n]');
+  const captionTitle = root.querySelector('[data-rj-title]');
+  const captionText = root.querySelector('[data-rj-text]');
+  const notifText = root.querySelector('[data-rj-notif]');
+  const statuses = [...root.querySelectorAll('[data-rj-st]')];
+  const ages = [...root.querySelectorAll('[data-rj-age]')];
+  const drivers = [...root.querySelectorAll('[data-rj-drv]')];
+  const col3 = root.querySelector('[data-rj-col3]');
+
+  // Duración de cada paso (ms): el 2 es más largo porque recorre el menú
+  const DURATIONS = [3800, 5600, 4300, 4300, 4300, 4800];
+
+  const FLOWS = {
+    mesa: {
+      labels: ['Escanea el QR', 'Arma su pedido', 'Llega al panel', 'Va a cocina', 'Está listo', 'Se entrega'],
+      steps: [
+        ['Escanea el QR de la mesa', 'Cada mesa tiene su código. El cliente lo escanea con la cámara del celular y se abre la página de tu restaurante: sin descargar nada y sin esperar a que lo atiendan.'],
+        ['Arma su pedido en tu menú digital', 'Ve las fotos, elige el término de la carne, suma adiciones, escribe una nota para la cocina y recibe la sugerencia de una bebida. Todo en segundos.'],
+        ['Llega al panel al instante, con su nombre y su mesa', 'El pedido aparece en tu tablero en tiempo real: a nombre de Camila, en la mesa 4, con cada detalle y la nota para la cocina. Y a su WhatsApp le llega la confirmación.'],
+        ['A cocina, y el cliente se entera solo', 'Tu equipo lo manda a cocina con un toque. En ese instante, al WhatsApp del cliente le llega: “tu pedido ya está en preparación”. Nadie escribió nada.'],
+        ['Listo para servir: otro aviso, sin escribir', 'Cuando la cocina lo marca como listo, el cliente recibe su aviso. Tu equipo se enfoca en servir, no en responder mensajes.'],
+        ['Entregado, y el cliente lo sabe', 'El pedido llega a la mesa y queda registrado en la cuenta. El cliente recibe su “buen provecho” y tú tienes cada paso con su hora.']
+      ],
+      screens: ['qr', 'menu', 'wa', 'wa', 'wa', 'wa'],
+      chips: [['🪑 Mesa 4', 'Sin descargar nada'], ['📸 Fotos y favoritos', '📝 Nota para la cocina'], [], [], [], []],
+      calls: [['A nombre de Camila', 'Mesa 4 · Cuenta 1', 'Término, adiciones y notas'], null, null, null],
+      notif: [null, null, '✅ Pedido #12 registrado · $48.000', '👩‍🍳 Tu pedido #12 ya está en preparación.', '✅ ¡Tu pedido #12 está listo!', '🍽️ Pedido #12 entregado. ¡Buen provecho!'],
+      status: [null, null, ['nuevo', 'Nuevo'], ['cocina', 'En cocina'], ['listo', 'Listo'], ['entregado', 'Entregado']],
+      ages: ['', '', 'ahora', 'hace 2 min', 'hace 18 min', 'hace 25 min'],
+      col3: 'Listos'
+    },
+    dom: {
+      labels: ['Pide por WhatsApp', 'Arma su pedido', 'Llega al panel', 'Va a cocina', 'Va en camino', 'Se entrega'],
+      steps: [
+        ['Escribe por WhatsApp y un agente lo atiende', 'El cliente escribe “quiero pedir”. Tu agente le responde al instante, le comparte la página de tu restaurante y le pregunta si es para recoger, domicilio o mesa.'],
+        ['Arma su pedido y deja su dirección', 'Elige sus platos, la zona de entrega con su tarifa, su dirección y cómo va a pagar, incluso si necesita cambio. El total se calcula solo.'],
+        ['Llega al panel marcado como domicilio', 'El pedido entra con todo: el cliente y su teléfono, el pedido, la dirección, la zona y la forma de pago. Tu equipo asigna al domiciliario.'],
+        ['A cocina, con el domiciliario asignado', 'Mientras la cocina prepara, el cliente recibe su aviso de “en preparación” en el mismo chat donde pidió.'],
+        ['Va en camino, y lo ve en su WhatsApp', 'Al despachar el pedido, el cliente recibe “tu pedido va en camino”. Sin llamadas preguntando por el domicilio.'],
+        ['Entregado en su puerta', 'El pedido queda entregado y registrado, con el domiciliario que lo llevó. El cliente recibió cada estado sin que nadie le escribiera.']
+      ],
+      screens: ['wa', 'menu', 'wa', 'wa', 'wa', 'wa'],
+      chips: [['🤖 Un agente atiende', '🔗 Comparte el menú'], ['🛵 Domicilio', '📍 Zona con tarifa'], [], [], [], []],
+      calls: [['Cliente y teléfono', 'Dirección y zona', 'Pago y cambio'], ['Domiciliario: Carlos 🛵'], null, null],
+      notif: [null, null, '✅ Pedido #13 registrado · 🛵 Domicilio', '👩‍🍳 Tu pedido #13 ya está en preparación.', '🛵 Tu pedido #13 va en camino.', '🏠 Pedido #13 entregado. ¡Buen provecho!'],
+      status: [null, null, ['nuevo', 'Nuevo'], ['cocina', 'En cocina'], ['camino', 'En camino'], ['entregado', 'Entregado']],
+      ages: ['', '', 'ahora', 'hace 3 min', 'hace 22 min', 'hace 31 min'],
+      col3: 'En camino'
+    }
+  };
+
+  let mode = 'mesa';
+  let step = 1;
+  let timer = null;
+  let onScreen = false;
+
+  const setCalls = (flow, index) => {
+    const list = index === 3 ? flow.calls[0] : (index === 4 && flow.calls[1]) || null;
+    calls.forEach((node, i) => {
+      if (list && list[i]) node.textContent = list[i];
+    });
+  };
+
+  const render = () => {
+    const flow = FLOWS[mode];
+    const index = step - 1;
+    stage.dataset.mode = mode;
+    stage.dataset.step = String(step);
+    stage.dataset.screen = flow.screens[index];
+    stage.classList.toggle('has-tk', step >= 3);
+
+    // Pestañas de pasos
+    stepButtons.forEach((btn, i) => {
+      const active = i === index;
+      btn.classList.toggle('is-done', i < index);
+      btn.setAttribute('aria-pressed', String(active));
+      btn.querySelector('[data-rj-lab]').textContent = flow.labels[i];
+      if (active) restartClass(btn, 'is-active');
+      else btn.classList.remove('is-active');
+    });
+    root.style.setProperty('--rj-dur', `${DURATIONS[index]}ms`);
+
+    // Panel: columna del ticket y contadores
+    const colIndex = Math.max(0, step - 3);
+    cols.style.setProperty('--rj-col', String(colIndex));
+    columns.forEach((col, i) => col.classList.toggle('is-active', step >= 3 && i === colIndex));
+    counts.forEach((count, i) => { count.textContent = step >= 3 && i === colIndex ? '1' : '0'; });
+    if (col3) col3.textContent = flow.col3;
+    const status = flow.status[index];
+    statuses.forEach((node) => {
+      if (!status) return;
+      node.dataset.st = status[0];
+      node.textContent = status[1];
+    });
+    ages.forEach((node) => { node.textContent = flow.ages[index] || 'ahora'; });
+    drivers.forEach((node) => {
+      const assigned = mode === 'dom' && step >= 4;
+      node.textContent = assigned ? 'Carlos 🛵' : 'Sin asignar';
+      node.parentElement.classList.toggle('is-set', assigned);
+    });
+    setCalls(flow, step);
+
+    // WhatsApp del cliente: los mensajes que ya llegaron
+    messages.forEach((message) => {
+      const fits = !message.dataset.mode || message.dataset.mode === mode;
+      message.classList.toggle('is-on', fits && Number(message.dataset.from) <= step);
+    });
+
+    // Etiquetas flotantes del celular
+    chips.forEach((chip, i) => {
+      const text = flow.chips[index][i];
+      if (text) chip.textContent = text;
+      chip.classList.toggle('is-on', Boolean(text));
+    });
+
+    // Notificación en el celular y esfera que viaja al panel
+    const notif = flow.notif[index];
+    if (notif) {
+      notifText.textContent = notif;
+      restartClass(stage, 'is-notif');
+    } else {
+      stage.classList.remove('is-notif');
+    }
+    if (step === 3) restartClass(stage, 'is-fly');
+    else stage.classList.remove('is-fly');
+
+    // Texto del paso
+    captionN.textContent = `Paso ${step} de 6`;
+    captionTitle.textContent = flow.steps[index][0];
+    captionText.textContent = flow.steps[index][1];
+    restartClass(caption, 'is-swap');
+  };
+
+  const stop = () => {
+    window.clearTimeout(timer);
+    timer = null;
+  };
+
+  const schedule = () => {
+    stop();
+    const autoplay = onScreen && !document.hidden && !prefersReducedMotion.matches;
+    root.classList.toggle('is-autoplay', autoplay);
+    root.classList.toggle('is-paused', !autoplay);
+    if (!autoplay) return;
+    timer = window.setTimeout(() => {
+      step = step >= 6 ? 1 : step + 1;
+      render();
+      schedule();
+    }, DURATIONS[step - 1]);
+  };
+
+  stepButtons.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      step = i + 1;
+      render();
+      schedule();
+      emitConversion('resto_step', { label: `${mode}_${step}` });
+    });
+  });
+
+  modeButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.dataset.rjMode === mode) return;
+      mode = btn.dataset.rjMode;
+      step = 1;
+      modeButtons.forEach((other) => {
+        const active = other === btn;
+        other.classList.toggle('is-active', active);
+        other.setAttribute('aria-pressed', String(active));
+      });
+      render();
+      schedule();
+      emitConversion('resto_mode', { label: mode });
+    });
+  });
+
+  prefersReducedMotion.addEventListener?.('change', () => { render(); schedule(); });
+  document.addEventListener('visibilitychange', schedule);
+
+  // Sin movimiento se muestra de entrada el panel con el pedido; con movimiento arranca en el paso 1
+  step = prefersReducedMotion.matches ? 3 : 1;
+  render();
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      schedule();
+    }, { threshold: 0.3 }).observe(stage);
+  }
+})();
+
+// Restaurantes: el menú digital en cuatro diseños (cambia solo y al elegir uno)
+(() => {
+  const root = document.querySelector('[data-resto-menu]');
+  if (!root) return;
+
+  const phone = root.querySelector('.rm-phone');
+  const badge = root.querySelector('[data-rm-badge]');
+  const buttons = [...root.querySelectorAll('[data-rm-theme]')];
+  const NAMES = { carta: 'Carta', vitrina: 'Vitrina', noche: 'Noche', editorial: 'Editorial' };
+  const ORDER = buttons.map((btn) => btn.dataset.rmTheme);
+  const CYCLE = 3200;
+  const RESUME = 9000;
+  let current = ORDER.indexOf('noche');
+  let timer = null;
+  let onScreen = false;
+
+  const show = (index) => {
+    current = (index + ORDER.length) % ORDER.length;
+    const theme = ORDER[current];
+    phone.dataset.theme = theme;
+    badge.textContent = NAMES[theme];
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('is-active', i === current);
+      btn.setAttribute('aria-pressed', String(i === current));
+    });
+    restartClass(phone, 'is-swap');
+  };
+
+  const schedule = (delay = CYCLE) => {
+    window.clearTimeout(timer);
+    timer = null;
+    if (!onScreen || prefersReducedMotion.matches) return;
+    timer = window.setTimeout(() => {
+      show(current + 1);
+      schedule();
+    }, delay);
+  };
+
+  buttons.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      show(i);
+      schedule(RESUME);
+      emitConversion('resto_theme', { label: btn.dataset.rmTheme });
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      onScreen = entry.isIntersecting;
+      schedule();
+    }, { threshold: 0.35 }).observe(root);
+  }
+})();
+
+// Dropshipping: el recorrido del agente se va encendiendo paso a paso.
+// Cada paso se activa cuando cruza el centro de la pantalla; la línea y el
+// paquete avanzan con el scroll. Sin movimiento (o sin IntersectionObserver)
+// todos los pasos se ven activos desde el inicio.
+(() => {
+  const flow = document.querySelector('[data-ds-flow]');
+  if (!flow) return;
+
+  const steps = [...flow.querySelectorAll('[data-ds-step]')];
+  const activateAll = () => {
+    steps.forEach((step) => step.classList.add('is-in'));
+    flow.style.setProperty('--ds-p', '1');
+  };
+
+  if (prefersReducedMotion.matches || !('IntersectionObserver' in window)) {
+    activateAll();
+    return;
+  }
+
+  // Un paso se enciende al llegar a la parte media-baja de la pantalla y se queda encendido
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('is-in');
+    });
+  }, { threshold: 0.25, rootMargin: '0px 0px -18% 0px' });
+  steps.forEach((step) => observer.observe(step));
+
+  // Progreso de la línea: de 0 (arriba del recorrido) a 1 (el último paso)
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    const box = flow.getBoundingClientRect();
+    const anchor = window.innerHeight * 0.55;
+    const progress = Math.min(1, Math.max(0, (anchor - box.top) / box.height));
+    flow.style.setProperty('--ds-p', progress.toFixed(4));
+  };
+  const request = () => {
+    if (!frame) frame = window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', request, { passive: true });
+  window.addEventListener('resize', request);
+  update();
 })();
