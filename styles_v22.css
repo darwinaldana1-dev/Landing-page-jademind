@@ -2361,6 +2361,10 @@ section[id] {
   justify-content: flex-end;
 }
 
+.media-section {
+  overflow-x: clip;
+}
+
 .video-stage::before {
   content: "";
   position: absolute;
